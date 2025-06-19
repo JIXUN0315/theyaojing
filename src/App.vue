@@ -28,4 +28,7 @@ const hideLayout = computed(() => route.meta?.hideLayout === true)
   width: 100%;
   position: relative;
 }
+main{
+  padding-top: 84px;
+}
 </style>

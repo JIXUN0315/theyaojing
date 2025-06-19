@@ -74,3 +74,23 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+ button {
+      appearance: none;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      color: inherit;
+      text-align: inherit;
+      line-height: inherit;
+      cursor: pointer;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Source Han Serif TC", "思源宋體 TC", "Source Han Serif",
+        serif;
+      color: #333;
+      background-color: #fff;
+    }
