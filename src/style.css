@@ -1,16 +1,27 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'Source Han Serif TC';
+  src: url('@/assets/fonts/NotoSerifTC-Black.ttf') format('truetype'),
+       url('@/assets/fonts/NotoSerifTC-Bold.ttf') format('truetype'),
+       url('@/assets/fonts/NotoSerifTC-ExtraBold.ttf') format('truetype'),
+       url('@/assets/fonts/NotoSerifTC-ExtraLight.ttf') format('truetype'),
+       url('@/assets/fonts/NotoSerifTC-Light.ttf') format('truetype'),
+       url('@/assets/fonts/NotoSerifTC-Medium.ttf') format('truetype'),
+       url('@/assets/fonts/NotoSerifTC-Regular.ttf') format('truetype'),
+       url('@/assets/fonts/NotoSerifTC-SemiBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  margin: 0;
+  font-family: "Source Han Serif TC", "思源宋體 TC", "Source Han Serif",
+    serif;
+  color: #333;
+  background-color: #fff;
+  letter-spacing: 0.08em !important;
+}
+span{
+  letter-spacing: 0.08em !important;
 }
 
 a {

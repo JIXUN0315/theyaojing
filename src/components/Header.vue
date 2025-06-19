@@ -1,15 +1,14 @@
 <template>
   <header>
-    <img src="@/assets/logo.jpg" alt="深川製磁 Logo" class="logo" />
-    <!-- 放你的 logo -->
+    <img src="@/assets/logo.jpg" alt="曜境 Logo" class="logo" />
     <nav class="nav">
       <a href="#">HOME<span class="nav__sub">首頁</span></a>
       <a href="#">ABOUT<span class="nav__sub">關於我們</span></a>
       <a href="#">PRODUCTS<span class="nav__sub">服務項目</span></a>
       <a href="#">BLOG<span class="nav__sub">留學部落格</span></a>
       <a href="#">NEW<span class="nav__sub">最新消息</span></a>
-      <span>|</span>
-      <button class="form-link"><span class="nav__sub">預約諮詢</span></button>
+      <span class="nav__line">|</span>
+      <button class="nav__link"><span class="nav__sub">預約諮詢</span></button>
     </nav>
   </header>
 </template>
@@ -30,12 +29,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  padding: 0px 40px;
   border-bottom: 1px solid #ddd;
   z-index: 1000;
 }
 .logo {
-  height: 24px;
+  height: 83px;
 }
 .nav {
   display: flex;
@@ -57,7 +56,20 @@ header {
       color: #0055aa;
     }
   }
-  span {
+  &__link {
+    background-color: #b9afa6;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 10px;
+    margin-left: 14px;
+    &:hover {
+      background-color: #dad5cc;
+    }
+    .nav__sub {
+      color: white;
+    }
+  }
+  &__line {
     color: #000;
     margin: 0 8px;
   }

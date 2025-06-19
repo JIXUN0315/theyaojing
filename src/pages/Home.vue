@@ -1,7 +1,17 @@
 <template>
-  <div>
-    <h1>Home Page</h1>
-    <router-link to="/about">Go to About</router-link>
-    <router-link to="/template">Go to template</router-link>
+  <div class="home">
+    <div>{{ text }}</div>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+const text = ref('模板')
+</script>
+
+<style lang="scss" scoped>
+.home {
+  height: 100vh;
+}
+</style>
