@@ -17,8 +17,14 @@ const routes = [
   {
     path: '/template',
     name: 'template',
-    component: Template
-  }
+    component: Template,
+  },
+  // {
+  //   path: '/template',
+  //   name: 'template',
+  //   component: Template,
+  //   meta: { hideLayout: true } 
+  // }
 ]
 
 const router = createRouter({

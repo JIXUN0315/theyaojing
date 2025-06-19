@@ -1,24 +1,31 @@
 <template>
-  <div id="app">
-    <router-view />
+  <div id="container">
+    <Header></Header>
+
+    <main>
+      <router-view />
+    </main>
+    
+    <Footer></Footer>
   </div>
 </template>
 
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
+
+const route = useRoute()
+
+// 檢查 route.meta.hideLayout 是否為 true
+const hideLayout = computed(() => route.meta?.hideLayout === true)
 </script>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+#container{
+  height: 100vh;
+  width: 100%;
+  position: relative;
 }
 </style>
