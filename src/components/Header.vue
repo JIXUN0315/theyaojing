@@ -1,6 +1,6 @@
 <template>
   <header>
-    <img src="@/assets/logo.jpg" alt="曜境 Logo" class="logo" />
+    <img src="@/assets/images/logo.jpg" alt="曜境 Logo" class="logo" />
     <nav class="nav">
       <a href="#">HOME<span class="nav__sub">首頁</span></a>
       <a href="#">ABOUT<span class="nav__sub">關於我們</span></a>

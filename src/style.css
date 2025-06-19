@@ -14,7 +14,7 @@
 }
 body {
   margin: 0;
-  font-family: "Source Han Serif TC", "思源宋體 TC", "Source Han Serif",
+  font-family:  "思源宋體 TC","Source Han Serif TC", "Source Han Serif",
     serif;
   color: #333;
   background-color: #fff;
@@ -96,12 +96,4 @@ button:focus-visible {
       text-align: inherit;
       line-height: inherit;
       cursor: pointer;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Source Han Serif TC", "思源宋體 TC", "Source Han Serif",
-        serif;
-      color: #333;
-      background-color: #fff;
     }
