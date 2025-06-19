@@ -44,6 +44,10 @@ const text = ref("模板");
   background-color: #043d78;
   color: #ffffff;
   justify-content: space-between;
+   @media (max-width: 1024px) {
+          padding: 35px 21px;
+    height: 229px;
+    }
   &__right {
     font-size: 16px;
     writing-mode: vertical-rl;
@@ -57,6 +61,9 @@ const text = ref("模板");
     flex-direction: column;
     justify-content: space-between;
     font-size: 16px;
+    @media (max-width: 1024px) {
+        justify-content: end;
+    }
   }
   &__con {
     display: flex;
@@ -68,6 +75,9 @@ const text = ref("模板");
   }
   .copyRight{
     font-size: 12px;
+     @media (max-width: 1024px) {
+        font-size: 10px;
+    }
   }
 }
 </style>

@@ -22,7 +22,7 @@ const route = useRoute()
 const hideLayout = computed(() => route.meta?.hideLayout === true)
 </script>
 
-<style scoped>
+<style  lang="scss" scoped>
 #container{
   height: 100vh;
   width: 100%;
@@ -30,5 +30,8 @@ const hideLayout = computed(() => route.meta?.hideLayout === true)
 }
 main{
   padding-top: 84px;
+  @media (max-width: 1024px) {
+    padding-top: 56px;
+  }
 }
 </style>
