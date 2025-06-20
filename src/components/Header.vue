@@ -22,12 +22,13 @@
       <transition name="fade-slide">
       <div class="header__mob--list list" v-show="isOpenNav">
         <div class="list__item">
-          <a href="#" class="list__item--link list__item--active"
+          <a href="/" class="list__item--link" v-bind:class="{'list__item--active': page === 'Home'}"
             >HOME<span>首頁</span></a
           >
         </div>
         <div class="list__item">
-          <a href="#" class="list__item--link">ABOUT<span>關於我們</span></a>
+          <a href="/about" class="list__item--link" v-bind:class="{'list__item--active': page === 'About'}">
+            ABOUT<span>關於我們</span></a>
         </div>
         <div class="list__item">
           <a href="#" class="list__item--link"
@@ -54,7 +55,7 @@
         </div>
         <div class="list__item">
           <div class="list__item--community">
-            <div>Instagram</div>
+            <div><a target="_blank" href="https://www.instagram.com/excellent_future_education/" style="color: #333;">Instagram</a></div>
             <div>Facebook</div>
           </div>
         </div>
@@ -65,9 +66,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const isOpenNav = ref(false);
+
+const page = computed(() => route.name);
 
 const text = ref("模板");
 

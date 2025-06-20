@@ -19,11 +19,12 @@
           />09123456789
         </div>
       </div>
+      <div class="footerText">曜境，讓每個夢想都有出口。</div>
       <div class="copyRight">@ 2025 yaojing COPYRIGHT</div>
     </div>
     <div class="footer__right">
       <div class="">FACEBOOK</div>
-      <div class="">instagram</div>
+      <div class=""><a target="_blank" href="https://www.instagram.com/excellent_future_education/">instagram</a></div>
       <div class="">LINE</div>
       <div class="">threads</div>
     </div>
@@ -43,6 +44,9 @@ import { ref } from "vue";
   height: 163px;
   background-color: #043d78;
   color: #ffffff;
+  a{
+    color: #ffffff;
+  }
   justify-content: space-between;
    @media (max-width: 1024px) {
           padding: 35px 21px;
@@ -77,6 +81,11 @@ import { ref } from "vue";
     font-size: 12px;
      @media (max-width: 1024px) {
         font-size: 10px;
+    }
+  }
+  .footerText{
+    @media (max-width: 1024px) {
+        font-size: 13px;
     }
   }
 }
