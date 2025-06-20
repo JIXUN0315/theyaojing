@@ -13,7 +13,7 @@
     </p>
   </section>
 
-  <!-- <img src="@/assets/images/about-us-logo.png" alt="關於我們 Logo" class="full-width-image" /> -->
+  <img src="@/assets/images/about-us-logo.png" alt="關於我們 Logo" class="full-width-image" />
 
   <!-- 品牌理念補充 -->
   <section class="content">
@@ -28,7 +28,7 @@
     <div class="grid-container">
       <div class="grid-vertical">
         <div class="grid-row">
-          <!-- <img src="@/assets/images/myworry.jpg" alt="worry"> -->
+          <img src="@/assets/images/myworry.jpg" alt="worry">
           <div class="caption-block">
             <p class="caption-title">你有以下煩惱嗎 <br>——我們來幫你搞定一切。</p>
             <ul>
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="grid-row">
-          <!-- <img src="@/assets/images/mything.png" alt="mything"> -->
+          <img src="@/assets/images/mything.png" alt="mything">
           <div class="caption-block">
             <p class="caption-title">認真對待你對我們的信任</p>
             <p class="paragraph">
