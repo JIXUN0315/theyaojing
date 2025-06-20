@@ -18,12 +18,7 @@ const routes = [
     path: '/template',
     name: 'template',
     component: Template,
-  },
-  {
-    path: '/test',
-    name: 'testPage',
-    component: Test,
-  },
+  }
   // {
   //   path: '/template',
   //   name: 'template',
