@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/test',
     name: 'testPage',
-    component: Template,
+    component: Test,
   },
   // {
   //   path: '/template',
