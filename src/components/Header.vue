@@ -3,8 +3,8 @@
     <div class="header__com">
       <img src="@/assets/images/logo.jpg" alt="曜境 Logo" class="logo" />
       <nav class="nav">
-        <a href="#">HOME<span class="nav__sub">首頁</span></a>
-        <a href="#">ABOUT<span class="nav__sub">關於我們</span></a>
+        <a href="/">HOME<span class="nav__sub">首頁</span></a>
+        <a href="/about">ABOUT<span class="nav__sub">關於我們</span></a>
         <a href="#">PRODUCTS<span class="nav__sub">服務項目</span></a>
         <a href="#">BLOG<span class="nav__sub">留學部落格</span></a>
         <a href="#">NEW<span class="nav__sub">最新消息</span></a>
