@@ -16,8 +16,9 @@
     </div>
     <div class="header__mob">
       <div class="header__mob--nav">
-        <div class="header__mob--hamburger" v-on:click="open"></div>
-        <div class="header__mob--close" v-on:click="close"></div>
+        <div class="header__mob--toggle" v-on:click="toggle" :class="{ open: isOpenNav }"></div>
+        <div v-show="isOpenNav"></div>
+        <div class="header__mob--close" v-on:click="close" v-show="isOpenNav"></div>
       </div>
       <transition name="fade-slide">
       <div class="header__mob--list list" v-show="isOpenNav">
@@ -80,8 +81,8 @@ const text = ref("模板");
 function close(){
 isOpenNav.value = false;
 }
-function open(){
-isOpenNav.value = true;
+function toggle(){
+isOpenNav.value = !isOpenNav.value;
 }
 </script>
 
@@ -112,10 +113,12 @@ header {
       display: block;
     }
     &--nav {
+      position: relative;
+      width: 100%;
+      height: 56px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
     }
     &--close {
       background-image: url("@/assets/images/close.png");
@@ -134,6 +137,22 @@ header {
       width: 23px;
       height: 23px;
       padding: 16px;
+       transition: transform 0.3s ease, right 0.3s ease, background-image 0.3s;
+    }
+    &--toggle {
+      position: absolute;
+      right: 16px;
+      width: 23px;
+      height: 23px;
+      background-image: url("@/assets/images/menu.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 24px;
+      transition: transform 0.3s ease, right 0.3s ease, background-image 0.3s;
+
+      &.open {
+        right: calc(100% - 40px); // 往左滑過去一段距離（你可以調整）
+      }
     }
   }
 }
