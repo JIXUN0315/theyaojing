@@ -19,6 +19,11 @@ const routes = [
     name: 'template',
     component: Template,
   },
+  {
+    path: '/test',
+    name: 'testPage',
+    component: Template,
+  },
   // {
   //   path: '/template',
   //   name: 'template',
