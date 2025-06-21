@@ -16,8 +16,24 @@
       </div>
     </section>
     <section class="home__heroImage">
-      <img src="@/assets/images/hero-image.jpg" alt="曜境HeroImage" />
-    </section>
+    <Carousel
+      :items-to-show="1"
+      :wrap-around="images.length > 1"
+      :autoplay="5000"
+      :pause-autoplay-on-hover="true"
+      :transition="500"
+      :mouse-drag="true"
+      class="hero-carousel"
+    >
+      <Slide v-for="(img, i) in images" :key="i">
+        <img :src="img" alt="hero image" />
+      </Slide>
+
+      <template #addons>
+        <Navigation />
+      </template>
+    </Carousel>
+  </section>
     <section class="featured">
       <div class="featured__text">
         <div class="featured__text--content">
@@ -201,9 +217,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, nextTick } from "vue";
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 
-const text = ref("模板");
+const images = [
+  new URL("@/assets/images/hero-image.jpg", import.meta.url).href,
+  new URL("@/assets/images/excellent-future.jpg", import.meta.url).href,
+  new URL("@/assets/images/service-content.jpg", import.meta.url).href,
+  new URL("@/assets/images/student.jpg", import.meta.url).href,
+  new URL("@/assets/images/qa.jpg", import.meta.url).href,
+];
 </script>
 
 <style lang="scss" scoped>
@@ -416,19 +440,19 @@ const text = ref("模板");
       &__text {
         width: 100%;
       }
-      &__whiteSpace{
+      &__whiteSpace {
         display: none;
       }
     }
-    .subject{
+    .subject {
       padding: 20px 0;
       flex-wrap: wrap;
-      &__content{
+      &__content {
         width: 100%;
-            text-align: left !important;
-            padding-left: 20px;
+        text-align: left !important;
+        padding-left: 20px;
       }
-      &__image{
+      &__image {
         width: 100%;
       }
     }

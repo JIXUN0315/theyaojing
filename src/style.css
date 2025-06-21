@@ -143,3 +143,15 @@ button:focus-visible {
       line-height: inherit;
       cursor: pointer;
     }
+.carousel__next,
+.carousel__prev {
+  outline: 0 !important;
+  width: 50px !important;
+  height: 50px !important;
+}
+@media (max-width: 1024px){
+  .carousel__next,
+  .carousel__prev {
+    display: none !important;
+  }
+}
