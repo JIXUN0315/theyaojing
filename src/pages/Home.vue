@@ -143,11 +143,13 @@
                 </li>
                 <li>
                   <span class="bold">只推薦最適合你的</span> -
-                  人生是由無數個選擇所堆疊的，選對學校，是讓夢想更靠近現實的起點。
+                  <span class="smallText"
+                    >人生是由無數個選擇所堆疊的，選對學校，是讓夢想更靠近現實的起點。</span
+                  >
                 </li>
                 <li>
                   <span class="bold">我們不是代辦是夥伴</span> -
-                  你的申請我們當成自己的辦
+                  <span class="smallText">你的申請我們當成自己的辦</span>
                 </li>
               </ul>
             </div>
@@ -430,6 +432,7 @@ const images = [
     ul,
     li {
       color: black;
+      margin: 10px 0;
     }
   }
   @media (max-width: 1024px) {

@@ -1,12 +1,9 @@
 <template>
   <header class="header">
     <div class="header__com">
-      <img
-        src="@/assets/images/logoText.jpg"
-        alt="曜境 Logo"
-        class="logo"
-        v-on:click="goHome"
-      />
+      <div class="logo" v-on:click="goHome">
+        <img src="@/assets/images/logoText.jpg" alt="曜境 Logo" class="" />
+      </div>
       <nav class="nav">
         <a href="/">HOME<span class="nav__sub">首頁</span></a>
         <a href="/about">ABOUT<span class="nav__sub">關於我們</span></a>
@@ -197,7 +194,16 @@ header {
 }
 .logo {
   height: 83px;
+  width: 135px;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  img {
+    width: 200px;
+    position: absolute;
+    top: -36px;
+    left: -30px;
+  }
 }
 .nav {
   display: flex;
