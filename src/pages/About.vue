@@ -1,7 +1,7 @@
 <template>
   <!-- Hero Banner -->
   <section class="hero">
-    <h1 class="hero-title">關於 YAOJING</h1>
+    <h1 class="hero-title">關於曜境</h1>
   </section>
 
   <!-- 品牌理念 -->
@@ -13,24 +13,44 @@
     </p>
   </section>
 
-  <img src="@/assets/images/about-us-logo.png" alt="關於我們 Logo" class="full-width-image" />
+  <!-- <img
+    src="@/assets/images/about-us-logo.png"
+    alt="關於我們 Logo"
+    class="full-width-image"
+  /> -->
 
   <!-- 品牌理念補充 -->
-  <section class="content">
+  <!-- <section class="content">
     <p class="section-title">品牌名稱與Logo</p>
     <p class="paragraph">
       「曜是光，境是方向，我們願成為你留學路上的一盞明燈，照亮你的前程。」
       Logo設計結合學士帽及提供指引的箭頭。(那個老鼠純粹是老闆喜歡)
     </p>
-  </section>
+  </section> -->
 
   <section class="grid-section">
     <div class="grid-container">
       <div class="grid-vertical">
         <div class="grid-row">
-          <img src="@/assets/images/myworry.jpg" alt="worry">
+          <img
+            src="@/assets/images/about-us-logo.png"
+            alt="關於我們 Logo"
+            class="full-width-image"
+          />
           <div class="caption-block">
-            <p class="caption-title">你有以下煩惱嗎 <br>——我們來幫你搞定一切。</p>
+            <p class="caption-title">品牌名稱與Logo</p>
+            <p class="paragraph">
+              「曜是光，境是方向，我們願成為你留學路上的一盞明燈，照亮你的前程。」
+              Logo設計結合學士帽及提供指引的箭頭。(那個老鼠純粹是老闆喜歡)
+            </p>
+          </div>
+        </div>
+        <div class="grid-row">
+          <img src="@/assets/images/myworry.jpg" alt="worry" />
+          <div class="caption-block">
+            <p class="caption-title">
+              你有以下煩惱嗎 <br />——我們來幫你搞定一切。
+            </p>
             <ul>
               <li>我不知道我能申請到什麼學校</li>
               <li>什麼時候該準備? 到底要準備什麼?</li>
@@ -41,7 +61,7 @@
           </div>
         </div>
         <div class="grid-row">
-          <img src="@/assets/images/mything.png" alt="mything">
+          <img src="@/assets/images/mything.png" alt="mything" />
           <div class="caption-block">
             <p class="caption-title">認真對待你對我們的信任</p>
             <p class="paragraph">
@@ -54,13 +74,13 @@
   </section>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style>
 .hero {
   height: 16rem;
   display: flex;
+  padding: 0;
   align-items: center;
   justify-content: center;
   color: white;
@@ -72,13 +92,14 @@
   font-size: 2.25rem;
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 1rem 1.5rem;
+  padding: 1rem 5rem;
+  letter-spacing: 1rem;
   border-radius: 0.5rem;
 }
 
 .content {
   max-width: 80ch;
-  margin: 3rem auto;
+  margin: 1rem auto;
   padding: 1rem;
 }
 
@@ -118,11 +139,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 2rem;
+  gap: 5rem;
 }
 
 .grid-row img {
-  width: 50%;
+  width: 45%;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   object-fit: cover;

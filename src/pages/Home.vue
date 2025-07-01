@@ -16,33 +16,31 @@
       </div>
     </section>
     <section class="home__heroImage">
-    <Carousel
-      :items-to-show="1"
-      :wrap-around="images.length > 1"
-      :autoplay="5000"
-      :pause-autoplay-on-hover="true"
-      :transition="500"
-      :mouse-drag="true"
-      class="hero-carousel"
-    >
-      <Slide v-for="(img, i) in images" :key="i">
-        <img :src="img" alt="hero image" />
-      </Slide>
+      <Carousel
+        :items-to-show="1"
+        :wrap-around="images.length > 1"
+        :autoplay="5000"
+        :pause-autoplay-on-hover="true"
+        :transition="500"
+        :mouse-drag="true"
+        class="hero-carousel"
+      >
+        <Slide v-for="(img, i) in images" :key="i">
+          <img :src="img" alt="hero image" />
+        </Slide>
 
-      <template #addons>
-        <Navigation />
-      </template>
-    </Carousel>
-  </section>
+        <template #addons>
+          <Navigation />
+        </template>
+      </Carousel>
+    </section>
     <section class="featured">
       <div class="featured__text">
         <div class="featured__text--content">
           <div class="">
             <h2>我們是曜境 Excellent Future Education</h2>
             <h2>誠信 × 專業 × 陪伴，是我們不變的承諾。</h2>
-            <p>
-              曜境有限公司致力於為每一位懷抱留學夢想的學生，提供真誠、安心、用心的留學諮詢服務。
-            </p>
+            <p>曜境留遊，提供真誠、安心、用心的留學諮詢服務。</p>
             <p>
               我們了解：對大多數人來說，留學代表未知、焦慮與挑戰。這就是我們存在的理由——
             </p>
@@ -71,7 +69,7 @@
               <span class="bold">英國</span>、
               <span class="bold">加拿大</span>、
               <span class="bold">美國</span>、<span class="bold">澳洲</span>、
-              其他(請與我們聯繫)。
+              其他(歡迎與我們聯繫討論客製化方案)。
             </div>
             <div class="subjectContent__text subjectContent__list">
               我們的服務內容包括：
@@ -79,7 +77,9 @@
             <div class="">
               <ul>
                 <li>個人化留遊學諮詢與規劃</li>
-                <li>文件指導與潤飾（SOP／CV／推薦信／Essays等）</li>
+                <li>
+                  文件規劃，包含引導、潤飾與編寫（SOP／CV／推薦信／Essays／獎學金文件等）
+                </li>
                 <li>學校與科系選擇建議與評估</li>
                 <li>申請流程與入學註冊協助</li>
                 <li>簽證輔導與行前準備</li>
@@ -136,15 +136,17 @@
             <div class="">
               <ul>
                 <li>
-                  <span class="bold">專業是我們的最低標準</span> - 小字:
-                  誠信是我們不變的原則，沒誠信的，就別說是代辦了
+                  <span class="bold">專業是我們的最低標準</span> -
+                  <span class="smallText"
+                    >誠信是我們不變的原則，沒誠信的，就別說是代辦了</span
+                  >
                 </li>
                 <li>
-                  <span class="bold">只推薦最適合你的</span> - 小字:
+                  <span class="bold">只推薦最適合你的</span> -
                   人生是由無數個選擇所堆疊的，選對學校，是讓夢想更靠近現實的起點。
                 </li>
                 <li>
-                  <span class="bold">我們不是代辦是夥伴</span> - 小字:
+                  <span class="bold">我們不是代辦是夥伴</span> -
                   你的申請我們當成自己的辦
                 </li>
               </ul>
@@ -190,19 +192,14 @@
           <div class="subject__content--title">05<br /></div>
           <div class="subject__content--body subjectContent">
             <div class="subjectContent__text subjectContent__list">
-              歡迎透過以下方式聯繫我們，預約免費留學諮詢：
+              我想了解：
             </div>
             <div class="">
               <ul>
-                <li>Email：待補</li>
-                <li>LINE官方帳號：待補</li>
-                <li>
-                  Instagram：<a
-                    target="_blank"
-                    href="https://www.instagram.com/excellent_future_education/"
-                    >@excellent_future_education</a
-                  >
-                </li>
+                <li><a href="#">大學研究所申請</a></li>
+                <li><a href="#">中學申請</a></li>
+                <li><a href="#">短期遊學</a></li>
+                <li><a href="#">純文件服務</a></li>
               </ul>
             </div>
             <div class="btn-more">【立即預約諮詢】</div>
@@ -218,8 +215,8 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from "vue";
-import 'vue3-carousel/dist/carousel.css';
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide, Navigation } from "vue3-carousel";
 
 const images = [
   new URL("@/assets/images/hero-image.jpg", import.meta.url).href,
@@ -231,6 +228,9 @@ const images = [
 </script>
 
 <style lang="scss" scoped>
+.smallText {
+  font-size: 14px;
+}
 .home {
   &__hero {
     text-align: center;
@@ -378,7 +378,7 @@ const images = [
       &--title {
         font-size: 16px;
         color: #043d78;
-        writing-mode: vertical-rl;
+        width: 30px;
         text-align: left;
         padding-bottom: 40px;
         padding-right: 5px;

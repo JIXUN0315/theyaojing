@@ -1,7 +1,12 @@
 <template>
   <header class="header">
     <div class="header__com">
-      <img src="@/assets/images/logo.jpg" alt="曜境 Logo" class="logo" />
+      <img
+        src="@/assets/images/logoText.jpg"
+        alt="曜境 Logo"
+        class="logo"
+        v-on:click="goHome"
+      />
       <nav class="nav">
         <a href="/">HOME<span class="nav__sub">首頁</span></a>
         <a href="/about">ABOUT<span class="nav__sub">關於我們</span></a>
@@ -16,51 +21,81 @@
     </div>
     <div class="header__mob">
       <div class="header__mob--nav">
-        <div class="header__mob--toggle" v-on:click="toggle" :class="{ open: isOpenNav }"></div>
+        <div
+          class="header__mob--toggle"
+          v-on:click="toggle"
+          :class="{ open: isOpenNav }"
+        ></div>
         <div v-show="isOpenNav"></div>
-        <div class="header__mob--close" v-on:click="close" v-show="isOpenNav"></div>
+        <div
+          class="header__mob--close"
+          v-on:click="close"
+          v-show="isOpenNav"
+        ></div>
       </div>
       <transition name="fade-slide">
-      <div class="header__mob--list list" v-show="isOpenNav">
-        <div class="list__item">
-          <a href="/" class="list__item--link" v-bind:class="{'list__item--active': page === 'Home'}"
-            >HOME<span>首頁</span></a
-          >
-        </div>
-        <div class="list__item">
-          <a href="/about" class="list__item--link" v-bind:class="{'list__item--active': page === 'About'}">
-            ABOUT<span>關於我們</span></a>
-        </div>
-        <div class="list__item">
-          <a href="#" class="list__item--link"
-            >PRODUCTS<span class="list__item--link">服務項目</span></a
-          >
-        </div>
-        <div class="list__item">
-          <a href="#" class="list__item--link"
-            >BLOG<span class="list__item--link">留學部落格</span></a
-          >
-        </div>
-        <div class="list__item">
-          <a href="#" class="list__item--link"
-            >NEW<span class="list__item--link">最新消息</span></a
-          >
-        </div>
-        <div class="list__item">
-          <div class="list__item--line"></div>
-        </div>
-        <div class="list__item">
-          <button class="nav__link">
-            <span class="nav__sub">預約諮詢</span>
-          </button>
-        </div>
-        <div class="list__item">
-          <div class="list__item--community">
-            <div><a target="_blank" href="https://www.instagram.com/excellent_future_education/" style="color: #333;">Instagram</a></div>
-            <div>Facebook</div>
+        <div class="header__mob--list list" v-show="isOpenNav">
+          <div class="list__item">
+            <a
+              href="/"
+              class="list__item--link"
+              v-bind:class="{ 'list__item--active': page === 'Home' }"
+              >HOME<span>首頁</span></a
+            >
+          </div>
+          <div class="list__item">
+            <a
+              href="/about"
+              class="list__item--link"
+              v-bind:class="{ 'list__item--active': page === 'About' }"
+            >
+              ABOUT<span>關於我們</span></a
+            >
+          </div>
+          <div class="list__item">
+            <a href="#" class="list__item--link"
+              >PRODUCTS<span class="list__item--link">服務項目</span></a
+            >
+          </div>
+          <div class="list__item">
+            <a href="#" class="list__item--link"
+              >BLOG<span class="list__item--link">留學部落格</span></a
+            >
+          </div>
+          <div class="list__item">
+            <a href="#" class="list__item--link"
+              >NEW<span class="list__item--link">最新消息</span></a
+            >
+          </div>
+          <div class="list__item">
+            <div class="list__item--line"></div>
+          </div>
+          <div class="list__item">
+            <button class="nav__link">
+              <span class="nav__sub">預約諮詢</span>
+            </button>
+          </div>
+          <div class="list__item">
+            <div class="list__item--community">
+              <div>
+                <a
+                  target="_blank"
+                  href="https://www.instagram.com/excellent_future_education/"
+                  style="color: #333"
+                  >Instagram</a
+                >
+              </div>
+              <div>
+                <a
+                  target="_blank"
+                  style="color: #333"
+                  href="https://www.facebook.com/profile.php?id=61551849541200"
+                  >FACEBOOK</a
+                >
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       </transition>
     </div>
   </header>
@@ -68,9 +103,10 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from "vue-router";
 
-const route = useRoute()
+const route = useRoute();
+const router = useRouter();
 
 const isOpenNav = ref(false);
 
@@ -78,11 +114,14 @@ const page = computed(() => route.name);
 
 const text = ref("模板");
 
-function close(){
-isOpenNav.value = false;
+function close() {
+  isOpenNav.value = false;
 }
-function toggle(){
-isOpenNav.value = !isOpenNav.value;
+function toggle() {
+  isOpenNav.value = !isOpenNav.value;
+}
+function goHome() {
+  router.push({ name: "Home" });
 }
 </script>
 
@@ -94,7 +133,7 @@ header {
   right: 0;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
-  z-index: 1000;
+  z-index: 1001;
 }
 .header {
   &__com {
@@ -137,7 +176,7 @@ header {
       width: 23px;
       height: 23px;
       padding: 16px;
-       transition: transform 0.3s ease, right 0.3s ease, background-image 0.3s;
+      transition: transform 0.3s ease, right 0.3s ease, background-image 0.3s;
     }
     &--toggle {
       position: absolute;
@@ -158,6 +197,7 @@ header {
 }
 .logo {
   height: 83px;
+  cursor: pointer;
 }
 .nav {
   display: flex;
@@ -198,7 +238,6 @@ header {
   }
 }
 .list {
-    
   border-top: 1px solid #ddd;
   height: calc(100vh - 55px);
   &__item {
@@ -221,18 +260,18 @@ header {
     &--line {
       border-bottom: 1px solid #222;
     }
-    .nav__link{
-        margin: 0;
-        span{
-             font-size: 16px;
-        }
+    .nav__link {
+      margin: 0;
+      span {
+        font-size: 16px;
+      }
     }
-    &--community{
-        display: flex;
-        div{
-            margin-right:25px;
-                cursor: pointer;
-        }
+    &--community {
+      display: flex;
+      div {
+        margin-right: 25px;
+        cursor: pointer;
+      }
     }
   }
 }
