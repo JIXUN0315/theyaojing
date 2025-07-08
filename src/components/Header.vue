@@ -11,7 +11,7 @@
         <a href="#">BLOG<span class="nav__sub">留學部落格</span></a>
         <a href="#">NEW<span class="nav__sub">最新消息</span></a>
         <span class="nav__line">|</span>
-        <button class="nav__link">
+        <button class="nav__link" @click="goToBooking">
           <span class="nav__sub">預約諮詢</span>
         </button>
       </nav>
@@ -68,7 +68,7 @@
             <div class="list__item--line"></div>
           </div>
           <div class="list__item">
-            <button class="nav__link">
+            <button class="nav__link" @click="goToBooking">
               <span class="nav__sub">預約諮詢</span>
             </button>
           </div>
@@ -119,6 +119,9 @@ function toggle() {
 }
 function goHome() {
   router.push({ name: "Home" });
+}
+function goToBooking(){
+  router.push({ name: "booking" });
 }
 </script>
 
