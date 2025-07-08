@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="featured__img">
-        <img src="@/assets/images/excellent-future.jpg" alt="home" />
+        <img src="@/assets/images/introduce.jpg" alt="home" />
       </div>
       <div class="featured__whiteSpace"></div>
     </section>
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="subject__image">
-        <img src="@/assets/images/service-content.jpg" alt="服務內容" />
+        <img src="@/assets/images/service.jpg" alt="服務內容" />
       </div>
     </section>
     <section class="subject subjectReverse">
@@ -105,18 +105,22 @@
             <div class="subjectContent__title">學生回饋專欄精選</div>
             <div class="subjectContent__text">
               <span class="bold"
-                >「我原本對留學一點頭緒都沒有，但顧問真的很有耐心，把整個流程都清楚講解，讓我覺得安心。」</span
-              >
+                >「文案引導潤飾合宜、整體流程掌握順暢、時程也掌握得宜（我覺得這很重要！）
+                  針對申請期間與校方互動應對專業，能夠十分放心。另外，也鼓勵學生去往上申請或是能引導學生至適合自己的program。
+                  整體服務體驗佳，非常推薦！」
+                  </span>
               <div class="subjectContent__text--student">
-                — Rachel｜成功錄取澳洲 UNSW 公共衛生碩士
+                — Jacky｜成功錄取華威商學院(WBS) 金融碩士
               </div>
             </div>
             <div class="subjectContent__text">
-              <span class="bold"
-                >「不只是文件修改，連面試練習也都幫我安排，真的覺得有人陪著走這條路很重要。」</span
-              >
+              <span class="bold">
+                「真的幫我非常多的事情，因為當初申請大學時我英文不是非常好，準備申請文件都會和代辦討論，
+                像是寫SOP、推薦函、ＣＶ、選校等。且因疫情，我延遲一年入學，在台灣工作期間代辦也幫忙我處理非常多學校的事 (上班真的太累..)。
+                申請美簽時更不用說，我還遇到行政審查(希望大家不要碰到會非常難受)，相關文件準備Shelly也能協助並幫忙潤稿，真的非常感謝顧問的協助。」
+              </span>
               <div class="subjectContent__text--student">
-                — Kevin｜錄取美國 NYU 數據分析碩士
+                — TY W｜成功錄取UCLA 材料工程碩士
               </div>
             </div>
             <div class="btn-more">【查看更多學生故事】</div>
@@ -124,7 +128,7 @@
         </div>
       </div>
       <div class="subject__image">
-        <img src="@/assets/images/student.jpg" alt="服務內容" />
+        <img src="@/assets/images/feedback.jpg" alt="服務內容" />
       </div>
     </section>
     <section class="subject">
@@ -157,7 +161,7 @@
         </div>
       </div>
       <div class="subject__image">
-        <img src="@/assets/images/service-content.jpg" alt="服務內容" />
+        <img src="@/assets/images/persist.jpg" alt="服務內容" />
       </div>
     </section>
     <section class="subject subjectReverse">
@@ -185,7 +189,7 @@
         </div>
       </div>
       <div class="subject__image">
-        <img src="@/assets/images/qa.jpg" alt="常見問題" />
+        <img src="@/assets/images/questions.jpg" alt="常見問題" />
       </div>
     </section>
     <section class="subject">
@@ -196,7 +200,7 @@
             <div class="subjectContent__text subjectContent__list">
               我想了解：
             </div>
-            <div class="">
+            <div class="minWidth300">
               <ul>
                 <li><a href="#">大學研究所申請</a></li>
                 <li><a href="#">中學申請</a></li>
@@ -463,5 +467,8 @@ const images = [
 }
 .bold {
   font-weight: bold;
+}
+.minWidth300{
+  min-width: 300px;
 }
 </style>
