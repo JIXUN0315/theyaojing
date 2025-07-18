@@ -6,6 +6,9 @@ import Booking from "../pages/Booking.vue";
 import HighSchool from "../pages/HighSchool.vue";
 import Template from "../pages/Template.vue";
 import LanguageSchool from "../pages/LanguageSchool.vue";
+import Blog from "../pages/Blog.vue"
+import BlogPost from '../pages/BlogPost.vue'; // 對應你的文章詳細頁 component
+
 
 const routes = [
   {
@@ -43,6 +46,16 @@ const routes = [
     name: "template",
     component: Template,
   },
+  {
+    path: "/blog",
+    name: "template",
+    component: Blog,
+  },
+  {
+    path: '/blog/posts/:slug',   // 動態參數 slug
+    name: 'BlogPost',
+    component: BlogPost
+  }
   // {
   //   path: '/template',
   //   name: 'template',
