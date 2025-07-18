@@ -3,7 +3,9 @@ import Home from "../pages/Home.vue";
 import About from "../pages/About.vue";
 import StudyAbroad from "../pages/StudyAbroad.vue";
 import Booking from "../pages/Booking.vue";
+import HighSchool from "../pages/HighSchool.vue";
 import Template from "../pages/Template.vue";
+import LanguageSchool from "../pages/LanguageSchool.vue";
 
 const routes = [
   {
@@ -25,6 +27,16 @@ const routes = [
     path: "/booking",
     name: "booking",
     component: Booking,
+  },
+  {
+    path: "/highSchool",
+    name: "highSchool",
+    component: HighSchool,
+  },
+  {
+    path: "/languageSchool",
+    name: "languageSchool",
+    component: LanguageSchool,
   },
   {
     path: "/template",

@@ -7,7 +7,18 @@
       <nav class="nav">
         <a href="/">HOME<span class="nav__sub">首頁</span></a>
         <a href="/about">ABOUT<span class="nav__sub">關於我們</span></a>
-        <a href="/studyAbroad">PRODUCTS<span class="nav__sub">服務項目</span></a>
+        <div class="nav__dropdown">
+          <a href="/studyAbroad" class="nav__dropdown--main">
+            PRODUCTS<span class="nav__sub">服務項目</span>
+          </a>
+          <div class="nav__dropdown--position">
+            <div class="nav__dropdown--menu">
+              <a href="/studyAbroad">留學申請（大學、研究所）</a>
+              <a href="/highSchool">中學申請</a>
+              <a href="/languageSchool">語言學校</a>
+            </div>
+          </div>
+        </div>
         <a href="#">BLOG<span class="nav__sub">留學部落格</span></a>
         <a href="#">NEW<span class="nav__sub">最新消息</span></a>
         <span class="nav__line">|</span>
@@ -50,10 +61,23 @@
             >
           </div>
           <div class="list__item">
-            <a href="/studyAbroad" class="list__item--link"
-              >PRODUCTS<span class="list__item--link">服務項目</span></a
+            <div
+              class="list__item--link list__item--dropdown"
+              @click="toggleProductDropdown"
             >
+              <div class="list__item--text">PRODUCTS<span>服務項目</span></div>
+              <span class="dropdown-arrow" :class="{ open: isProductOpen }"
+                >▼</span
+              >
+            </div>
+
+            <div class="list__item--submenu" v-show="isProductOpen">
+              <a href="/studyAbroad">留學申請（大學、研究所）</a>
+              <a href="/highSchool">中學申請</a>
+              <a href="/languageSchool">語言學校</a>
+            </div>
           </div>
+
           <div class="list__item">
             <a href="#" class="list__item--link"
               >BLOG<span class="list__item--link">留學部落格</span></a
@@ -109,7 +133,7 @@ const isOpenNav = ref(false);
 
 const page = computed(() => route.name);
 
-const text = ref("模板");
+const isProductOpen = ref(false);
 
 function close() {
   isOpenNav.value = false;
@@ -120,8 +144,12 @@ function toggle() {
 function goHome() {
   router.push({ name: "Home" });
 }
-function goToBooking(){
+function goToBooking() {
   router.push({ name: "booking" });
+}
+
+function toggleProductDropdown() {
+  isProductOpen.value = !isProductOpen.value;
 }
 </script>
 
@@ -246,6 +274,71 @@ header {
     margin: 0 8px;
   }
 }
+.nav {
+  .nav__dropdown {
+    position: relative;
+    height: 83px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      .nav__dropdown--position {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    &--main {
+      display: block;
+      margin: 0 25px;
+      color: #333;
+      text-align: center;
+      text-decoration: none;
+      &:hover {
+        color: #0055aa;
+      }
+      .nav__sub {
+        font-size: 16px;
+        font-weight: 900;
+        color: #777;
+      }
+    }
+    &--position {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      opacity: 0;
+      z-index: 100;
+      display: none;
+      padding-top: 2px;
+      left: -68px;
+    }
+    &--menu {
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 10px 0;
+      min-width: 220px;
+
+      a {
+        display: block;
+        padding: 10px 20px;
+        color: #333;
+        white-space: nowrap;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+
+        &:hover {
+          background: #f3f4f6;
+          color: #0055aa;
+        }
+      }
+    }
+  }
+}
+
 .list {
   border-top: 1px solid #ddd;
   height: calc(100vh - 55px);
@@ -255,7 +348,7 @@ header {
     &--link {
       display: block;
       color: #222;
-      width: 100px;
+      width: 100%;
       padding-bottom: 5px;
     }
     span {
@@ -284,6 +377,52 @@ header {
     }
   }
 }
+.list {
+  &__item {
+    &--dropdown {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; // 重點：讓箭頭跑最右
+      padding-right: 10px;
+      cursor: pointer;
+
+      .list__item--text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dropdown-arrow {
+        margin-left: auto;
+        font-size: 14px;
+        color: #555;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown-arrow.open {
+        transform: rotate(180deg);
+      }
+    }
+
+    &--submenu {
+      padding-left: 20px;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+
+      a {
+        font-size: 15px;
+        padding: 12px 0;
+        color: #333;
+        text-decoration: none;
+
+        &:hover {
+          color: #0055aa;
+        }
+      }
+    }
+  }
+}
+
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition: all 0.4s ease;

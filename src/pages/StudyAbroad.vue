@@ -190,6 +190,9 @@ onMounted(() => {
 .study-abroad-page {
   .study-abroad-content {
     padding: 2rem;
+    @media (max-width: 1024px) {
+      padding: 0 20px;
+    }
   }
 
   h1,
@@ -323,75 +326,122 @@ onMounted(() => {
   }
 
   .help {
+    position: relative;
+    padding-top: 4rem;
+
     .timeline {
+      position: relative;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 3rem;
+
+      // 中央線
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        background: #d1d5db;
+        transform: translateX(-50%);
+        z-index: 0;
+      }
     }
 
     .step {
-      max-width: 600px;
-      width: 100%;
-      padding: 1.5rem;
-      border-radius: 12px;
-      background: #eef2f7;
       position: relative;
+      width: 48%;
+      background: #eeece9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease;
-      text-align: left;
-
-      img {
-        width: 50%;
-        object-fit: contain;
-        margin: auto;
-        margin-top: 30px;
-      }
+      z-index: 1;
 
       p {
-        margin: 0;
-        color: #374151;
         font-size: 1rem;
+        color: #374151;
         line-height: 1.6;
+      }
+
+      img {
+        max-width: 50%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin-top: 1rem;
+        margin: auto;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 1.5rem;
+        width: 16px;
+        height: 16px;
+        background: #043d78;
+        border: 3px solid white;
+        border-radius: 50%;
+        z-index: 2;
       }
 
       &.left {
         align-self: flex-start;
+        margin-right: auto;
+
+        &::before {
+          right: -8px;
+        }
       }
 
       &.right {
         align-self: flex-end;
-        background: #dbeafe;
-      }
+        margin-left: auto;
 
-      opacity: 0;
-      transform: translateY(20px); // 原本 40px 太遠了
-      transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.5, 1),
-        transform 0.8s cubic-bezier(0.25, 0.8, 0.5, 1);
+        &::before {
+          left: -8px;
+        }
+      }
 
       &.in-view {
         opacity: 1;
         transform: translateY(0);
       }
-      &:hover {
-        transform: translateY(-4px);
-      }
+
+      opacity: 0;
+      transform: translateY(30px);
     }
 
-    // RWD 手機版調整
+    // Hover 效果
+    .step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    // 手機版統一置中
     @media (max-width: 1024px) {
-      .step {
-        align-self: center !important;
-        text-align: center;
-
-        img {
-          align-self: center;
+      .timeline {
+        left: -20px;
+        &::before {
+          left: 8px;
+          transform: none;
         }
+      }
 
-        p {
-          text-align: center;
+      .step {
+        width: 100%;
+        align-self: center !important;
+        text-align: left;
+        padding-left: 24px;
+
+        &::before {
+          left: -12px !important;
         }
       }
     }
@@ -436,10 +486,10 @@ onMounted(() => {
 //     display: block;
 //   }
 // }
- .desktop {
-    display: none!important;
-  }
-  .mobile {
-    display: block;
-  }
+.desktop {
+  display: none !important;
+}
+.mobile {
+  display: block;
+}
 </style>
