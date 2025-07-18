@@ -19,7 +19,7 @@
             </div>
           </div>
         </div>
-        <a href="#">BLOG<span class="nav__sub">留學部落格</span></a>
+        <a href="/blog">BLOG<span class="nav__sub">留學部落格</span></a>
         <a href="#">NEW<span class="nav__sub">最新消息</span></a>
         <span class="nav__line">|</span>
         <button class="nav__link" @click="goToBooking">
@@ -79,7 +79,7 @@
           </div>
 
           <div class="list__item">
-            <a href="#" class="list__item--link"
+            <a href="/blog" class="list__item--link"
               >BLOG<span class="list__item--link">留學部落格</span></a
             >
           </div>
