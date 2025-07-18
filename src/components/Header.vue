@@ -8,7 +8,7 @@
         <a href="/">HOME<span class="nav__sub">首頁</span></a>
         <a href="/about">ABOUT<span class="nav__sub">關於我們</span></a>
         <a href="/studyAbroad">PRODUCTS<span class="nav__sub">服務項目</span></a>
-        <a href="#">BLOG<span class="nav__sub">留學部落格</span></a>
+        <a href="/blog">BLOG<span class="nav__sub">留學部落格</span></a>
         <a href="#">NEW<span class="nav__sub">最新消息</span></a>
         <span class="nav__line">|</span>
         <button class="nav__link" @click="goToBooking">
