@@ -2,14 +2,14 @@
   <header class="header">
     <div class="header__com">
       <div class="logo" v-on:click="goHome">
-        <img src="@/assets/images/logoText.jpg" alt="曜境 Logo" class="" />
+        <img src="@/assets/images/logoHeader.png" alt="曜境 Logo" class="" />
       </div>
       <nav class="nav">
-        <a href="/">HOME<span class="nav__sub">首頁</span></a>
-        <a href="/about">ABOUT<span class="nav__sub">關於我們</span></a>
+        <a href="/"><span class="nav__sub">首頁</span></a>
+        <a href="/about"><span class="nav__sub">關於我們</span></a>
         <div class="nav__dropdown">
           <a href="/studyAbroad" class="nav__dropdown--main">
-            PRODUCTS<span class="nav__sub">服務項目</span>
+            <span class="nav__sub">服務項目</span>
           </a>
           <div class="nav__dropdown--position">
             <div class="nav__dropdown--menu">
@@ -19,8 +19,8 @@
             </div>
           </div>
         </div>
-        <a href="/blog">BLOG<span class="nav__sub">留學部落格</span></a>
-        <a href="#">NEW<span class="nav__sub">最新消息</span></a>
+        <a href="/blog"><span class="nav__sub">留學部落格</span></a>
+        <a href="#"><span class="nav__sub">最新消息</span></a>
         <span class="nav__line">|</span>
         <button class="nav__link" @click="goToBooking">
           <span class="nav__sub">預約諮詢</span>
@@ -159,7 +159,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
+  background-color: #eeece9;
   border-bottom: 1px solid #ddd;
   z-index: 1001;
 }
@@ -225,15 +225,11 @@ header {
 }
 .logo {
   height: 83px;
-  width: 135px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   img {
-    width: 200px;
-    position: absolute;
-    top: -36px;
-    left: -30px;
+    height: 100%;
   }
 }
 .nav {

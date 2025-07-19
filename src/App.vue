@@ -34,5 +34,6 @@ main{
   @media (max-width: 1024px) {
     padding-top: 56px;
   }
+  background-color: #eeece9;
 }
 </style>

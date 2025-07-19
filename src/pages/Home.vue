@@ -16,23 +16,7 @@
       </div>
     </section>
     <section class="home__heroImage">
-      <Carousel
-        :items-to-show="1"
-        :wrap-around="images.length > 1"
-        :autoplay="5000"
-        :pause-autoplay-on-hover="true"
-        :transition="500"
-        :mouse-drag="true"
-        class="hero-carousel"
-      >
-        <Slide v-for="(img, i) in images" :key="i">
-          <img :src="img" alt="hero image" />
-        </Slide>
-
-        <template #addons>
-          <Navigation />
-        </template>
-      </Carousel>
+      <img src="@/assets/images/homepageTest1.jpg" alt="">
     </section>
     <section class="featured">
       <div class="featured__text">
@@ -164,38 +148,11 @@
         <img src="@/assets/images/persist.jpg" alt="服務內容" />
       </div>
     </section>
-    <section class="subject subjectReverse">
-      <div class="subject__content">
-        <div class="subject__content--area">
-          <div class="subject__content--title">04<br /></div>
-          <div class="subject__content--body subjectContent">
-            <div class="subjectContent__title">常見問題 FAQ</div>
-            <div class="subjectContent__text--QA">
-              <div class="bold">Q：是否只服務特定國家的申請？</div>
-              <div class="">
-                A：我們主要服務英、美、澳、加的留學申請，如有其他國家需求，也歡迎直接與我們聯繫討論。
-              </div>
-            </div>
-            <div class="subjectContent__text--QA">
-              <div class="bold">Q：第一次諮詢需要付費嗎？</div>
-              <div class="">
-                A：不需要！我們提供一次免費諮詢，讓你能先認識我們的服務方式與流程，再決定是否進一步合作。
-              </div>
-            </div>
-            <div class="btn-more">
-              【查看更多<span class="color-main">問題解答</span>】
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="subject__image">
-        <img src="@/assets/images/questions.jpg" alt="常見問題" />
-      </div>
-    </section>
+
     <section class="subject">
       <div class="subject__content">
         <div class="subject__content--area">
-          <div class="subject__content--title">05<br /></div>
+          <div class="subject__content--title">04<br /></div>
           <div class="subject__content--body subjectContent">
             <div class="subjectContent__text subjectContent__list">
               我想了解：
@@ -240,7 +197,7 @@ const images = [
 .home {
   &__hero {
     text-align: center;
-    padding-top: 40px !important;
+    padding-top: 30px !important;
     padding-bottom: 60px !important;
     padding: 0 10px;
     h1 {
@@ -283,9 +240,8 @@ const images = [
     justify-content: center;
     background-color: #dad5cc;
     img {
-      width: 100%;
-      max-width: 1024px;
-      height: auto;
+      height: calc(100vh - 303px);
+     width: 100%;
       display: block;
     }
   }
@@ -345,7 +301,7 @@ const images = [
     &__whiteSpace {
       width: 18%;
       height: 333px;
-      background-color: #ffffff;
+      background-color: #eeece9;
     }
   }
   .btn-more {

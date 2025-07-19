@@ -81,10 +81,10 @@ function openUrl(url){
   padding: 35px 50px;
   display: flex;
   height: 234px;
-  background-color: #043d78;
-  color: #ffffff;
+  background-color: #5B5B5B5B;
+  color: #222222;
   a {
-    color: #ffffff;
+    color: #222222;
   }
   justify-content: space-between;
   @media (max-width: 1024px) {
