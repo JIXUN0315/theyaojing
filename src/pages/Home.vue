@@ -16,7 +16,7 @@
       </div>
     </section>
     <section class="home__heroImage">
-      <img src="@/assets/images/homepageTest1.jpg" alt="">
+      <img src="@/assets/images/homepageTest1.jpg" alt="" />
     </section>
     <section class="featured">
       <div class="featured__text">
@@ -90,9 +90,9 @@
             <div class="subjectContent__text">
               <span class="bold"
                 >「文案引導潤飾合宜、整體流程掌握順暢、時程也掌握得宜（我覺得這很重要！）
-                  針對申請期間與校方互動應對專業，能夠十分放心。另外，也鼓勵學生去往上申請或是能引導學生至適合自己的program。
-                  整體服務體驗佳，非常推薦！」
-                  </span>
+                針對申請期間與校方互動應對專業，能夠十分放心。另外，也鼓勵學生去往上申請或是能引導學生至適合自己的program。
+                整體服務體驗佳，非常推薦！」
+              </span>
               <div class="subjectContent__text--student">
                 — Jacky｜成功錄取華威商學院(WBS) 金融碩士
               </div>
@@ -100,7 +100,8 @@
             <div class="subjectContent__text">
               <span class="bold">
                 「真的幫我非常多的事情，因為當初申請大學時我英文不是非常好，準備申請文件都會和代辦討論，
-                像是寫SOP、推薦函、ＣＶ、選校等。且因疫情，我延遲一年入學，在台灣工作期間代辦也幫忙我處理非常多學校的事 (上班真的太累..)。
+                像是寫SOP、推薦函、ＣＶ、選校等。且因疫情，我延遲一年入學，在台灣工作期間代辦也幫忙我處理非常多學校的事
+                (上班真的太累..)。
                 申請美簽時更不用說，我還遇到行政審查(希望大家不要碰到會非常難受)，相關文件準備Shelly也能協助並幫忙潤稿，真的非常感謝顧問的協助。」
               </span>
               <div class="subjectContent__text--student">
@@ -149,30 +150,46 @@
       </div>
     </section>
 
-    <section class="subject">
-      <div class="subject__content">
-        <div class="subject__content--area">
-          <div class="subject__content--title">04<br /></div>
-          <div class="subject__content--body subjectContent">
-            <div class="subjectContent__text subjectContent__list">
-              我想了解：
-            </div>
-            <div class="minWidth300">
-              <ul>
-                <li><a href="#">大學研究所申請</a></li>
-                <li><a href="#">中學申請</a></li>
-                <li><a href="#">短期遊學</a></li>
-                <li><a href="#">純文件服務</a></li>
-              </ul>
-            </div>
-            <div class="btn-more">【立即預約諮詢】</div>
-          </div>
+    <section class="subject imageGridSection">
+  <div class="schoolGrid">
+    <a href="/kaplan-language" class="schoolCard">
+      <img src="@/assets/images/kaplan1.jpg" alt="KAPLAN International Language" />
+      <div class="cardOverlay">凱普國際語言學院<br/>KAPLAN International Language</div>
+    </a>
+    <a href="/kaplan-perth" class="schoolCard">
+      <img src="@/assets/images/perth.jpg" alt="Kaplan Aspect-Perth" />
+      <div class="cardOverlay">卡普蘭－柏斯分校<br/>Kaplan Aspect-Perth</div>
+    </a>
+    <a href="/kaplan-sydney" class="schoolCard">
+      <img src="@/assets/images/kaplan2.jpg" alt="Kaplan International College-Sydney City" />
+      <div class="cardOverlay">卡普蘭語言中心－雪梨 市中心<br/>Kaplan International College-Sydney City</div>
+    </a>
+    <a href="/ilsc-sydney" class="schoolCard">
+      <img src="@/assets/images/sydney.jpg" alt="ILSC-Sydney" />
+      <div class="cardOverlay">ILSC 國際語言學校－雪梨分校<br/>ILSC-Sydney</div>
+    </a>
+  </div>
+
+  <div class="subject__content">
+    <div class="subject__content--area">
+      <div class="subject__content--title">04<br /></div>
+      <div class="subject__content--body subjectContent">
+        <div class="subjectContent__text subjectContent__list">
+          我想了解：
         </div>
+        <div class="minWidth300">
+          <ul>
+            <li><a href="#">大學研究所申請</a></li>
+            <li><a href="#">中學申請</a></li>
+            <li><a href="#">短期遊學</a></li>
+            <li><a href="#">純文件服務</a></li>
+          </ul>
+        </div>
+        <div class="btn-more">【立即預約諮詢】</div>
       </div>
-      <div class="subject__image">
-        <img src="@/assets/images/connect.jpg" alt="服務內容" />
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
   </div>
 </template>
 
@@ -195,13 +212,14 @@ const images = [
   font-size: 14px;
 }
 .home {
+  line-height: 1.8;
   &__hero {
     text-align: center;
     padding-top: 30px !important;
     padding-bottom: 60px !important;
     padding: 0 10px;
     h1 {
-      font-size: 18px;
+      font-size: 16px;
       letter-spacing: 2px;
       padding-bottom: 8px;
       padding: 0 12px;
@@ -215,7 +233,7 @@ const images = [
       }
     }
     p {
-      font-size: 16px;
+      font-size: 14px;
       color: #666;
     }
     &--btn {
@@ -241,7 +259,7 @@ const images = [
     background-color: #dad5cc;
     img {
       height: calc(100vh - 303px);
-     width: 100%;
+      width: 100%;
       display: block;
     }
   }
@@ -256,7 +274,7 @@ const images = [
     &__text {
       flex: 1;
       padding-right: 40px;
-      font-size: 16px;
+      font-size: 14px;
       color: #2b2b2b;
       display: flex;
       flex-direction: column;
@@ -273,7 +291,7 @@ const images = [
       }
 
       h2 {
-        font-size: 16px;
+        font-size: 14px;
         color: #1a2b61;
         margin-bottom: 10px;
       }
@@ -313,7 +331,7 @@ const images = [
     color: #1a2b61;
     background: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     align-self: flex-start;
     cursor: pointer;
     &:hover {
@@ -338,7 +356,7 @@ const images = [
       }
 
       &--title {
-        font-size: 16px;
+        font-size: 14px;
         color: #043d78;
         width: 30px;
         text-align: left;
@@ -351,14 +369,24 @@ const images = [
     &__image {
       width: 50%;
       img {
-        width: 100%;
+        margin-right: 25%;
+        width: 75%;
       }
     }
   }
   .subjectReverse {
     flex-direction: row-reverse;
-    .subject__content {
-      text-align: left;
+    .subject {
+      &__content {
+        text-align: left;
+      }
+
+      &__image {
+        img {
+          margin-left: 25%;
+          margin-right: 0;
+        }
+      }
     }
   }
   .subjectContent {
@@ -368,14 +396,14 @@ const images = [
     &__title {
       color: #043d78;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
       padding-bottom: 10px;
     }
     &__text {
       padding: 4px 0;
       color: black;
       &--student {
-        padding: 8px 0 18px 15px;
+        padding: 8px 0 16px 15px;
         font-size: 14px;
       }
       &--QA {
@@ -386,7 +414,7 @@ const images = [
       }
     }
     &__list {
-      padding-top: 18px;
+      padding-top: 16px;
       color: black;
     }
     ul,
@@ -417,6 +445,11 @@ const images = [
       }
       &__image {
         width: 100%;
+        img {
+          width: 100%;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
       }
     }
   }
@@ -424,7 +457,112 @@ const images = [
 .bold {
   font-weight: bold;
 }
-.minWidth300{
+.minWidth300 {
   min-width: 300px;
+}
+.imageGridSection {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  padding: 60px 0;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.schoolGrid {
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding-left: 40px;
+  box-sizing: border-box;
+}
+
+.schoolCard {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+  text-decoration: none;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.schoolCard img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 100%;
+  padding: 10px;
+  font-size: 0.85rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.schoolCard:hover img {
+  transform: scale(1.05);
+}
+
+.schoolCard:hover .cardOverlay {
+  opacity: 1;
+}
+
+.subject__content {
+  width: 50%;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .imageGridSection {
+    flex-direction: column;
+    padding: 40px 0;
+  }
+
+  .schoolGrid {
+    width: 100%;
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+
+  .schoolCard {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .subject__content {
+    width: 100%;
+    padding: 24px 16px;
+  }
+
+  .cardOverlay {
+    opacity: 1 !important;
+    background: #043d78;
+    font-weight: bold;
+    font-size: 0.9rem;
+    position: static;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .schoolCard:hover img {
+    transform: none;
+  }
 }
 </style>

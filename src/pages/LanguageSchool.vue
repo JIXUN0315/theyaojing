@@ -25,12 +25,6 @@
               課程結合當地文化、實境會話，讓你不再只是「學語言」，而是用語言生活、思考、交朋友。
             </p>
           </div>
-          <div class="col">
-            <h4>（03）學習與生活並進</h4>
-            <p>
-              搭配寄宿家庭、校園活動、探索旅程，語言進步、視野拓展、自信成長一次到位。
-            </p>
-          </div>
         </div>
       </div>
 
@@ -102,8 +96,7 @@ const text = ref("模板");
   display: flex;
   flex-wrap: wrap;
   gap: 0;
-  border: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
 
   .col {
     flex: 1;
@@ -114,10 +107,6 @@ const text = ref("模板");
     &:not(:first-child) {
       border-left: 1px solid #ddd;
     }
-    &:not(:last-child) {
-      border-bottom: 1px solid #ddd;
-    }
-
     h4 {
       font-size: 1rem;
       font-weight: bold;
@@ -139,7 +128,7 @@ const text = ref("模板");
 
     .col {
       &:first-child {
-        border-top: none;
+        border-bottom: 1px solid #ddd;
       }
       &:not(:first-child) {
         border-left: none;

@@ -152,13 +152,6 @@
           </div>
         </div>
       </section>
-
-      <!-- Call to Action -->
-      <section class="cta">
-        <h2>夢想不該等待</h2>
-        <p>馬上預約，邁出你的第一步。</p>
-        <a href="/booking" class="cta-button">預約諮詢</a>
-      </section>
     </div>
   </div>
 </template>
@@ -447,30 +440,7 @@ onMounted(() => {
     }
   }
 
-  .cta {
-    text-align: center;
-    background: #043d78;
-    color: #ffffff;
-    padding: 2rem;
-    border-radius: 1rem;
-    h2 {
-      color: #ffffff;
-    }
-    .cta-button {
-      margin-top: 1rem;
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: #b9afa6;
-      color: white;
-      border-radius: 9999px;
-      font-weight: bold;
-      transition: background 0.3s;
-
-      &:hover {
-        background: #dad5cc;
-      }
-    }
-  }
+  
 }
 // .desktop {
 //   display: block;

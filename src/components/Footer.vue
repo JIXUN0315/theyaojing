@@ -1,61 +1,49 @@
 <template>
+  <section class="ctaContainer">
+    <div class="cta">
+      <h2>夢想不該等待</h2>
+      <p>馬上預約，邁出你的第一步。</p>
+      <a href="/booking" class="cta-button">預約諮詢</a>
+    </div>
+  </section>
   <footer class="footer">
-    <div class="desktop-only"></div>
-    <div class="footer__left">
-      <div class="">
-        <div class="footer__con">
-          <img
-            src="@/assets/images/logo.jpg"
-            alt="曜境Logo"
-            class="logoFooter logo"
-          />曜境留遊學 - <br class="onlyDesktop" />讓每個夢想都有出口
-        </div>
-        <div class="footer__con">
-          <img
-            src="@/assets/images/mail.png"
-            alt="Cart"
-            class="logo logoMail"
-          />
-          <span v-on:click="sendEmail">admin@theyaojing.com</span>
-        </div>
-        <div class="footer__con">
-          <img
-            src="@/assets/images/phone.png"
-            alt="Cart"
-            class="logo logoPhone"
-          />
-          <span class="mobile-only"><a href="tel:+886911847591">+886 911847591</a></span>
-          <span class="desktop-only">+886 911847591</span>
+    <div class="footer__content">
+      <div class="footer__left">
+        <img
+          src="@/assets/images/logoText.png"
+          alt="Excellent Future Education Logo"
+          class="footer__logo"
+        />
+      </div>
+
+      <div class="footer__middle">
+        <div class="footer__slogan">曜境 - 讓每個夢想都有出口</div>
+        <div class="footer__contact-title">Contact Us</div>
+        <a class="footer__email" @click="sendEmail">admin@theyaojing.com</a>
+      </div>
+
+      <div class="footer__right">
+        <div class="footer__social">
+          <div
+            class="footerIconArea__btn fbIcon"
+            @click="
+              openUrl('https://www.facebook.com/profile.php?id=61551849541200')
+            "
+          ></div>
+          <div
+            class="footerIconArea__btn igIcon"
+            @click="
+              openUrl('https://www.instagram.com/excellent_future_education/')
+            "
+          ></div>
+          <div
+            class="footerIconArea__btn lineIcon"
+            @click="openUrl('https://lin.ee/h7iqezB')"
+          ></div>
         </div>
       </div>
-      <div class="footerIconArea">
-        <div class="footerIconArea__btn lineIcon" @click="openUrl('https://lin.ee/h7iqezB')"></div>
-        <div class="footerIconArea__btn fbIcon" @click="openUrl('https://www.facebook.com/profile.php?id=61551849541200')"></div>
-        <div class="footerIconArea__btn igIcon" @click="openUrl('https://www.instagram.com/excellent_future_education/')"></div>
-      </div>
-      <div class="copyRight">© Excellent Future Education LTD. 2025</div>
     </div>
-    <div class="desktop-only"></div>
-    <div class="footer__right">
-      <div class="">
-        <a
-          target="_blank"
-          href="https://www.facebook.com/profile.php?id=61551849541200"
-          >FACEBOOK</a
-        >
-      </div>
-      <div class="">
-        <a
-          target="_blank"
-          href="https://www.instagram.com/excellent_future_education/"
-          >instagram</a
-        >
-      </div>
-      <div class="">
-        <a target="_blank" href="https://lin.ee/h7iqezB">LINE</a>
-      </div>
-      <!-- <div class="">threads</div> -->
-    </div>
+    <div class="footer__bottom">© Excellent Future Education LTD. 2025</div>
   </footer>
 </template>
 
@@ -71,108 +59,121 @@ function sendEmail() {
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`;
   window.open(gmailUrl, "_blank");
 }
-function openUrl(url){
-   window.open(url, "_blank");
+function openUrl(url) {
+  window.open(url, "_blank");
 }
 </script>
 
 <style lang="scss" scoped>
 .footer {
-  padding: 35px 50px;
-  display: flex;
-  height: 234px;
-  background-color: #5B5B5B5B;
-  color: #222222;
-  a {
-    color: #222222;
-  }
-  justify-content: space-between;
-  @media (max-width: 1024px) {
-    padding: 35px 21px;
-    height: 250px;
-  }
-  &__right {
-    font-size: 16px;
-    writing-mode: vertical-rl;
-    text-align: left;
-    position: absolute;
-    right: 12px;
-    div {
-      margin-left: 18px;
+  background-color: #222222;
+  color: #ffffff;
+  padding: 40px 20px 20px;
+  text-align: center;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
   }
+
   &__left {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    font-size: 16px;
-    @media (max-width: 1024px) {
-      justify-content: end;
+    align-items: center;
+
+    .footer__logo {
+      width: 130px;
+    }
+
+    .footer__company-name {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #cccccc;
+
+      span {
+        display: block;
+        font-size: 12px;
+        color: #999999;
+      }
     }
   }
-  &__con {
+
+  &__middle {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
-    span {
+
+    .footer__slogan {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .footer__contact-title {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .footer__email {
+      color: #4ea2d9;
+      text-decoration: underline;
       cursor: pointer;
     }
   }
-  .logo {
-    height: 30px;
-    margin-right: 10px;
+
+  &__right {
+    .footer__social {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
   }
-  .copyRight {
+
+  &__bottom {
+    margin-top: 30px;
     font-size: 12px;
-    @media (max-width: 1024px) {
-      font-size: 10px;
-    }
-  }
-  .footerIconArea {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    &__btn{
-      cursor: pointer;
-      width: 32px;
-      height: 32px;
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-    .lineIcon{
-      background-image: url("@/assets/images/line-icon.png");
-      width: 43px;
-      height: 43px;
-      margin-right: 5px;
-    }
-     .fbIcon{
-      background-image: url("@/assets/images/fb-icon.png");
-       margin-right: 8px;
-    }
-     .igIcon{
-      background-image: url("@/assets/images/ig-icon.png");
-      width: 35px;
-      height: 35px;
-    }
-  }
-  .logoFooter {
-    border-radius: 50%;
-  }
-  .logoMail {
-    height: 32px;
-    margin-right: 0;
-    margin-left: -10px;
-  }
-  .onlyDesktop {
-    display: none;
-    @media (max-width: 1024px) {
-      display: inline;
-    }
-  }
-  .logoPhone {
-    height: 32px;
+    color: #aaaaaa;
   }
 }
+
+.footerIconArea__btn {
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
+  &.lineIcon {
+      background-size: 300%;
+    background-position: center;
+    background-image: url("@/assets/images/line-icon.png");
+  }
+
+  &.fbIcon {
+    background-size: 600%;
+    background-position: center;
+    background-image: url("@/assets/images/fb-icon.png");
+  }
+
+  &.igIcon {
+    background-size: 140%;
+    background-position: center;
+    background-image: url("@/assets/images/ig-icon.png");
+  }
+}
+
 .mobile-only {
   display: inline;
 
@@ -186,6 +187,40 @@ function openUrl(url){
 
   @media (min-width: 1024px) {
     display: inline;
+  }
+}
+.ctaContainer {
+  padding: 50px 50px 80px;
+  background-color: #eeece9;
+  @media (max-width: 1024px) {
+    padding: 50px 0 80px;
+    .cta {
+      border-radius: 0;
+    }
+  }
+}
+.cta {
+  text-align: center;
+  background: #043d78;
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  h2 {
+    color: #ffffff;
+  }
+  .cta-button {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #b9afa6;
+    color: white;
+    border-radius: 9999px;
+    font-weight: bold;
+    transition: background 0.3s;
+
+    &:hover {
+      background: #dad5cc;
+    }
   }
 }
 </style>

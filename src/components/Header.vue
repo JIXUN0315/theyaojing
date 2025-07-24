@@ -20,6 +20,7 @@
           </div>
         </div>
         <a href="/blog"><span class="nav__sub">留學部落格</span></a>
+        <a href="#"><span class="nav__sub">學生心得</span></a>
         <a href="#"><span class="nav__sub">最新消息</span></a>
         <span class="nav__line">|</span>
         <button class="nav__link" @click="goToBooking">
@@ -29,6 +30,9 @@
     </div>
     <div class="header__mob">
       <div class="header__mob--nav">
+        <div class="header__mob--logo"
+          :class="{close: isOpenNav}"
+           v-on:click="goHomeModile"></div>
         <div
           class="header__mob--toggle"
           v-on:click="toggle"
@@ -86,6 +90,11 @@
           <div class="list__item">
             <a href="#" class="list__item--link"
               >NEW<span class="list__item--link">最新消息</span></a
+            >
+          </div>
+          <div class="list__item">
+            <a href="#" class="list__item--link"
+              >FEEDBACK<span class="list__item--link">學生心得</span></a
             >
           </div>
           <div class="list__item">
@@ -150,6 +159,12 @@ function goToBooking() {
 
 function toggleProductDropdown() {
   isProductOpen.value = !isProductOpen.value;
+}
+function goHomeModile(){
+  if(isOpenNav.value){
+    return;
+  }
+   router.push({ name: "Home" });
 }
 </script>
 
@@ -218,7 +233,23 @@ header {
       transition: transform 0.3s ease, right 0.3s ease, background-image 0.3s;
 
       &.open {
-        right: calc(100% - 40px); // 往左滑過去一段距離（你可以調整）
+        right: calc(100% - 40px); // 往左滑過去一段距離
+      }
+    }
+    &--logo{
+      background-image: url("@/assets/images/logo.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 52px;
+      width: 23px;
+      height: 23px;
+      padding: 16px;
+      padding-left: 30px;
+       opacity: 1;
+      transition: transform 0.3s ease, background-image 0.3s, opacity 0.3s ease;
+      &.close {
+        opacity: 0;
+        transition: transform 0.3s ease, background-image 0.3s, opacity 0.3s ease;
       }
     }
   }
@@ -375,6 +406,7 @@ header {
 }
 .list {
   &__item {
+    padding: 15px 20px;
     &--dropdown {
       display: flex;
       align-items: center;
