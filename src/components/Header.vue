@@ -30,9 +30,11 @@
     </div>
     <div class="header__mob">
       <div class="header__mob--nav">
-        <div class="header__mob--logo"
-          :class="{close: isOpenNav}"
-           v-on:click="goHomeModile"></div>
+        <div
+          class="header__mob--logo"
+          :class="{ close: isOpenNav }"
+          v-on:click="goHomeModile"
+        ></div>
         <div
           class="header__mob--toggle"
           v-on:click="toggle"
@@ -160,11 +162,11 @@ function goToBooking() {
 function toggleProductDropdown() {
   isProductOpen.value = !isProductOpen.value;
 }
-function goHomeModile(){
-  if(isOpenNav.value){
+function goHomeModile() {
+  if (isOpenNav.value) {
     return;
   }
-   router.push({ name: "Home" });
+  router.push({ name: "Home" });
 }
 </script>
 
@@ -236,7 +238,7 @@ header {
         right: calc(100% - 40px); // 往左滑過去一段距離
       }
     }
-    &--logo{
+    &--logo {
       background-image: url("@/assets/images/logo.png");
       background-repeat: no-repeat;
       background-position: center;
@@ -245,11 +247,12 @@ header {
       height: 23px;
       padding: 16px;
       padding-left: 30px;
-       opacity: 1;
+      opacity: 1;
       transition: transform 0.3s ease, background-image 0.3s, opacity 0.3s ease;
       &.close {
         opacity: 0;
-        transition: transform 0.3s ease, background-image 0.3s, opacity 0.3s ease;
+        transition: transform 0.3s ease, background-image 0.3s,
+          opacity 0.3s ease;
       }
     }
   }
@@ -260,7 +263,10 @@ header {
   position: relative;
   overflow: hidden;
   img {
-    height: 100%;
+    height: 140%;
+    position: relative;
+    top: -16px;
+    left: -55px;
   }
 }
 .nav {
@@ -270,14 +276,13 @@ header {
   &__sub {
     display: block;
     font-size: 16px;
-    color: #777;
-    font-weight: 900;
+    color: #38342e;
   }
 
   a {
     color: #333;
     text-decoration: none;
-    margin: 0 25px;
+    width: 100px;
     text-align: center;
     &:hover {
       color: #0055aa;
@@ -287,10 +292,13 @@ header {
     background-color: #b9afa6;
     padding: 10px 20px;
     color: white;
-    border-radius: 10px;
     margin-left: 14px;
+    border-radius: 0;
+    background: #000000de;
+       transition: transform 0.3s ease ;
     &:hover {
-      background-color: #dad5cc;
+      transform: scaleY(120%) scaleX(120%);
+      transition: transform 0.3s ease ;
     }
     .nav__sub {
       color: white;
@@ -307,6 +315,7 @@ header {
     height: 83px;
     display: flex;
     align-items: center;
+    width: 100px;
 
     &:hover {
       .nav__dropdown--position {
@@ -318,7 +327,6 @@ header {
 
     &--main {
       display: block;
-      margin: 0 25px;
       color: #333;
       text-align: center;
       text-decoration: none;
@@ -327,8 +335,7 @@ header {
       }
       .nav__sub {
         font-size: 16px;
-        font-weight: 900;
-        color: #777;
+        color: #38342e;
       }
     }
     &--position {
@@ -349,6 +356,8 @@ header {
       min-width: 220px;
 
       a {
+        width: 100%;
+        text-align: left;
         display: block;
         padding: 10px 20px;
         color: #333;
@@ -358,7 +367,6 @@ header {
         cursor: pointer;
 
         &:hover {
-          background: #f3f4f6;
           color: #0055aa;
         }
       }

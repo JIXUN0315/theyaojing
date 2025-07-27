@@ -95,6 +95,14 @@ function openUrl(url) {
 
     .footer__logo {
       width: 130px;
+      transform: scale(1.5);
+      position: relative;
+      left: 50px;
+      top: 20px;
+      @media (max-width: 1024px) {
+         left: 0;
+      top: 0;
+      }
     }
 
     .footer__company-name {
@@ -156,7 +164,7 @@ function openUrl(url) {
   cursor: pointer;
 
   &.lineIcon {
-      background-size: 300%;
+    background-size: 300%;
     background-position: center;
     background-image: url("@/assets/images/line-icon.png");
   }
@@ -190,10 +198,9 @@ function openUrl(url) {
   }
 }
 .ctaContainer {
-  padding: 50px 50px 80px;
   background-color: #eeece9;
   @media (max-width: 1024px) {
-    padding: 50px 0 80px;
+    padding: 50px 0 0px;
     .cta {
       border-radius: 0;
     }
@@ -201,26 +208,20 @@ function openUrl(url) {
 }
 .cta {
   text-align: center;
-  background: #043d78;
-  color: #ffffff;
-  padding: 2rem;
-  border-radius: 1rem;
+  background: #f7db9e;
+  color: #38342e;
+  padding: 3rem;
   h2 {
-    color: #ffffff;
+    color: #38342e;
   }
   .cta-button {
     margin-top: 1rem;
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: #b9afa6;
-    color: white;
-    border-radius: 9999px;
+    background: #000000de;
+    color: #fff;
     font-weight: bold;
     transition: background 0.3s;
-
-    &:hover {
-      background: #dad5cc;
-    }
   }
 }
 </style>

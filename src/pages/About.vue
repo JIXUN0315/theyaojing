@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="grid-row">
-          <img src="@/assets/images/mything.png" alt="mything" />
+          <img src="@/assets/images/mything.jpg" alt="mything" />
           <div class="caption-block">
             <p class="caption-title">認真對待你對我們的信任</p>
             <p class="paragraph">
@@ -78,7 +78,7 @@
 
 <style>
 .hero {
-  height: 16rem;
+      height: 12rem;
   display: flex;
   padding: 0;
   align-items: center;
@@ -91,16 +91,18 @@
 .hero-title {
   font-size: 2.25rem;
   font-weight: 700;
-  background-color: rgba(0, 0, 0, 0.5);
   padding: 1rem 5rem;
   letter-spacing: 1rem;
   border-radius: 0.5rem;
+      color: #38342e;
+
 }
 
 .content {
-  max-width: 80ch;
+  max-width: 120ch;
   margin: 1rem auto;
-  padding: 1rem;
+  margin-top: 0;
+  padding-bottom: 1rem;
 }
 
 .section-title {
@@ -110,7 +112,7 @@
 }
 
 .paragraph {
-  color: #4a4a4a;
+  color: #38342e;
   line-height: 1.8;
   text-align: left;
 }
@@ -121,7 +123,7 @@
 }
 
 .grid-section {
-  padding: 3rem 1rem;
+  padding: 3rem 5rem 10rem;
 }
 
 .grid-container {
@@ -144,7 +146,6 @@
 
 .grid-row img {
   width: 45%;
-  border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   object-fit: cover;
 }

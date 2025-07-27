@@ -43,7 +43,7 @@
     <section class="subject">
       <div class="subject__content">
         <div class="subject__content--area">
-          <div class="subject__content--title">01<br /></div>
+          <!-- <div class="subject__content--title">01<br /></div> -->
           <div class="subject__content--body subjectContent">
             <div class="subjectContent__title">我們提供的服務</div>
             <div class="subjectContent__text">
@@ -84,27 +84,27 @@
     <section class="subject subjectReverse">
       <div class="subject__content">
         <div class="subject__content--area">
-          <div class="subject__content--title">02<br /></div>
+          <!-- <div class="subject__content--title">02<br /></div> -->
           <div class="subject__content--body subjectContent">
             <div class="subjectContent__title">學生回饋專欄精選</div>
             <div class="subjectContent__text">
-              <span class="bold"
+              <span class=""
                 >「文案引導潤飾合宜、整體流程掌握順暢、時程也掌握得宜（我覺得這很重要！）
                 針對申請期間與校方互動應對專業，能夠十分放心。另外，也鼓勵學生去往上申請或是能引導學生至適合自己的program。
                 整體服務體驗佳，非常推薦！」
               </span>
-              <div class="subjectContent__text--student">
+              <div class="subjectContent__text--student bold">
                 — Jacky｜成功錄取華威商學院(WBS) 金融碩士
               </div>
             </div>
             <div class="subjectContent__text">
-              <span class="bold">
+              <span class="">
                 「真的幫我非常多的事情，因為當初申請大學時我英文不是非常好，準備申請文件都會和代辦討論，
                 像是寫SOP、推薦函、ＣＶ、選校等。且因疫情，我延遲一年入學，在台灣工作期間代辦也幫忙我處理非常多學校的事
                 (上班真的太累..)。
                 申請美簽時更不用說，我還遇到行政審查(希望大家不要碰到會非常難受)，相關文件準備Shelly也能協助並幫忙潤稿，真的非常感謝顧問的協助。」
               </span>
-              <div class="subjectContent__text--student">
+              <div class="subjectContent__text--student bold">
                 — TY W｜成功錄取UCLA 材料工程碩士
               </div>
             </div>
@@ -119,7 +119,7 @@
     <section class="subject">
       <div class="subject__content">
         <div class="subject__content--area">
-          <div class="subject__content--title">03<br /></div>
+          <!-- <div class="subject__content--title">03<br /></div> -->
           <div class="subject__content--body subjectContent">
             <div class="subjectContent__title">我們的堅持</div>
             <div class="">
@@ -152,42 +152,22 @@
 
     <section class="subject imageGridSection">
   <div class="schoolGrid">
-    <a href="/kaplan-language" class="schoolCard">
-      <img src="@/assets/images/kaplan1.jpg" alt="KAPLAN International Language" />
-      <div class="cardOverlay">凱普國際語言學院<br/>KAPLAN International Language</div>
-    </a>
-    <a href="/kaplan-perth" class="schoolCard">
-      <img src="@/assets/images/perth.jpg" alt="Kaplan Aspect-Perth" />
-      <div class="cardOverlay">卡普蘭－柏斯分校<br/>Kaplan Aspect-Perth</div>
-    </a>
     <a href="/kaplan-sydney" class="schoolCard">
       <img src="@/assets/images/kaplan2.jpg" alt="Kaplan International College-Sydney City" />
-      <div class="cardOverlay">卡普蘭語言中心－雪梨 市中心<br/>Kaplan International College-Sydney City</div>
+      <div class="cardOverlay">大學研究所申請</div>
+    </a>
+    <a href="/kaplan-language" class="schoolCard">
+      <img src="@/assets/images/kaplan1.jpg" alt="KAPLAN International Language" />
+      <div class="cardOverlay">中學申請</div>
     </a>
     <a href="/ilsc-sydney" class="schoolCard">
       <img src="@/assets/images/sydney.jpg" alt="ILSC-Sydney" />
-      <div class="cardOverlay">ILSC 國際語言學校－雪梨分校<br/>ILSC-Sydney</div>
+      <div class="cardOverlay">短期語校/遊學團</div>
     </a>
-  </div>
-
-  <div class="subject__content">
-    <div class="subject__content--area">
-      <div class="subject__content--title">04<br /></div>
-      <div class="subject__content--body subjectContent">
-        <div class="subjectContent__text subjectContent__list">
-          我想了解：
-        </div>
-        <div class="minWidth300">
-          <ul>
-            <li><a href="#">大學研究所申請</a></li>
-            <li><a href="#">中學申請</a></li>
-            <li><a href="#">短期遊學</a></li>
-            <li><a href="#">純文件服務</a></li>
-          </ul>
-        </div>
-        <div class="btn-more">【立即預約諮詢】</div>
-      </div>
-    </div>
+    <a href="/kaplan-perth" class="schoolCard">
+      <img src="@/assets/images/perth.jpg" alt="Kaplan Aspect-Perth" />
+      <div class="cardOverlay">純文件/落點分析服務</div>
+    </a>
   </div>
 </section>
   </div>
@@ -400,7 +380,6 @@ const images = [
       padding-bottom: 10px;
     }
     &__text {
-      padding: 4px 0;
       color: black;
       &--student {
         padding: 8px 0 16px 15px;
@@ -414,13 +393,15 @@ const images = [
       }
     }
     &__list {
-      padding-top: 16px;
+      padding-top: 8px;
       color: black;
+    }
+    ul{
+      margin: 0;
     }
     ul,
     li {
       color: black;
-      margin: 10px 0;
     }
   }
   @media (max-width: 1024px) {
@@ -472,11 +453,10 @@ const images = [
 }
 
 .schoolGrid {
-  width: 50%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  padding-left: 40px;
+  gap: 40px;
+  padding: 0 200px;
   box-sizing: border-box;
 }
 
@@ -484,7 +464,6 @@ const images = [
   position: relative;
   display: block;
   overflow: hidden;
-  border-radius: 12px;
   text-decoration: none;
   background: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -509,7 +488,6 @@ const images = [
   padding: 10px;
   font-size: 0.85rem;
   text-align: center;
-  opacity: 0;
   transition: opacity 0.3s ease;
 }
 
@@ -553,7 +531,7 @@ const images = [
 
   .cardOverlay {
     opacity: 1 !important;
-    background: #043d78;
+    background: #38342e;
     font-weight: bold;
     font-size: 0.9rem;
     position: static;
