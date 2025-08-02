@@ -31,9 +31,9 @@ const hideLayout = computed(() => route.meta?.hideLayout === true)
 }
 main{
   padding-top: 84px;
+  background-color: #eeece9;
   @media (max-width: 1024px) {
     padding-top: 56px;
   }
-  background-color: #eeece9;
 }
 </style>
