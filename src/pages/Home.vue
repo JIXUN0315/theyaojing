@@ -16,7 +16,24 @@
       </div>
     </section>
     <section class="home__heroImage">
-      <img src="@/assets/images/homepageTest1.jpg" alt="" />
+      <div class="home__back"></div>
+      <Carousel
+        :items-to-show="1"
+        :wrap-around="images.length > 1"
+        :autoplay="5000"
+        :pause-autoplay-on-hover="true"
+        :transition="500"
+        :mouse-drag="true"
+        class="hero-carousel"
+      >
+        <Slide v-for="(img, i) in images" :key="i">
+          <img :src="img" alt="hero image" />
+        </Slide>
+
+        <template #addons>
+          <Navigation />
+        </template>
+      </Carousel>
     </section>
     <section class="featured">
       <div class="featured__text">
@@ -151,25 +168,31 @@
     </section>
 
     <section class="subject imageGridSection">
-  <div class="schoolGrid">
-    <a href="/kaplan-sydney" class="schoolCard">
-      <img src="@/assets/images/kaplan2.jpg" alt="Kaplan International College-Sydney City" />
-      <div class="cardOverlay">大學研究所申請</div>
-    </a>
-    <a href="/kaplan-language" class="schoolCard">
-      <img src="@/assets/images/kaplan1.jpg" alt="KAPLAN International Language" />
-      <div class="cardOverlay">中學申請</div>
-    </a>
-    <a href="/ilsc-sydney" class="schoolCard">
-      <img src="@/assets/images/sydney.jpg" alt="ILSC-Sydney" />
-      <div class="cardOverlay">短期語校/遊學團</div>
-    </a>
-    <a href="/kaplan-perth" class="schoolCard">
-      <img src="@/assets/images/perth.jpg" alt="Kaplan Aspect-Perth" />
-      <div class="cardOverlay">純文件/落點分析服務</div>
-    </a>
-  </div>
-</section>
+      <div class="schoolGrid">
+        <a href="/kaplan-sydney" class="schoolCard">
+          <img
+            src="@/assets/images/kaplan2.jpg"
+            alt="Kaplan International College-Sydney City"
+          />
+          <div class="cardOverlay">大學研究所申請</div>
+        </a>
+        <a href="/kaplan-language" class="schoolCard">
+          <img
+            src="@/assets/images/kaplan1.jpg"
+            alt="KAPLAN International Language"
+          />
+          <div class="cardOverlay">中學申請</div>
+        </a>
+        <a href="/ilsc-sydney" class="schoolCard">
+          <img src="@/assets/images/sydney.jpg" alt="ILSC-Sydney" />
+          <div class="cardOverlay">短期語校/遊學團</div>
+        </a>
+        <a href="/kaplan-perth" class="schoolCard">
+          <img src="@/assets/images/perth.jpg" alt="Kaplan Aspect-Perth" />
+          <div class="cardOverlay">純文件/落點分析服務</div>
+        </a>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -177,13 +200,15 @@
 import { ref, onMounted, nextTick } from "vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
+import "vue3-carousel/dist/carousel.css";
 
 const images = [
-  new URL("@/assets/images/hero-image.jpg", import.meta.url).href,
-  new URL("@/assets/images/excellent-future.jpg", import.meta.url).href,
-  new URL("@/assets/images/service-content.jpg", import.meta.url).href,
-  new URL("@/assets/images/student.jpg", import.meta.url).href,
-  new URL("@/assets/images/qa.jpg", import.meta.url).href,
+  new URL("@/assets/images/homepageTest1.jpg", import.meta.url).href,
+    new URL("@/assets/images/homepageTest1.jpg", import.meta.url).href,
+  // new URL("@/assets/images/excellent-future.jpg", import.meta.url).href,
+  // new URL("@/assets/images/service-content.jpg", import.meta.url).href,
+  // new URL("@/assets/images/student.jpg", import.meta.url).href,
+  // new URL("@/assets/images/qa.jpg", import.meta.url).href,
 ];
 </script>
 
@@ -194,10 +219,14 @@ const images = [
 .home {
   line-height: 1.8;
   &__hero {
+    color: #fff;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    top: 20vh;
     text-align: center;
     padding-top: 30px !important;
     padding-bottom: 60px !important;
-    padding: 0 10px;
     h1 {
       font-size: 16px;
       letter-spacing: 2px;
@@ -214,7 +243,7 @@ const images = [
     }
     p {
       font-size: 14px;
-      color: #666;
+      color: #fff;
     }
     &--btn {
       display: flex;
@@ -227,7 +256,7 @@ const images = [
     &--link {
       cursor: pointer;
       font-weight: bold;
-      color: #777;
+      color: #fff;
       &:hover {
         color: #0055aa;
       }
@@ -238,10 +267,17 @@ const images = [
     justify-content: center;
     background-color: #dad5cc;
     img {
-      height: calc(100vh - 303px);
+      height: calc(100vh - 85px);
       width: 100%;
       display: block;
     }
+  }
+  &__back {
+    height: calc(100vh - 85px);
+    width: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
   }
   .featured {
     display: flex;
@@ -396,7 +432,7 @@ const images = [
       padding-top: 8px;
       color: black;
     }
-    ul{
+    ul {
       margin: 0;
     }
     ul,
@@ -542,5 +578,8 @@ const images = [
   .schoolCard:hover img {
     transform: none;
   }
+}
+.carousel{
+  width: 100%;
 }
 </style>

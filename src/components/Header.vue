@@ -153,9 +153,19 @@ function toggle() {
   isOpenNav.value = !isOpenNav.value;
 }
 function goHome() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth", // 平滑滾動
+  });
+  isOpenNav.value = false;
   router.push({ name: "Home" });
 }
 function goToBooking() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth", // 平滑滾動
+  });
+  isOpenNav.value = false;
   router.push({ name: "booking" });
 }
 
@@ -166,6 +176,11 @@ function goHomeModile() {
   if (isOpenNav.value) {
     return;
   }
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth", // 平滑滾動
+  });
+  isOpenNav.value = false;
   router.push({ name: "Home" });
 }
 </script>
@@ -295,10 +310,10 @@ header {
     margin-left: 14px;
     border-radius: 0;
     background: #000000de;
-       transition: transform 0.3s ease ;
+    transition: transform 0.3s ease;
     &:hover {
       transform: scaleY(120%) scaleX(120%);
-      transition: transform 0.3s ease ;
+      transition: transform 0.3s ease;
     }
     .nav__sub {
       color: white;
