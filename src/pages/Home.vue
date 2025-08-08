@@ -1,20 +1,5 @@
 <template>
   <div class="home">
-    <section class="home__hero">
-      <h1>
-        <span>我曾經很迷惘，但因為曜境，</span
-        ><span>我錄取了夢想中的學校。</span>
-      </h1>
-      <p>
-        I didn’t know where to start, but with Excellent Future Education, I
-        made it into my dream school.
-      </p>
-      <div class="home__hero--btn">
-        <div class="home__hero--link">【免費預約諮詢】</div>
-        <div class="home__hero--line">|</div>
-        <div class="home__hero--link">【服務項目介紹】</div>
-      </div>
-    </section>
     <section class="home__heroImage">
       <div class="home__back"></div>
       <Carousel
@@ -34,6 +19,21 @@
           <Navigation />
         </template>
       </Carousel>
+    </section>
+    <section class="home__hero">
+      <h1>
+        <span>我曾經很迷惘，但因為曜境，</span
+        ><span>我錄取了夢想中的學校。</span>
+      </h1>
+      <p>
+        I didn’t know where to start, but with Excellent Future Education, I
+        made it into my dream school.
+      </p>
+      <div class="home__hero--btn">
+        <div class="home__hero--link">【免費預約諮詢】</div>
+        <div class="home__hero--line">|</div>
+        <div class="home__hero--link">【服務項目介紹】</div>
+      </div>
     </section>
     <section class="featured">
       <div class="featured__text">
@@ -219,11 +219,9 @@ const images = [
 .home {
   line-height: 1.8;
   &__hero {
-    color: #fff;
-    position: absolute;
+    color: #000;
     z-index: 2;
     width: 100%;
-    top: 20vh;
     text-align: center;
     padding-top: 30px !important;
     padding-bottom: 60px !important;
@@ -243,7 +241,7 @@ const images = [
     }
     p {
       font-size: 14px;
-      color: #fff;
+      color: #000;
     }
     &--btn {
       display: flex;
@@ -256,7 +254,7 @@ const images = [
     &--link {
       cursor: pointer;
       font-weight: bold;
-      color: #fff;
+      color: #000;
       &:hover {
         color: #0055aa;
       }

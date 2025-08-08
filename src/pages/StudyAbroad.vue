@@ -174,8 +174,8 @@ onMounted(() => {
           once: true,
         },
       })
-      .to(titleBlock, { autoAlpha: 1, duration: 0.1 })
-      .to(titleLine, { x: "100%", duration: 0.2, ease: "power2.out" });
+      .to(titleBlock, { autoAlpha: 1, duration: 0.2 })
+      .to(titleLine, { x: "100%", duration: 0.4, ease: "power2.out" });
   }
 
   cards.forEach((card) => {
@@ -196,7 +196,7 @@ onMounted(() => {
 
     tl.to(card, {
       autoAlpha: 1,
-      duration: 0.1, // ⏩ 淡入更快
+      duration: 0.2, // ⏩ 淡入更快
       ease: "power1.out",
     });
 
@@ -205,10 +205,10 @@ onMounted(() => {
         line,
         {
           x: "100%",
-          duration: 0.2, // ⏩ 掃描速度加快
+          duration: 0.4, // ⏩ 掃描速度加快
           ease: "power2.out",
         },
-        `>+${i * 0.1}`
+        `>+${i * 0.2}`
       ); // ⏩ 卡片內每段延遲間距也縮短
     });
   });
@@ -224,7 +224,7 @@ onMounted(() => {
 
 .hero {
   background: url("@/assets/images/study_abroad.jpg") center/cover no-repeat;
-  height: calc(100vh - 350px);
+  height: calc(100vh - 130px);
   display: flex;
   padding-bottom: 3rem;
   .hero-inner {
@@ -241,7 +241,7 @@ onMounted(() => {
 }
 
 .intro {
-  background: #f3e9e2;
+  background: #f7db9e;
   padding: 2rem 1.5rem;
   .intro-container {
     line-height: 2;
