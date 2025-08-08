@@ -155,64 +155,100 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
-  const cards = document.querySelectorAll(".why .card");
+  const container = document.querySelector(".why .cards");
+  const cards = Array.from(document.querySelectorAll(".why .card"));
 
+  // ====== Title animation (keeps your original behavior) ======
   const titleBlock = document.querySelector(".why .title-block");
   const titleLine = titleBlock?.querySelector(".scan-line");
   const titleText = titleBlock?.querySelector(".animated-text");
-
   if (titleBlock && titleLine && titleText) {
     gsap.set(titleBlock, { autoAlpha: 0 });
     gsap.set(titleText, { opacity: 1 });
     gsap.set(titleLine, { x: "0%" });
 
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: titleBlock,
-          start: "top 90%",
-          once: true,
-        },
-      })
-      .to(titleBlock, { autoAlpha: 1, duration: 0.2 })
-      .to(titleLine, { x: "100%", duration: 0.4, ease: "power2.out" });
+    gsap.timeline({
+      scrollTrigger: { trigger: titleBlock, start: "top 90%", once: true },
+    })
+    .to(titleBlock, { autoAlpha: 1, duration: 0.15 })
+    .to(titleLine, { x: "100%", duration: 0.4, ease: "power2.out" });
   }
 
+  // ====== Timing params ======
+  const DUR_LINE = 0.85;      // 黑色布幕掃過速度（慢一點）
+  const GAP_WITHIN = 0;    // 同一卡片內段落間距（h3 -> p）
+  const OVERLAP_RATIO = 0.4;  // 0.5 = 前一張播到一半，下一張開始（波浪感）
+
+  // ====== Initial state ======
   cards.forEach((card) => {
-    const scanLines = card.querySelectorAll(".scan-line");
-    const animatedTexts = card.querySelectorAll(".animated-text");
+    const blocks = card.querySelectorAll(".animated-block");
+    const lines = card.querySelectorAll(".scan-line");
+    const texts = card.querySelectorAll(".animated-text");
 
-    gsap.set(card, { autoAlpha: 0 });
-    gsap.set(animatedTexts, { opacity: 1 });
-    gsap.set(scanLines, { x: "0%" });
+    // 卡片本身一直存在
+    gsap.set(card, { autoAlpha: 1, visibility: "visible" });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: card,
-        start: "top 70%",
-        once: true,
-      },
-    });
+    // 區塊未輪到前完全消失（文字 & 黑幕都看不到）
+    gsap.set(blocks, { visibility: "hidden" });
 
-    tl.to(card, {
-      autoAlpha: 1,
-      duration: 0.2, // ⏩ 淡入更快
-      ease: "power1.out",
-    });
+    // 文字存在但不需要漸顯（之後一出場就被黑幕覆蓋）
+    gsap.set(texts, { opacity: 1 });
 
-    scanLines.forEach((line, i) => {
-      tl.to(
-        line,
-        {
-          x: "100%",
-          duration: 0.4, // ⏩ 掃描速度加快
-          ease: "power2.out",
-        },
-        `>+${i * 0.2}`
-      ); // ⏩ 卡片內每段延遲間距也縮短
-    });
+    // 黑幕準備從左到右；實際出場時才顯示（由 block visibility 控制）
+    gsap.set(lines, { x: "0%" });
   });
+
+  // ====== Build + play master timeline with absolute scheduling ======
+  const buildAndPlay = () => {
+    if (!container) return;
+
+    const master = gsap.timeline({ paused: true });
+
+    // 依畫面位置排序：先比 top，再比 left（上到下、左到右）
+    const sorted = cards
+      .map((el) => {
+        const r = el.getBoundingClientRect();
+        return { el, top: Math.round(r.top), left: Math.round(r.left) };
+      })
+      .sort((a, b) => (a.top - b.top) || (a.left - b.left))
+      .map((x) => x.el);
+
+    sorted.forEach((card, idx) => {
+      const blocks = card.querySelectorAll(".animated-block");
+      const lines = card.querySelectorAll(".scan-line");
+
+      const tlCard = gsap.timeline();
+
+      blocks.forEach((block, i) => {
+        const line = lines[i];
+
+        // 同步出現：區塊整體顯示（文字+黑幕同時出現，文字被黑幕蓋住）
+        tlCard
+          .set(block, { visibility: "visible" }, i === 0 ? 0 : `+=${GAP_WITHIN}`)
+          // 黑幕從左到右掃開（露出文字），不做文字漸顯
+          .fromTo(line, { x: "0%" }, { x: "100%", duration: DUR_LINE, ease: "power2.out" }, "<");
+      });
+
+      // 用「絕對時間」安排開始點：第一張播到一半，第二張開始（波浪感）
+      const startAt = idx * DUR_LINE * OVERLAP_RATIO;
+      master.add(tlCard, startAt);
+    });
+
+    // 進入視窗後才播放一次
+    ScrollTrigger.create({
+      trigger: container,
+      start: "top 75%",
+      once: true,
+      onEnter: () => master.play(0),
+    });
+  };
+
+  buildAndPlay();
+
+  // 版面改變時刷新（若有重排）
+  window.addEventListener("resize", () => ScrollTrigger.refresh(true));
 });
+
 </script>
 
 <style scoped lang="scss">
@@ -453,7 +489,7 @@ onMounted(() => {
   min-height: 70px;
 
   .animated-text {
-    opacity: 1;
+    opacity: 0; /* ⬅️ 未輪到前看不到 */
     position: relative;
     z-index: 1;
     white-space: pre-line;
@@ -461,16 +497,17 @@ onMounted(() => {
 
   .scan-line {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000; // 黑色不透明遮罩
+    inset: 0;
+    background: #000; /* 不透明黑遮罩 */
     z-index: 2;
-    transform: translateX(0%);
+    transform: translateX(0%); /* 從左邊蓋住 */
     pointer-events: none;
   }
+    visibility: hidden; /* 預設整個 block 不顯示 */
+  .animated-text { opacity: 1; } /* 文字一直在（但 block 隱藏時看不到） */
+  .scan-line { display: block; } /* 黑幕預設在左邊覆蓋文字 */
 }
+
 
 @keyframes scan {
   0% {

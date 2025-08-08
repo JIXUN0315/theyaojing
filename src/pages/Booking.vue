@@ -158,7 +158,7 @@
         </form>
       </section>
     </div>
-    <div class="next-btn" v-show="!isMobile || step === 1">
+    <div class="next-btn" v-show="isMobile && step === 1">
         <button @click="next">NEXT</button>
     </div>
   </div>
