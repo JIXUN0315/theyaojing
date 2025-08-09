@@ -37,7 +37,7 @@
             <div class="animated-block delay">
               <div class="scan-line"></div>
               <p class="animated-text">
-                沉浸在國際學術環境中，強化語言能力，掌握全球職場所需的軟硬實力，為未來升學與就業打下堅實基礎。阿，對了，不光是找一份待遇更好的工作，也許你就是下一個張忠謀。
+                沉浸在國際學術環境中，強化語言能力，掌握全球職場所需的軟硬實力，為未來升學與就業打下堅實基礎。阿，對了，不光是找一份待遇更好的工作，也許你就是下一個張忠謀。不想當張忠謀？那也沒關係，重點是你準備好成為有選擇的人了嗎？
               </p>
             </div>
           </div>
@@ -52,7 +52,7 @@
             <div class="animated-block delay">
               <div class="scan-line"></div>
               <p class="animated-text">
-                跨出舒適圈，在多元文化中學習、交流，建立國際人脈，也促使你從不同角度重新認識自己，實現跳躍式自我成長。
+                跳脫舒適圈，在多元文化中學習、交流，建立國際人脈，也促使你從不同角度重新認識自己，學會自我管理與獨立面對生活，實現跳躍式的自我成長。
               </p>
             </div>
           </div>
@@ -80,7 +80,7 @@
             <div class="animated-block delay">
               <div class="scan-line"></div>
               <p class="animated-text">
-                留學申請的準備過程，不只是填表、寫文書、考試而已。這是一段深入思考自己是誰、想成為什麼樣的人的人生旅程。
+                留學申請的準備過程，不只是填表、寫文書、考試而已。這是一段深入思考自己是誰、想成為什麼樣的人的人生旅程。在選校、寫讀書計畫、準備面試的每個環節中，你將更清楚自己的興趣、價值觀與人生目標——這種自我了解的深度，往往比錄取通知書本身還更珍貴。
               </p>
             </div>
           </div>
@@ -95,21 +95,21 @@
             <img src="@/assets/images/planning.png" alt="規劃表" />
             <div class="text">
               <h4>制定專屬留學規劃表</h4>
-              <p>讓你知道每個時間點該做什麼，不再焦慮咬手手。</p>
+              <p>讓你知道每個時間點該做什麼，不再焦慮咬手手</p>
             </div>
           </li>
           <li class="assist-item">
             <img src="@/assets/images/find.png" alt="選校" />
             <div class="text">
               <h4>找到最適合你的學校</h4>
-              <p>留學就像挑選人生的舞台，不是越華麗越好，而是要站上剛剛好。</p>
+              <p>留學就像挑選人生的舞台，不是越華麗越好，而是要站上去剛剛好</p>
             </div>
           </li>
           <li class="assist-item">
             <img src="@/assets/images/writing.png" alt="文書撰寫" />
             <div class="text">
               <h4>文件撰寫規劃</h4>
-              <p>文案導師深度討論，寫出打中招生官心坎的文書，申請無往不利。</p>
+              <p>文案導師深度討論，發掘你的亮點與獨特性，寫出既貼近你自己、又能打中招生官心坎的內容，申請無往不利</p>
             </div>
           </li>
           <li class="assist-item">
@@ -117,7 +117,7 @@
             <div class="text">
               <h4>申請表填寫</h4>
               <p>
-                我們能為你省去很多繁瑣，讓你可以專心準備考試、工作，或單純保留更多時間給自己。
+                我們能為你省去很多繁瑣，讓你可以專心準備考試、工作，或單純保留更多時間給自己
               </p>
             </div>
           </li>
@@ -125,21 +125,21 @@
             <img src="@/assets/images/reminder.png" alt="提醒追蹤" />
             <div class="text">
               <h4>全程進度追蹤與提醒</h4>
-              <p>留意你的每封來信，為你把關每個小細節。</p>
+              <p>留意你的每封來信，為你把關每個小細節</p>
             </div>
           </li>
           <li class="assist-item">
             <img src="@/assets/images/visa.png" alt="簽證住宿" />
             <div class="text">
               <h4>簽證與住宿協助</h4>
-              <p>從簽證流程到住宿選擇，安心飛、落地有著落。</p>
+              <p>從簽證流程到宿舍選擇，我們協助你每一步，讓你安心飛、落地就有地方住</p>
             </div>
           </li>
           <li class="assist-item">
             <img src="@/assets/images/register.png" alt="入學流程" />
             <div class="text">
               <h4>入學流程協助</h4>
-              <p>疫苗規定、註冊選課都幫你搞定。</p>
+              <p>疫苗規定、選課流程、註冊繳費、行前說明……每一個環節，我們都替你準備妥當，讓你安心又自信地踏上留學旅程</p>
             </div>
           </li>
         </ul>
@@ -175,9 +175,9 @@ onMounted(() => {
   }
 
   // ====== Timing params ======
-  const DUR_LINE = 0.85;      // 黑色布幕掃過速度（慢一點）
+  const DUR_LINE = 0.65;      // 黑色布幕掃過速度（慢一點）
   const GAP_WITHIN = 0;    // 同一卡片內段落間距（h3 -> p）
-  const OVERLAP_RATIO = 0.4;  // 0.5 = 前一張播到一半，下一張開始（波浪感）
+  const OVERLAP_RATIO = 0.2;  // 0.5 = 前一張播到一半，下一張開始（波浪感）
 
   // ====== Initial state ======
   cards.forEach((card) => {
@@ -380,7 +380,9 @@ onMounted(() => {
           margin-bottom: 0.5rem;
           color: #111;
         }
-
+        h4{
+           font-size: 1.125rem;
+        }
         p {
           font-size: 1.125rem;
           color: #333;

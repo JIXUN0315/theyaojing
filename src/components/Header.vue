@@ -312,7 +312,7 @@ header {
     background: #000000de;
     transition: transform 0.3s ease;
     &:hover {
-      transform: scaleY(120%) scaleX(120%);
+      transform: scaleY(110%) scaleX(110%);
       transition: transform 0.3s ease;
     }
     .nav__sub {
