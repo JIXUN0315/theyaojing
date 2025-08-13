@@ -1,13 +1,8 @@
 <template>
   <div class="consultation">
     <div class="consultation-hero"></div>
-    <div class="stepper">
-      <div :class="['step', { active: step >= 1 }]"><span>1</span></div>
-      <div :class="['stepper-line', { active: step >= 2 }]"></div>
-      <div :class="['step', { active: step >= 2 }]"><span>2</span></div>
-    </div>
     <div class="consultation-wrapper">
-      <section class="faq-container" v-show="!isMobile || step === 1">
+      <section class="faq-container">
         <div class="faq">
           <h2>常見問題 FAQ</h2>
           <div class="faq-item" v-for="(item, index) in faqs" :key="index">
@@ -23,143 +18,159 @@
           </div>
         </div>
       </section>
-      <section class="form-container" v-show="!isMobile || step === 2">
+      <section class="form-container">
         <h2>預約諮詢表單</h2>
-        <form @submit.prevent="submit">
-          <label>中文全名 *</label>
-          <input
-            type="text"
-            placeholder="您的姓名"
-            required
-            v-model="form.name"
-          />
-
-          <label>電子郵件 *</label>
-          <input
-            type="email"
-            placeholder="請輸入有效信箱"
-            required
-            v-model="form.email"
-          />
-
-          <label>電話 或 LINE ID *</label>
-          <input
-            type="text"
-            placeholder="電話或 LINE ID"
-            required
-            v-model="form.contact"
-          />
-          <small class="note">若留LINE ID 請確認可接收陌生訊息</small>
-
-          <label>畢業(就讀)學校</label>
-          <input type="text" placeholder="學校名稱" v-model="form.school" />
-
-          <label>畢業(就讀)科系</label>
-          <input type="text" placeholder="科系名稱" v-model="form.department" />
-
-          <label>想去哪個國家</label>
-          <div class="country-options">
-            <label
-              v-for="country in countryOptions"
-              :key="country.value"
-              class="country-card"
-            >
-              <input
-                type="radio"
-                :value="country.value"
-                v-model="form.country"
-                name="country"
-              />
-              <img :src="country.img" :alt="country.value" />
-              <span>{{ country.value }}</span>
-            </label>
-            <label for="other" class="otherOption">
-              <input
-                type="radio"
-                name="country"
-                placeholder="其他"
-                v-model="form.courseOther"
-              />
-              <input id="other" placeholder="其他" />
-            </label>
-          </div>
-
-          <div class="radio-area">
-            <label>想了解的課程類別 *</label>
-            <div class="radio-group">
-              <label v-for="type in courseTypes" :key="type">
+        <div class="stepper">
+          <div :class="['step', { active: step >= 1 }]"><span>1</span></div>
+          <div :class="['stepper-line', { active: step >= 2 }]"></div>
+          <div :class="['step', { active: step >= 2 }]"><span>2</span></div>
+        </div>
+        <div class="form">
+          <div class="form-page" v-show="step === 1">
+            <label>中文全名 *</label>
+            <input
+              type="text"
+              placeholder="您的姓名"
+              required
+              v-model="form.name"
+            />
+            <label>電話 或 LINE ID *</label>
+            <input
+              type="text"
+              placeholder="電話或 LINE ID"
+              required
+              v-model="form.contact"
+            />
+            <label>電子郵件 *</label>
+            <input
+              type="email"
+              placeholder="請輸入有效信箱"
+              required
+              v-model="form.email"
+            />
+            <small class="note">若留LINE ID 請確認可接收陌生訊息</small>
+            <label>畢業(就讀)學校</label>
+            <input type="text" placeholder="學校名稱" v-model="form.school" />
+            <label>畢業(就讀)科系</label>
+            <input
+              type="text"
+              placeholder="科系名稱"
+              v-model="form.department"
+            />
+            <label>想去哪個國家</label>
+            <div class="country-options">
+              <label
+                v-for="country in countryOptions"
+                :key="country.value"
+                class="country-card"
+              >
                 <input
                   type="radio"
-                  :value="type"
-                  v-model="form.courseType"
-                  name="courseType"
-                  required
+                  :value="country.value"
+                  v-model="form.country"
+                  name="country"
                 />
-                {{ type }}
+                <img :src="country.img" :alt="country.value" />
+                <span>{{ country.value }}</span>
               </label>
-              <label for="oth">
+              <label for="other" class="otherOption">
                 <input
                   type="radio"
-                  name="courseType"
+                  name="country"
                   placeholder="其他"
                   v-model="form.courseOther"
                 />
-                <input id="oth" placeholder="其他" class="otherInput" />
+                <input id="other" placeholder="其他" />
               </label>
             </div>
           </div>
-
-          <div class="radio-area">
-            <label>欲就讀的科系 *</label>
-            <div class="radio-group">
-              <label v-for="type in subject" :key="type">
-                <input
-                  type="radio"
-                  :value="type"
-                  v-model="form.courseType"
-                  name="subject"
-                  required
-                />
-                {{ type }}
-              </label>
-              <label for="oth">
-                <input
-                  type="radio"
-                  name="courseType"
-                  placeholder="其他"
-                  v-model="form.courseOther"
-                />
-                <input id="oth" placeholder="其他" class="otherInput" />
-              </label>
+          <div class="form-page" v-show="step === 2">
+            <div class="radio-area">
+              <label>想了解的課程類別 *</label>
+              <div class="radio-group">
+                <label v-for="type in courseTypes" :key="type">
+                  <input
+                    type="radio"
+                    :value="type"
+                    v-model="form.courseType"
+                    name="courseType"
+                    required
+                  />
+                  {{ type }}
+                </label>
+                <label for="oth" class="othOption">
+                  <input
+                    type="radio"
+                    name="courseType"
+                    placeholder="其他"
+                    v-model="form.courseOther"
+                  />
+                  <input id="oth" placeholder="其他" class="otherInput" />
+                </label>
+              </div>
             </div>
+
+            <div class="radio-area">
+              <label>欲就讀的科系 *</label>
+              <div class="radio-group">
+                <label v-for="type in subject" :key="type">
+                  <input
+                    type="radio"
+                    :value="type"
+                    v-model="form.courseType"
+                    name="subject"
+                    required
+                  />
+                  {{ type }}
+                </label>
+                <label for="oth">
+                  <input
+                    type="radio"
+                    name="courseType"
+                    placeholder="其他"
+                    v-model="form.courseOther"
+                  />
+                  <input id="oth" placeholder="其他" class="otherInput" />
+                </label>
+              </div>
+            </div>
+
+            <label>預計哪一年出發就讀</label>
+            <select>
+              <option value="">2025</option>
+              <option value="">2026</option>
+              <option value="">2027</option>
+              <option value="">2028</option>
+            </select>
+
+            <label>諮詢方式</label>
+            <select>
+              <option value="">實體諮詢</option>
+              <option value="">線上諮詢</option>
+            </select>
+
+            <label>如何得知曜境</label>
+            <select>
+              <option value="">介紹人</option>
+              <option value="">推薦碼</option>
+              <option value="">社群平台</option>
+            </select>
+
+            <label>其他資訊</label>
+            <textarea
+              placeholder="歡迎補充其他想讓我們知道的資訊"
+              v-model="form.extra"
+            ></textarea>
+            <small class="note">歡迎補充其他想讓我們知道的資訊</small>
           </div>
-
-          <label>預計哪一年出發就讀</label>
-          <select name="" id="">
-            <option value="">2025</option>
-            <option value="">2025</option>
-            <option value="">2025</option>
-            <option value="">2025</option>
-          </select>
-
-          <label>如何得知曜境 (介紹人 / 推薦碼 / 社群平台...)</label>
-          <input type="text" v-model="form.referral" />
-
-          <label>其他資訊</label>
-          <textarea
-            placeholder="歡迎補充其他想讓我們知道的資訊"
-            v-model="form.extra"
-          ></textarea>
-          <small class="note">歡迎補充其他想讓我們知道的資訊</small>
-          <div class="btn-area">
-            <div class="lucky"></div>
-            <button type="submit">立即送出</button>
-          </div>
-        </form>
+        </div>
+        <div class="btn-area">
+          <div class="lucky"></div>
+          <button @click="last" v-show="step === 2">上一頁</button>
+          <button @click="next" v-show="step === 1">下一頁</button>
+          <button v-show="step === 2">立即送出</button>
+        </div>
       </section>
-    </div>
-    <div class="next-btn" v-show="isMobile && step === 1">
-        <button @click="next">NEXT</button>
     </div>
   </div>
 </template>
@@ -273,12 +284,27 @@ const submit = () => {
   alert("送出成功！我們將儘快聯絡你。");
 };
 
-function next(){
+function next() {
   step.value = 2;
+  const formContainer = document.querySelector(".form-container");
+  const offset =
+    formContainer.getBoundingClientRect().top + window.scrollY - 60;
+
   window.scrollTo({
-  top: 0,
-  behavior: 'smooth' // 平滑滾動
-})
+    top: offset,
+    behavior: "smooth",
+  });
+}
+function last() {
+  step.value = 1;
+  const formContainer = document.querySelector(".form-container");
+  const offset =
+    formContainer.getBoundingClientRect().top + window.scrollY - 60;
+
+  window.scrollTo({
+    top: offset,
+    behavior: "smooth",
+  });
 }
 </script>
 
@@ -363,19 +389,23 @@ section {
   padding: 2rem;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
 
-  form {
+  .form {
+    .form-page {
+      box-sizing: border-box;
+      min-height: 925px;
+    }
     label {
       display: block;
-      margin-top: 1rem;
+      padding-top: 12px;
       font-weight: 600;
       color: #333;
     }
 
     input,
     textarea {
-      width: calc(100% - 26px);
+      width: calc(100% - 18px);
       margin-top: 0.25rem;
-      padding: 0.75rem;
+      padding: 8px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
@@ -383,7 +413,7 @@ section {
     select {
       width: 100%;
       margin-top: 0.25rem;
-      padding: 0.75rem;
+      padding: 8px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
@@ -391,7 +421,7 @@ section {
 
     textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 180px;
     }
 
     .note {
@@ -399,17 +429,23 @@ section {
       font-size: 0.85rem;
       color: #666;
       margin-top: 0.25rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.25rem;
     }
 
     .country-options {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      margin-top: 1rem;
+      @media (max-width: 768px) {
+        margin-top: 1rem;
+      }
 
       .country-card {
-        width: calc(50% - 0.5rem);
+        @media (min-width: 768px) {
+          max-width: 250px;
+          margin-top: 5px;
+        }
+        width: calc(40% - 0.5rem);
         text-align: center;
         border: 1px solid #ccc;
         border-radius: 8px;
@@ -428,6 +464,7 @@ section {
           border-radius: 4px;
         }
         @media (max-width: 768px) {
+          width: calc(50% - 0.5rem);
           height: 230px;
         }
         span {
@@ -452,17 +489,19 @@ section {
       }
     }
     .radio-area {
-      padding: 16px 0;
+      padding: 12px 0;
     }
     .radio-group {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      margin: 1rem 0;
+      margin: 12px 0;
       .otherInput {
         width: 100%;
       }
       label {
+        margin: 0;
+        padding: 10px 0;
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -475,49 +514,65 @@ section {
           width: auto;
         }
       }
-
+      .othOption {
+        padding: 0;
+        input {
+          margin-top: 0;
+        }
+      }
       input[type="text"] {
         margin-top: 0.5rem;
         flex: 1;
         width: 100%;
       }
     }
-    .btn-area {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      margin-top: 50px;
-      .lucky {
-        position: absolute;
-        top: -80px;
-        left: 100px;
-        width: 200px;
-        height: 250px;
-        background-image: url("@/assets/images/lucky.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        @media (max-width: 1280px) {
-          left: -30px;
-        }
+  }
+  .btn-area {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: relative;
+    margin-top: 50px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+    .lucky {
+      position: absolute;
+      top: -80px;
+      left: 100px;
+      width: 200px;
+      height: 250px;
+      background-image: url("@/assets/images/lucky.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      @media (max-width: 1280px) {
+        left: -30px;
       }
-      button {
-        position: relative;
-        z-index: 3;
-        margin-top: 2rem;
-        background-color: #ffee55;
-        color: #063a5e;
-        font-weight: bold;
-        padding: 0.9rem 1.5rem;
-        border: none;
-        border-radius: 6px;
-        font-size: 1rem;
-        cursor: pointer;
+    }
+    button {
+      position: relative;
+      z-index: 3;
+      margin-top: 2rem;
+      background-color: #ffee55;
+      color: #063a5e;
+      font-weight: bold;
+      padding: 0.9rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-left: 20px;
+      margin-right: 20px;
+      cursor: pointer;
 
-        &:hover {
-          background-color: #d8c93e;
-        }
+      &:hover {
+        background-color: #d8c93e;
+      }
+      @media (max-width: 768px) {
+        margin-left: 12px;
+        margin-right: 0;
       }
     }
   }
@@ -555,25 +610,26 @@ small {
 .stepper {
   display: flex;
   align-items: center;
-  padding: 18px 30px;
-  background-color: #f7faff;
+  padding: 2px 30px;
 }
 
 .step {
+  position: relative;
+  z-index: 10;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #dbeafe; // 未完成的淺藍
-  color: #3b82f6; // 文字藍
+  background: #fffac9; // 未完成的淺藍
+  color: #ccc544; // 文字藍
   display: grid;
   place-items: center;
   font-weight: 700;
   transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 
   &.active {
-    background: #3b82f6; // 已完成的藍色
-    color: #fff;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background: #FFEE55; // 已完成的藍色
+    color: #063A5E;
+    box-shadow: 0 0 0 3px rgba(208, 204, 93, 0.7);
   }
 }
 
@@ -581,7 +637,7 @@ small {
   flex: 1; // 自動撐滿兩點之間
   height: 6px;
   border-radius: 999px;
-  background: #dbeafe; // 未完成的線
+  background: #fffac9; // 未完成的線
   overflow: hidden;
   position: relative;
 
@@ -591,7 +647,7 @@ small {
     position: absolute;
     inset: 0;
     width: 0%; // 初始 0%
-    background: #3b82f6; // 已完成顏色
+    background: #FFEE55; // 已完成顏色
     transition: width 0.35s ease;
   }
 
@@ -600,41 +656,41 @@ small {
   }
 }
 .next-btn {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      align-items: center;
-      padding: 20px 0;
-      .lucky {
-        position: absolute;
-        top: -80px;
-        left: 100px;
-        width: 200px;
-        height: 250px;
-        background-image: url("@/assets/images/lucky.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        @media (max-width: 1280px) {
-          left: -30px;
-        }
-      }
-      button {
-        position: relative;
-        z-index: 3;
-        background-color: #ffee55;
-        color: #063a5e;
-        font-weight: bold;
-        padding: 0.9rem 1.5rem;
-        border: none;
-        border-radius: 6px;
-        font-size: 1rem;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #d8c93e;
-        }
-      }
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  padding: 20px 0;
+  .lucky {
+    position: absolute;
+    top: -80px;
+    left: 100px;
+    width: 200px;
+    height: 250px;
+    background-image: url("@/assets/images/lucky.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    @media (max-width: 1280px) {
+      left: -30px;
     }
+  }
+  button {
+    position: relative;
+    z-index: 3;
+    background-color: #ffee55;
+    color: #063a5e;
+    font-weight: bold;
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d8c93e;
+    }
+  }
+}
 </style>
