@@ -2,12 +2,13 @@
     <div class="post-page">
         <!-- 上方欄位（標題/分類/圖片） -->
         <div class="back-column">
-            <router-link to="/blog" class="back-link">← Column</router-link>
+            <router-link to="/blog" class="back-link">← 上一頁</router-link>
         </div>
       <section class="post-hero">
         <div class="post-meta">
           <p class="date">{{ post.date }}</p>
           <h1 class="title">{{ post.title }}</h1>
+          <span class="">{{ post.school }}</span>
           <router-link :to="'/blog?cat=' + post.category" class="category">{{ post.category }}</router-link>
         </div>
         <div class="post-cover">
@@ -64,7 +65,8 @@
   const post = {
     slug,
     date: '2025.05.31',
-    title: 'Lu同學, Purdue University',
+    title: 'Lu同學',
+    school: 'Purdue University',
     category: '#留學後的我變了',
     image: sharedImg
   }
@@ -75,7 +77,7 @@
     padding: 2rem 1.5rem;
   }
   .post-page {
-    background-color: #f9f8f6;
+    background-color: #E6E4DF;
     padding: 2rem 1.5rem;
     font-family: "Noto Sans JP", sans-serif;
   }

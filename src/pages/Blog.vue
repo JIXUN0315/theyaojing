@@ -1,7 +1,23 @@
 <template>
-  <div class="blog-page">
-    <!-- 分類區塊 -->
-    <nav class="category-tabs">
+  <div class="hero-section">
+    <div class="photo">
+      <img src="@/assets/images/blog.jpg" alt="blog" />
+    </div>
+    <div class="content">
+      <p class="paragraph">每段留學路都是一場獨特的旅程</p>
+      <p class="description">
+        這裡,我們集結了學生們的真實回饋、親身經歷,
+        <br />
+        以及顧問團隊撰寫的實用文章。
+        <br />
+        也許你會在某一段故事中,看見此刻的自己。
+        <br />
+        感受到「你不是一個人」的陪伴力量。
+      </p>
+    </div>
+  </div>
+      <!-- 分類區塊 -->
+      <nav class="category-tabs">
       <div
         v-for="cat in categories"
         :key="cat"
@@ -12,19 +28,21 @@
       </div>
     </nav>
 
+  <div class="blog-page">
+
     <!-- 卡片區塊 -->
     <div class="cards-grid">
       <div
         v-for="post in filteredPosts"
         :key="post.slug"
-        class="card"
+        class="blog-card"
         @click="goToPost(post.slug)"
       >
         <img :src="post.image" alt="cover" />
         <div class="card-content">
           <p class="date">{{ post.date }}</p>
           <p class="tag">{{ post.category }}</p>
-          <h3 class="title">{{ post.title }}</h3>
+          <p class="title">{{ post.title }}</p>
         </div>
       </div>
     </div>
@@ -37,75 +55,68 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const categories = [
-  "#留學後才知道的事",
-  "#留學後的我變了",
-  "#國外職業分享",
-  "#勇敢跳脫舒適圈：以前的我 vs 現在的我",
-  "#學生自選主題",
-];
+const categories = ["#總覽", "#學生見證", "#留學故事", "#實用專欄"];
 
 const activeCategory = ref(categories[0]);
 
-import sharedImg from '@/assets/images/shareblog01.jpg'
-
+import sharedImg from "@/assets/images/shareblog01.jpg";
 
 // 寫死的文章資料（僅作為卡片模板）
 const posts = ref([
   {
     slug: "post-01",
-    title: "（文章標題）",
+    title: "Lu同學,Purdue University",
     date: "2025.05.31",
-    category: "#留學後才知道的事",
+    category: "#總覽",
     image: sharedImg,
   },
   {
     slug: "post-01",
-    title: "（文章標題）",
+    title: "Lu同學,Purdue University",
     date: "2025.05.31",
-    category: "#留學後才知道的事",
+    category: "#總覽",
     image: sharedImg,
   },
   {
     slug: "post-01",
-    title: "（文章標題）",
+    title: "Lu同學,Purdue University",
     date: "2025.05.31",
-    category: "#留學後才知道的事",
+    category: "#總覽",
     image: sharedImg,
   },
   {
     slug: "post-01",
-    title: "（文章標題）",
+    title: "Lu同學,Purdue University",
     date: "2025.05.31",
-    category: "#留學後才知道的事",
+    category: "#總覽",
     image: sharedImg,
   },
   {
     slug: "post-02",
     title: "Lu同學, Purdue University",
     date: "2025.05.31",
-    category: "#留學後的我變了",
+    category: "#總覽",
     image: sharedImg,
   },
   {
     slug: "post-03",
-    title: "（文章標題）",
+    title: "Lu同學,Purdue University",
     date: "2025.05.31",
-    category: "#國外職業分享",
+    category: "#學生見證",
     image: sharedImg,
   },
   {
     slug: "post-04",
-    title: "（文章標題）",
+    title: "Lu同學,Purdue University",
     date: "YYYY.MM.DD",
-    category: "#勇敢跳脫舒適圈：以前的我 vs 現在的我",
+    category: "#實用專欄",
     image: sharedImg,
   },
   {
     slug: "post-05",
-    title: "（文章標題）",
+    title: "Lu同學,Purdue University",
     date: "YYYY.MM.DD",
-    category: "#學生自選主題",
+    category: "#實用專欄",
     image: sharedImg,
   },
 ]);
@@ -124,9 +135,19 @@ function goToPost(slug) {
   padding: 2rem;
   font-family: sans-serif;
 }
+.content {
+  text-align: center;
+}
+.paragraph{
+  text-align: center;
+  font-size: 26px;
+  font-weight: 900;
+}
+.description{
+  line-height: 3;
+}
 .category-tabs {
   display: flex;
-  justify-content: center;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   margin-bottom: 1rem;
@@ -136,6 +157,8 @@ function goToPost(slug) {
   padding: 1.75rem 1.5rem;
   font-size: 1rem;
   color: #333;
+  flex-grow: 1;
+  text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
   background-color: #fff;
@@ -164,48 +187,44 @@ function goToPost(slug) {
   font-weight: bold;
 }
 
-
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   padding: 0;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
-.card {
-  background: #f8f8f8;
-  border-radius: 8px;
+.blog-card {
   overflow: hidden;
   cursor: pointer;
   transition: box-shadow 0.2s;
+  margin: 1rem;
 }
 
-.card:hover {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
 
-.card img {
+.blog-card  img {
   width: 100%;
   height: auto;
 }
 
 .card-content {
-  padding: 1rem;
+  text-align: center;
 }
 
-.date {
-  font-size: 0.85rem;
-  color: #888;
+.date  {
+  font-size: 1rem;
+  font-weight: 900;
+  margin: 0;
 }
-
-.tag {
-  font-size: 0.75rem;
-  color: #aaa;
+.tag{
+  font-size: 1rem;
+  font-weight: 900;
+  margin: 0;
 }
 
 .title {
-  margin-top: 0.5rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  margin: 0;
 }
 
 @media (min-width: 1025px) {
@@ -215,24 +234,22 @@ function goToPost(slug) {
 }
 
 @media (max-width: 640px) {
-    .cards-grid {
-        grid-template-columns: 1fr;
-    }
-    .category-tabs {
-        flex-direction: column;
-        align-items: stretch;
-    }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .category-tabs {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .category-tabs div {
-        border-top: 1px solid #ccc;
-        border-left: none ;
-        border-right: none;
-    }
+  .category-tabs div {
+    border-top: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+  }
 
-    .category-tabs div:first-child {
-        border-top: none;
-    }
-  
+  .category-tabs div:first-child {
+    border-top: none;
+  }
 }
-
 </style>
