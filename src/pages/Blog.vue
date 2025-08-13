@@ -1,8 +1,6 @@
 <template>
   <div class="hero-section">
-    <div class="photo">
-      <img src="@/assets/images/blog.jpg" alt="blog" />
-    </div>
+    <div class="photo"></div>
     <div class="content">
       <p class="paragraph">每段留學路都是一場獨特的旅程</p>
       <p class="description">
@@ -16,20 +14,19 @@
       </p>
     </div>
   </div>
-      <!-- 分類區塊 -->
-      <nav class="category-tabs">
-      <div
-        v-for="cat in categories"
-        :key="cat"
-        :class="{ active: activeCategory === cat }"
-        @click="activeCategory = cat"
-      >
-        {{ cat }}
-      </div>
-    </nav>
+  <!-- 分類區塊 -->
+  <nav class="category-tabs">
+    <div
+      v-for="cat in categories"
+      :key="cat"
+      :class="{ active: activeCategory === cat }"
+      @click="activeCategory = cat"
+    >
+      {{ cat }}
+    </div>
+  </nav>
 
   <div class="blog-page">
-
     <!-- 卡片區塊 -->
     <div class="cards-grid">
       <div
@@ -46,6 +43,26 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="pagination">
+    <nav class="pager" aria-label="Pagination">
+      <a class="pager__nav pager__prev" href="#" aria-label="上一頁">上一頁</a>
+
+      <ul class="pager__pages" role="list">
+        <li><a class="pager__page" href="#">1</a></li>
+        <li class="pager__ellipsis" aria-hidden="true">…</li>
+        <li><a class="pager__page" href="#">2</a></li>
+        <li>
+          <a class="pager__page is-current" aria-current="page" href="#">3</a>
+        </li>
+        <li><a class="pager__page" href="#">4</a></li>
+        <li class="pager__ellipsis" aria-hidden="true">…</li>
+        <li><a class="pager__page" href="#">10</a></li>
+      </ul>
+
+      <a class="pager__nav pager__next" href="#" aria-label="下一頁">下一頁</a>
+    </nav>
   </div>
 </template>
 
@@ -130,7 +147,16 @@ function goToPost(slug) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.photo {
+  height: calc(100vh - 130px);
+  display: flex;
+  padding-bottom: 3rem;
+  background: url("@/assets/images/blog.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .blog-page {
   padding: 2rem;
   font-family: sans-serif;
@@ -138,12 +164,12 @@ function goToPost(slug) {
 .content {
   text-align: center;
 }
-.paragraph{
+.paragraph {
   text-align: center;
   font-size: 26px;
   font-weight: 900;
 }
-.description{
+.description {
   line-height: 3;
 }
 .category-tabs {
@@ -201,8 +227,7 @@ function goToPost(slug) {
   margin: 1rem;
 }
 
-
-.blog-card  img {
+.blog-card img {
   width: 100%;
   height: auto;
 }
@@ -211,12 +236,12 @@ function goToPost(slug) {
   text-align: center;
 }
 
-.date  {
+.date {
   font-size: 1rem;
   font-weight: 900;
   margin: 0;
 }
-.tag{
+.tag {
   font-size: 1rem;
   font-weight: 900;
   margin: 0;
@@ -225,6 +250,76 @@ function goToPost(slug) {
 .title {
   font-size: 1rem;
   margin: 0;
+}
+
+.pagination {
+  /* ===== Pagination (含省略號) ===== */
+  .pager {
+    --gap-nav: clamp(16px, 3vw, 40px);
+    --gap-pages: clamp(10px, 2vw, 24px);
+    --color-text: #111;
+    --color-muted: #b8b8b8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-nav);
+    padding: 16px 8px;
+    font-size: 16px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .pager__nav,
+  .pager__page {
+    color: var(--color-text);
+    text-decoration: none;
+    outline: none;
+  }
+
+  .pager__nav:hover,
+  .pager__page:hover {
+    text-decoration: underline;
+  }
+
+  .pager__pages {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-pages);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  /* 當前頁 */
+  .pager__page.is-current {
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+
+  /* 省略號 */
+  .pager__ellipsis {
+    color: var(--color-muted);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* disabled 範例（放在需要時） */
+  .is-disabled {
+    color: var(--color-muted);
+    pointer-events: none;
+    text-decoration: none;
+  }
+
+  /* 小螢幕調整 */
+  @media (max-width: 480px) {
+    .pager {
+      gap: 20px;
+    }
+    .pager__pages {
+      gap: 14px;
+    }
+  }
 }
 
 @media (min-width: 1025px) {
