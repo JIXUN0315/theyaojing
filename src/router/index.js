@@ -7,7 +7,8 @@ import HighSchool from "../pages/HighSchool.vue";
 import Template from "../pages/Template.vue";
 import LanguageSchool from "../pages/LanguageSchool.vue";
 import Blog from "../pages/Blog.vue"
-import BlogPost from '../pages/BlogPost.vue'; // 對應你的文章詳細頁 component
+import BlogPost from '../pages/BlogPost.vue'; 
+import Document from "../pages/Document.vue";
 
 
 const routes = [
@@ -52,10 +53,15 @@ const routes = [
     component: Blog,
   },
   {
-    path: '/blog/posts/:slug',   // 動態參數 slug
-    name: 'BlogPost',
-    component: BlogPost
-  }
+    path: "/blog/posts/:slug", // 動態參數 slug
+    name: "BlogPost",
+    component: BlogPost,
+  },
+  {
+    path: "/document",
+    name: "document",
+    component: Document,
+  },
   // {
   //   path: '/template',
   //   name: 'template',

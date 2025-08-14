@@ -16,6 +16,7 @@
               <a href="/studyAbroad">留學申請（大學、研究所）</a>
               <a href="/highSchool">中學申請</a>
               <a href="/languageSchool">語言學校</a>
+              <a href="/document">純文件與落點分析</a>
             </div>
           </div>
         </div>
@@ -81,6 +82,7 @@
               <a href="/studyAbroad">留學申請（大學、研究所）</a>
               <a href="/highSchool">中學申請</a>
               <a href="/languageSchool">語言學校</a>
+              <a href="/document">純文件與落點分析</a>
             </div>
           </div>
 

@@ -83,18 +83,20 @@
   }
   
   .post-hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-items: center;
     gap: 2rem;
     max-width: 1200px;
     margin: 3rem auto;
+    width: 75%;
+    text-align: center;
   }
   
   .post-meta {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: 30%;
   }
   
   .back-link {
@@ -121,6 +123,9 @@
     color: #555;
   }
   
+  .post-cover{
+    width: 70%;
+  }
   .post-cover img {
     width: 100%;
     border-radius: 4px;
