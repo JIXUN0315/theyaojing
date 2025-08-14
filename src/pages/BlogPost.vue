@@ -67,7 +67,7 @@
     date: '2025.05.31',
     title: 'Lu同學',
     school: 'Purdue University',
-    category: '#留學後的我變了',
+    category: '#留學故事 - 留學後的我變了',
     image: sharedImg
   }
   </script>
@@ -85,18 +85,18 @@
   .post-hero {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    justify-content: center;
     max-width: 1200px;
     margin: 3rem auto;
-    width: 75%;
-    text-align: center;
+    gap: 2rem;
   }
   
   .post-meta {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 30%;
+    width: 50%;
+    text-align: end;
   }
   
   .back-link {
@@ -128,7 +128,6 @@
   }
   .post-cover img {
     width: 100%;
-    border-radius: 4px;
     object-fit: cover;
   }
     .post-body {
