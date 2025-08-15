@@ -83,6 +83,7 @@
 }
 
 .highlight-list {
+  font-size: 18px;
   margin-bottom: 2rem;
   line-height: 1.8;
   list-style: disc;
@@ -150,8 +151,9 @@ ul {
 }
 
 .cta {
-  width: 50%;
+  width: 70%;
   margin-top: 2rem;
+      font-size: 18px;
 }
 
 .cta ul {
@@ -170,6 +172,7 @@ ul {
   min-width: 200px;
 }
 .text-right{
+   font-size: 18px;
     display: flex;
     justify-content: end;
 }
