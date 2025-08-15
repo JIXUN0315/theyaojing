@@ -41,6 +41,7 @@
               required
               v-model="form.contact"
             />
+            <small class="note">若留LINE ID 請確認可接收陌生訊息</small>
             <label>電子郵件 *</label>
             <input
               type="email"
@@ -48,7 +49,6 @@
               required
               v-model="form.email"
             />
-            <small class="note">若留LINE ID 請確認可接收陌生訊息</small>
             <label>畢業(就讀)學校</label>
             <input type="text" placeholder="學校名稱" v-model="form.school" />
             <label>畢業(就讀)科系</label>
@@ -117,20 +117,73 @@
                   <input
                     type="radio"
                     :value="type"
-                    v-model="form.courseType"
-                    name="subject"
+                    v-model="form.subject"
+                    name="subjectOth"
                     required
                   />
                   {{ type }}
                 </label>
-                <label for="oth">
+                <label for="othSub">
                   <input
                     type="radio"
-                    name="courseType"
-                    placeholder="其他"
-                    v-model="form.courseOther"
+                    name="subjectOth"
+                    v-model="form.subject"
+                    id="othSub"
+                    value="其他"
                   />
-                  <input id="oth" placeholder="其他" class="otherInput" />
+                  <input
+                    placeholder="其他"
+                    class="otherInput"
+                    v-model="form.subjectOther"
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div class="radio-area">
+              <label>如何得知曜境 *</label>
+              <div class="radio-group">
+                <label v-for="type in howKnow" :key="type">
+                  <input
+                    type="radio"
+                    :value="type"
+                    v-model="form.howKnow"
+                    name="howKnow"
+                    required
+                  />
+                  {{ type }}
+                </label>
+                <label for="othRel" :class="{'relatives': form.howKnow == '親友介紹'}">
+                  <input
+                    type="radio"
+                    name="howKnow"
+                    v-model="form.howKnow"
+                    id="othRel"
+                    value="親友介紹"
+                  />
+                  <span style="width: 90px">親友介紹</span>
+                  <input
+                    v-show="form.howKnow == '親友介紹'"
+                    placeholder="請輸入推薦人"
+                    class="otherInput"
+                    style="width: 140px"
+                    v-model="form.recommendName"
+                  />
+                </label>
+
+                <label for="othHow">
+                  <input
+                    type="radio"
+                    name="howKnow"
+                    v-model="form.howKnow"
+                    id="othHow"
+                    value="其他"
+                  />
+                  <input
+                    placeholder="其他"
+                    class="otherInput"
+                    v-model="form.otherHow"
+                  />
                 </label>
               </div>
             </div>
@@ -149,25 +202,18 @@
               <option value="">線上諮詢</option>
             </select>
 
-            <label>如何得知曜境</label>
-            <select>
-              <option value="">介紹人</option>
-              <option value="">推薦碼</option>
-              <option value="">社群平台</option>
-            </select>
-
             <label>其他資訊</label>
             <textarea
               placeholder="歡迎補充其他想讓我們知道的資訊"
               v-model="form.extra"
             ></textarea>
-            <small class="note">歡迎補充其他想讓我們知道的資訊</small>
           </div>
         </div>
         <div class="btn-area">
           <div class="lucky"></div>
+          <div class="" v-show="step === 1"></div>
           <button @click="last" v-show="step === 2">上一頁</button>
-          <button @click="next" v-show="step === 1">下一頁</button>
+          <button @click="next" v-show="step === 1" style="margin-right: 0;">下一頁</button>
           <button v-show="step === 2">立即送出</button>
         </div>
       </section>
@@ -249,6 +295,8 @@ const form = reactive({
   startYear: "",
   referral: "",
   extra: "",
+  subject: "",
+  howKnow: "",
 });
 
 const countryOptions = [
@@ -280,6 +328,7 @@ const courseTypes = [
   "遊學團",
 ];
 const subject = ["商科", "工程類", "科學類", "藝術設計", "人文相關"];
+const howKnow = ["Google Search", "Instagram", "Facebook"];
 const submit = () => {
   alert("送出成功！我們將儘快聯絡你。");
 };
@@ -315,7 +364,7 @@ function last() {
   background-image: url("@/assets/images/booking-hero.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: 0 -50px;
   @media (max-width: 768px) {
     height: 30vh;
   }
@@ -330,7 +379,12 @@ function last() {
     flex-direction: column;
   }
 }
-
+.relatives {
+  width: 260px !important;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
 section {
   background-color: white;
   padding: 2rem;
@@ -392,7 +446,7 @@ section {
   .form {
     .form-page {
       box-sizing: border-box;
-      min-height: 925px;
+      min-height: 950px;
     }
     label {
       display: block;
@@ -501,7 +555,7 @@ section {
       }
       label {
         margin: 0;
-        padding: 10px 0;
+        padding: 5px 0;
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -530,10 +584,10 @@ section {
   .btn-area {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     position: relative;
     margin-top: 50px;
-    padding: 0 20px;
+    padding: 0;
     box-sizing: border-box;
     @media (max-width: 768px) {
       padding: 0;
@@ -541,16 +595,13 @@ section {
     .lucky {
       position: absolute;
       top: -80px;
-      left: 100px;
+      left: calc(50% - 80px);
       width: 200px;
       height: 250px;
       background-image: url("@/assets/images/lucky.png");
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-      @media (max-width: 1280px) {
-        left: -30px;
-      }
     }
     button {
       position: relative;
@@ -563,8 +614,8 @@ section {
       border: none;
       border-radius: 6px;
       font-size: 1rem;
-      margin-left: 20px;
-      margin-right: 20px;
+      // margin-left: 20px;
+      // margin-right: 20px;
       cursor: pointer;
 
       &:hover {
@@ -627,8 +678,8 @@ small {
   transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 
   &.active {
-    background: #FFEE55; // 已完成的藍色
-    color: #063A5E;
+    background: #ffee55; // 已完成的藍色
+    color: #063a5e;
     box-shadow: 0 0 0 3px rgba(208, 204, 93, 0.7);
   }
 }
@@ -647,7 +698,7 @@ small {
     position: absolute;
     inset: 0;
     width: 0%; // 初始 0%
-    background: #FFEE55; // 已完成顏色
+    background: #ffee55; // 已完成顏色
     transition: width 0.35s ease;
   }
 
