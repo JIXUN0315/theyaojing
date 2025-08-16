@@ -88,7 +88,7 @@
             <div class="radio-area">
               <label>想了解的課程類別 *</label>
               <div class="radio-group">
-                <label v-for="type in courseTypes" :key="type">
+                <label v-for="type in courseTypes" :key="type" class="w-50">
                   <input
                     type="radio"
                     :value="type"
@@ -113,7 +113,7 @@
             <div class="radio-area">
               <label>欲就讀的科系 *</label>
               <div class="radio-group">
-                <label v-for="type in subject" :key="type">
+                <label v-for="type in subject" :key="type" class="w-50">
                   <input
                     type="radio"
                     :value="type"
@@ -153,7 +153,10 @@
                   />
                   {{ type }}
                 </label>
-                <label for="othRel" :class="{'relatives': form.howKnow == '親友介紹'}">
+                <label
+                  for="othRel"
+                  :class="{ relatives: form.howKnow == '親友介紹' }"
+                >
                   <input
                     type="radio"
                     name="howKnow"
@@ -213,7 +216,9 @@
           <div class="lucky"></div>
           <div class="" v-show="step === 1"></div>
           <button @click="last" v-show="step === 2">上一頁</button>
-          <button @click="next" v-show="step === 1" style="margin-right: 0;">下一頁</button>
+          <button @click="next" v-show="step === 1" style="margin-right: 0">
+            下一頁
+          </button>
           <button v-show="step === 2">立即送出</button>
         </div>
       </section>
@@ -401,13 +406,14 @@ section {
 .faq {
   padding: 30px;
   background-color: #ffffffc9;
-  height: calc(100% - 3.5rem);
+  padding-bottom: 60px;
 }
 .faq-container {
   background-image: url("@/assets/images/FAQ-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  padding: 55px 2rem;
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -568,6 +574,12 @@ section {
           width: auto;
         }
       }
+      
+      .w-50{
+        @media (max-width: 768px) {
+          width: calc(50% - 0.5rem);
+        }
+      }
       .othOption {
         padding: 0;
         input {
@@ -594,14 +606,27 @@ section {
     }
     .lucky {
       position: absolute;
-      top: -80px;
-      left: calc(50% - 80px);
+      top: -90px;
+      left: calc(50% + 55px);
       width: 200px;
       height: 250px;
       background-image: url("@/assets/images/lucky.png");
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
+      @media (max-width: 1280px) {
+       left: calc(50% - 10px);
+    }
+    @media (max-width: 1280px) {
+       left: calc(50% - 60px);
+    }
+    @media (max-width: 768px) {
+          top: -75px;
+     left: calc(50% - 70px);
+     width: 180px;
+    height: 225px;
+    }
+    
     }
     button {
       position: relative;
@@ -622,8 +647,8 @@ section {
         background-color: #d8c93e;
       }
       @media (max-width: 768px) {
-        margin-left: 12px;
         margin-right: 0;
+        padding: 0.5rem 1rem;
       }
     }
   }

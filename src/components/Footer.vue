@@ -1,5 +1,5 @@
 <template>
-  <section class="ctaContainer" v-if="page !== 'booking'">
+  <section class="ctaContainer" v-if="page !== 'booking' && page !== 'document'">
     <div class="cta">
       <h2>夢想不該等待</h2>
       <p>馬上預約，邁出你的第一步。</p>

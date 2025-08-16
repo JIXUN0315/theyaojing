@@ -40,41 +40,21 @@
 
     <!-- Call to Action -->
     <div class="cta">
-      <p><strong>如果你</strong></p>
-      <ul>
-        <li><strong>對申請文件怎麼寫毫無頭緒</strong></li>
-        <li><strong>不知道可以申請到什麼學校</strong></li>
-      </ul>
-      <div class="ask-button">
-        <p>請</p>
-        <a class="consult-btn" href="/booking">預約諮詢</a>
-      </div>
-
-      <div class="description">
-        一對一專屬顧問深度討論，挖掘你的獨特優勢與經驗
-        <br />
-        放大你的亮點，完整展現個人特質與潛力
-        <br />
-        中師與外師雙重把關，精準製作高質量申請文件，讓你脫穎而出
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        精準落點，讓申請更有把握
-        <br />
-        依據你的成績、經歷與興趣，分析適合申請的學校
-        <br />
-        幫助你規劃保底校、目標校與夢想校
-        <br />
-        製作清楚明瞭的學校落點清單，各校錄取標準與特色一目了然，選校不再困擾
+      <div class="cta-content">
+        <p><strong>如果你</strong></p>
+        <ul>
+          <li><strong>對申請文件怎麼寫毫無頭緒</strong></li>
+          <li><strong>不知道可以申請到什麼學校</strong></li>
+        </ul>
+        <div class="ask-button">
+          <a class="consult-btn" href="/booking">預約諮詢</a>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
-<style scoped>
+<style scoped  lang="scss">
 .service-analysis {
   max-width: 1080px;
   margin: 0 auto;
@@ -151,9 +131,17 @@ ul {
 }
 
 .cta {
-  width: 70%;
-  margin-top: 2rem;
-      font-size: 18px;
+  width: 100%;
+  padding: 5rem 0;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  &-content{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: start;
+  }
 }
 
 .cta ul {
@@ -166,15 +154,16 @@ ul {
   text-align: center;
 }
 .ask-button {
+  margin-top: 12px;
   display: flex;
   align-items: center;
-  width: 36%;
-  min-width: 200px;
+  justify-content: center;
+  width: 220px;
 }
-.text-right{
-   font-size: 18px;
-    display: flex;
-    justify-content: end;
+.text-right {
+  font-size: 18px;
+  display: flex;
+  justify-content: end;
 }
 .consult-btn {
   background-color: #000;

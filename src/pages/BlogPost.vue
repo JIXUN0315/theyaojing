@@ -95,7 +95,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 50%;
+    width: 35%;
     text-align: end;
   }
   
@@ -124,7 +124,7 @@
   }
   
   .post-cover{
-    width: 70%;
+    width: calc(50% - 1rem);
   }
   .post-cover img {
     width: 100%;
