@@ -32,14 +32,14 @@
               type="text"
               placeholder="您的姓名"
               required
-              v-model="form.name"
+              v-model="form.fullName"
             />
             <label>電話 或 LINE ID *</label>
             <input
               type="text"
               placeholder="電話或 LINE ID"
               required
-              v-model="form.contact"
+              v-model="form.phoneOrLine"
             />
             <small class="note">若留LINE ID 請確認可接收陌生訊息</small>
             <label>電子郵件 *</label>
@@ -67,8 +67,8 @@
                 <input
                   type="radio"
                   :value="country.value"
-                  v-model="form.country"
-                  name="country"
+                  v-model="form.targetCountry"
+                  name="targetCountryOther"
                 />
                 <img :src="country.img" :alt="country.value" />
                 <span>{{ country.value }}</span>
@@ -76,11 +76,12 @@
               <label for="other" class="otherOption">
                 <input
                   type="radio"
-                  name="country"
+                  name="targetCountryOther"
                   placeholder="其他"
-                  v-model="form.courseOther"
+                  v-model="form.targetCountry"
+                  value="other"
                 />
-                <input id="other" placeholder="其他" />
+                <input id="other" placeholder="其他" v-model="targetCountryOther"/>
               </label>
             </div>
           </div>
@@ -92,7 +93,7 @@
                   <input
                     type="radio"
                     :value="type"
-                    v-model="form.courseType"
+                    v-model="form.programType"
                     name="courseType"
                     required
                   />
@@ -103,9 +104,10 @@
                     type="radio"
                     name="courseType"
                     placeholder="其他"
-                    v-model="form.courseOther"
+                    v-model="form.programType"
+                    value="other"
                   />
-                  <input id="oth" placeholder="其他" class="otherInput" />
+                  <input id="oth" placeholder="其他" class="otherInput" v-model="programTypeOther" />
                 </label>
               </div>
             </div>
@@ -114,27 +116,21 @@
               <label>欲就讀的科系 *</label>
               <div class="radio-group">
                 <label v-for="type in subject" :key="type" class="w-50">
-                  <input
-                    type="radio"
-                    :value="type"
-                    v-model="form.subject"
-                    name="subjectOth"
-                    required
-                  />
+                  <input type="checkbox" :value="type" v-model="form.intendedMajor" />
                   {{ type }}
                 </label>
                 <label for="othSub">
                   <input
-                    type="radio"
+                    type="checkbox"
                     name="subjectOth"
-                    v-model="form.subject"
+                    v-model="form.intendedMajor"
                     id="othSub"
-                    value="其他"
+                    value="other"
                   />
                   <input
                     placeholder="其他"
                     class="otherInput"
-                    v-model="form.subjectOther"
+                    v-model="intendedMajorOther"
                   />
                 </label>
               </div>
@@ -147,7 +143,7 @@
                   <input
                     type="radio"
                     :value="type"
-                    v-model="form.howKnow"
+                    v-model="form.referral"
                     name="howKnow"
                     required
                   />
@@ -155,22 +151,22 @@
                 </label>
                 <label
                   for="othRel"
-                  :class="{ relatives: form.howKnow == '親友介紹' }"
+                  :class="{ relatives: form.referral == '親友介紹' }"
                 >
                   <input
                     type="radio"
                     name="howKnow"
-                    v-model="form.howKnow"
+                    v-model="form.referral"
                     id="othRel"
                     value="親友介紹"
                   />
                   <span style="width: 90px">親友介紹</span>
                   <input
-                    v-show="form.howKnow == '親友介紹'"
+                    v-show="form.referral == '親友介紹'"
                     placeholder="請輸入推薦人"
                     class="otherInput"
                     style="width: 140px"
-                    v-model="form.recommendName"
+                    v-model="recommendName"
                   />
                 </label>
 
@@ -178,25 +174,49 @@
                   <input
                     type="radio"
                     name="howKnow"
-                    v-model="form.howKnow"
+                    v-model="form.referral"
                     id="othHow"
                     value="其他"
                   />
                   <input
                     placeholder="其他"
                     class="otherInput"
-                    v-model="form.otherHow"
+                    v-model="referralOther"
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div class="radio-area question-area">
+              <label>您最想解決的問題是什麼？</label>
+              <div class="radio-group">
+                <label v-for="type in questionOptions" :key="type" class="w-50">
+                  <input type="checkbox" :value="type" v-model="form.questionToResolve" />
+                  {{ type }}
+                </label>
+                <label for="othQue">
+                  <input
+                    type="checkbox"
+                    name="subjectOth"
+                    v-model="form.questionToResolve"
+                    id="othQue"
+                    value="other"
+                  />
+                  <input
+                    placeholder="其他"
+                    class="otherInput"
+                    v-model="questionToResolveOther"
                   />
                 </label>
               </div>
             </div>
 
             <label>預計哪一年出發就讀</label>
-            <select>
-              <option value="">2025</option>
-              <option value="">2026</option>
-              <option value="">2027</option>
-              <option value="">2028</option>
+            <select v-model="form.departYear">
+              <option :value="year">{{year}}</option>
+              <option :value="year+1">{{year+1}}</option>
+              <option :value="year+2">{{year+2}}</option>
+              <option :value="year+3">{{year+3}}</option>
             </select>
 
             <label>諮詢方式</label>
@@ -208,7 +228,7 @@
             <label>其他資訊</label>
             <textarea
               placeholder="歡迎補充其他想讓我們知道的資訊"
-              v-model="form.extra"
+              v-model="form.otherInfo"
             ></textarea>
           </div>
         </div>
@@ -219,7 +239,7 @@
           <button @click="next" v-show="step === 1" style="margin-right: 0">
             下一頁
           </button>
-          <button v-show="step === 2">立即送出</button>
+          <button v-show="step === 2" @click="submit">立即送出</button>
         </div>
       </section>
     </div>
@@ -228,6 +248,8 @@
 
 <script setup>
 import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
+import { formSubmit } from '@/api/booking.js';
+import axios from 'axios';
 const isMobile = ref(false);
 
 function checkMobile() {
@@ -282,26 +304,32 @@ const faqs = reactive([
 
 const step = ref(1);
 
+const year = ref(new Date().getFullYear());
+
 const toggle = (index) => {
   faqs[index].open = !faqs[index].open;
 };
 
-const form = reactive({
-  name: "",
+const targetCountryOther = ref("");
+const questionToResolveOther = ref("");
+const intendedMajorOther = ref("");
+const programTypeOther = ref("");
+const referralOther = ref("");
+const recommendName = ref("");
+
+const form = ref({
+  fullName: "",
   email: "",
-  contact: "",
+  phoneOrLine: "",
+  programType:"",
   school: "",
   department: "",
-  country: "",
-  countryOther: "",
-  courseType: "",
-  courseOther: "",
-  targetMajor: "",
-  startYear: "",
+  targetCountry: "",
+  departYear: year.value,
+  otherInfo: "",
+  intendedMajor: [],
+  questionToResolve: [],
   referral: "",
-  extra: "",
-  subject: "",
-  howKnow: "",
 });
 
 const countryOptions = [
@@ -323,20 +351,41 @@ const countryOptions = [
   },
 ];
 
+const questionOptions = [
+  "學校/科系選擇","文件準備（CV/SOP/推薦信等","申請流程 / 時間規劃", "語言考試準備", "我太忙／太懶，不知道從哪開始", "想有人幫我搞定一切"
+]
+
 const courseTypes = [
   "中學",
-  "副學士",
+  "社區大學/副學士",
   "學士",
   "碩士",
   "博士",
   "語言學校",
   "遊學團",
+  "證照課程"
 ];
 const subject = ["商科", "工程類", "科學類", "藝術設計", "人文相關"];
-const howKnow = ["Google Search", "Instagram", "Facebook"];
-const submit = () => {
+const howKnow = ["Google Search", "Instagram", "Facebook", "Dcard", "Threads"];
+const submit = async () => {
+  let data = form.value;
+  data.departYear = data.departYear.toString();
+   await formSubmit.send(null, data);
   alert("送出成功！我們將儘快聯絡你。");
 };
+// const submit = async () => {
+//   try {
+//     const data = form.value;
+//     data.departYear = data.departYear.toString();
+//     await axios.post('/api/Form/submit', data, {
+//       headers: { 'Content-Type': 'application/json' }
+//     });
+//     alert('送出成功！我們將儘快聯絡你。');
+//   } catch (err) {
+//     console.error('提交失敗:', err);
+//     alert('送出失敗，請稍後再試。');
+//   }
+// };
 
 function next() {
   step.value = 2;
@@ -452,7 +501,7 @@ section {
   .form {
     .form-page {
       box-sizing: border-box;
-      min-height: 950px;
+      min-height: 1000px;
     }
     label {
       display: block;
@@ -481,7 +530,7 @@ section {
 
     textarea {
       resize: vertical;
-      min-height: 180px;
+      min-height: 120px;
     }
 
     .note {
@@ -505,7 +554,7 @@ section {
           max-width: 250px;
           margin-top: 5px;
         }
-        width: calc(40% - 0.5rem);
+        width: calc(50% - 0.5rem);
         text-align: center;
         border: 1px solid #ccc;
         border-radius: 8px;
@@ -548,9 +597,6 @@ section {
         margin-top: 0.5rem;
       }
     }
-    .radio-area {
-      padding: 12px 0;
-    }
     .radio-group {
       display: flex;
       flex-wrap: wrap;
@@ -590,6 +636,11 @@ section {
         margin-top: 0.5rem;
         flex: 1;
         width: 100%;
+      }
+    }
+    .question-area{
+      .w-50{
+            width: calc(50% - 1rem);
       }
     }
   }
