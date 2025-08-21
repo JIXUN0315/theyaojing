@@ -1,5 +1,23 @@
 <template>
   <div class="consultation">
+    <div
+      class="submit-overlay global"
+      v-if="isSubmitting"
+      aria-live="polite"
+      role="status"
+    >
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="loading-text">送出中，請稍候…</div>
+    </div>
+    <div class="modal-overlay" v-if="showSuccess" role="dialog" aria-modal="true" aria-label="送出成功">
+      <div class="modal-card">
+        <h3>已成功送出！</h3>
+        <p>感謝您的填寫，我們將盡快與您聯繫。</p>
+        <div class="actions">
+          <button class="primary" @click="goHome">返回首頁</button>
+        </div>
+      </div>
+    </div>
     <div class="consultation-hero"></div>
     <div class="consultation-wrapper">
       <section class="faq-container">
@@ -49,6 +67,7 @@
               required
               v-model="form.email"
             />
+            <small class="note red" v-show="!emailValid">email格式錯誤</small>
             <label>畢業(就讀)學校</label>
             <input type="text" placeholder="學校名稱" v-model="form.school" />
             <label>畢業(就讀)科系</label>
@@ -57,7 +76,7 @@
               placeholder="科系名稱"
               v-model="form.department"
             />
-            <label>想去哪個國家</label>
+            <label>想去哪個國家 *</label>
             <div class="country-options">
               <label
                 v-for="country in countryOptions"
@@ -81,7 +100,11 @@
                   v-model="form.targetCountry"
                   value="other"
                 />
-                <input id="other" placeholder="其他" v-model="targetCountryOther"/>
+                <input
+                  id="other"
+                  placeholder="其他"
+                  v-model="targetCountryOther"
+                />
               </label>
             </div>
           </div>
@@ -107,7 +130,12 @@
                     v-model="form.programType"
                     value="other"
                   />
-                  <input id="oth" placeholder="其他" class="otherInput" v-model="programTypeOther" />
+                  <input
+                    id="oth"
+                    placeholder="其他"
+                    class="otherInput"
+                    v-model="programTypeOther"
+                  />
                 </label>
               </div>
             </div>
@@ -116,7 +144,11 @@
               <label>欲就讀的科系 *</label>
               <div class="radio-group">
                 <label v-for="type in subject" :key="type" class="w-50">
-                  <input type="checkbox" :value="type" v-model="form.intendedMajor" />
+                  <input
+                    type="checkbox"
+                    :value="type"
+                    v-model="form.intendedMajor"
+                  />
                   {{ type }}
                 </label>
                 <label for="othSub">
@@ -191,7 +223,11 @@
               <label>您最想解決的問題是什麼？</label>
               <div class="radio-group">
                 <label v-for="type in questionOptions" :key="type" class="w-50">
-                  <input type="checkbox" :value="type" v-model="form.questionToResolve" />
+                  <input
+                    type="checkbox"
+                    :value="type"
+                    v-model="form.questionToResolve"
+                  />
                   {{ type }}
                 </label>
                 <label for="othQue">
@@ -213,16 +249,16 @@
 
             <label>預計哪一年出發就讀</label>
             <select v-model="form.departYear">
-              <option :value="year">{{year}}</option>
-              <option :value="year+1">{{year+1}}</option>
-              <option :value="year+2">{{year+2}}</option>
-              <option :value="year+3">{{year+3}}</option>
+              <option :value="year">{{ year }}</option>
+              <option :value="year + 1">{{ year + 1 }}</option>
+              <option :value="year + 2">{{ year + 2 }}</option>
+              <option :value="year + 3">{{ year + 3 }}</option>
             </select>
 
             <label>諮詢方式</label>
-            <select>
-              <option value="">實體諮詢</option>
-              <option value="">線上諮詢</option>
+            <select v-model="form.askType">
+              <option value="實體諮詢">實體諮詢</option>
+              <option value="線上諮詢">線上諮詢</option>
             </select>
 
             <label>其他資訊</label>
@@ -236,10 +272,21 @@
           <div class="lucky"></div>
           <div class="" v-show="step === 1"></div>
           <button @click="last" v-show="step === 2">上一頁</button>
-          <button @click="next" v-show="step === 1" style="margin-right: 0">
+          <button
+            @click="next"
+            v-show="step === 1"
+            style="margin-right: 0"
+            :class="{ disabled: !isPage1Valid }"
+          >
             下一頁
           </button>
-          <button v-show="step === 2" @click="submit">立即送出</button>
+          <button
+            v-show="step === 2"
+            @click="submit"
+            :class="{ disabled: !isPage2Valid }"
+          >
+            立即送出
+          </button>
         </div>
       </section>
     </div>
@@ -247,22 +294,65 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
-import { formSubmit } from '@/api/booking.js';
-import axios from 'axios';
+import {
+  reactive,
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  computed,
+  watch,
+  nextTick 
+} from "vue";
+import { formSubmit } from "@/api/booking.js";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const showSuccess = ref(false);
+
 const isMobile = ref(false);
 
 function checkMobile() {
   isMobile.value = window.innerWidth <= 768; // 768px 以下視為手機
 }
 
-onMounted(() => {
-  checkMobile();
-  window.addEventListener("resize", checkMobile);
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const emailValid = computed(() => {
+  const email = form.value.email || "";
+  if (!email.trim()) {
+    // 空白時直接視為「尚未驗證」 => 不顯示提示
+    return true; // 或 return null，視你 template 判斷方式
+  }
+  return emailRegex.test(email);
 });
 
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", checkMobile);
+const isPage1Valid = computed(() => {
+  const f = form.value;
+  const fullOk = !!f.fullName?.trim();
+  const phoneOk = !!f.phoneOrLine?.trim();
+  const emailOk = emailRegex.test(f.email || "");
+  const countryOk =
+    !!f.targetCountry &&
+    (f.targetCountry !== "other" || !!targetCountryOther.value.trim());
+  return fullOk && phoneOk && emailOk && countryOk;
+});
+
+const isPage2Valid = computed(() => {
+  const f = form.value;
+  // 課程類別：一般選項或「other+文字」
+  const progOk =
+    !!f.programType &&
+    (f.programType !== "other" || !!programTypeOther.value.trim());
+  // 欲就讀科系：至少一個，若勾「other」則需填文字；或僅填「其他」文字也可
+  const hasMajor =
+    (f.intendedMajor?.length || 0) > 0 || !!intendedMajorOther.value.trim();
+  const majorOk =
+    hasMajor &&
+    (!f.intendedMajor.includes("other") || !!intendedMajorOther.value.trim());
+  // 如何得知：一般選項即可；若選「親友介紹」需推薦人；若選「其他」需填文字
+  let refOk = !!f.referral;
+  if (f.referral === "親友介紹") refOk = refOk && !!recommendName.value.trim();
+  if (f.referral === "其他") refOk = refOk && !!referralOther.value.trim();
+  return progOk && majorOk && refOk;
 });
 
 const faqs = reactive([
@@ -317,11 +407,13 @@ const programTypeOther = ref("");
 const referralOther = ref("");
 const recommendName = ref("");
 
+const isSubmitting = ref(false);
+
 const form = ref({
   fullName: "",
   email: "",
   phoneOrLine: "",
-  programType:"",
+  programType: "",
   school: "",
   department: "",
   targetCountry: "",
@@ -330,6 +422,7 @@ const form = ref({
   intendedMajor: [],
   questionToResolve: [],
   referral: "",
+  askType: "實體諮詢",
 });
 
 const countryOptions = [
@@ -352,8 +445,13 @@ const countryOptions = [
 ];
 
 const questionOptions = [
-  "學校/科系選擇","文件準備（CV/SOP/推薦信等","申請流程 / 時間規劃", "語言考試準備", "我太忙／太懶，不知道從哪開始", "想有人幫我搞定一切"
-]
+  "學校/科系選擇",
+  "文件準備（CV/SOP/推薦信等",
+  "申請流程 / 時間規劃",
+  "語言考試準備",
+  "我太忙／太懶，不知道從哪開始",
+  "想有人幫我搞定一切",
+];
 
 const courseTypes = [
   "中學",
@@ -363,31 +461,83 @@ const courseTypes = [
   "博士",
   "語言學校",
   "遊學團",
-  "證照課程"
+  "證照課程",
 ];
 const subject = ["商科", "工程類", "科學類", "藝術設計", "人文相關"];
 const howKnow = ["Google Search", "Instagram", "Facebook", "Dcard", "Threads"];
 const submit = async () => {
-  let data = form.value;
-  data.departYear = data.departYear.toString();
-   await formSubmit.send(null, data);
-  alert("送出成功！我們將儘快聯絡你。");
+  if (!isPage2Valid.value || isSubmitting.value) {
+    return;
+  }
+  isSubmitting.value = true;
+  // 複製一份，避免直接改 reactive form 對象
+  const data = { ...form.value };
+
+  // 年份轉字串
+  data.departYear = String(data.departYear);
+
+  // 👉 targetCountry
+  if (data.targetCountry === "other") {
+    data.targetCountry = targetCountryOther.value.trim();
+  }
+
+  // 👉 programType
+  if (data.programType === "other") {
+    data.programType = programTypeOther.value.trim();
+  }
+
+  // 👉 intendedMajor (checkbox 可多選)
+  const majorIndex = data.intendedMajor.findIndex((x) => x === "other");
+  if (majorIndex !== -1) {
+    data.intendedMajor[majorIndex] = intendedMajorOther.value.trim();
+  } else if (!data.intendedMajor.length && intendedMajorOther.value.trim()) {
+    // 如果完全沒勾選，但有填文字 → 直接補進陣列
+    data.intendedMajor.push(intendedMajorOther.value.trim());
+  }
+
+  // 👉 questionToResolve (checkbox 可多選)
+  const queIndex = data.questionToResolve.findIndex((x) => x === "other");
+  if (queIndex !== -1) {
+    data.questionToResolve[queIndex] = questionToResolveOther.value.trim();
+  } else if (
+    !data.questionToResolve.length &&
+    questionToResolveOther.value.trim()
+  ) {
+    data.questionToResolve.push(questionToResolveOther.value.trim());
+  }
+
+  // 👉 referral
+  if (data.referral === "親友介紹") {
+    data.referral = `親友介紹:${recommendName.value.trim()}`;
+  } else if (data.referral === "其他") {
+    data.referral = referralOther.value.trim();
+  }
+  try {
+    await formSubmit.send(null, data);
+    isSubmitting.value = false;
+    showSuccess.value = true;
+  } catch (err) {
+    console.error(err);
+    alert("送出失敗，請稍後再試或聯繫我們。");
+    isSubmitting.value = false;
+  }
 };
-// const submit = async () => {
-//   try {
-//     const data = form.value;
-//     data.departYear = data.departYear.toString();
-//     await axios.post('/api/Form/submit', data, {
-//       headers: { 'Content-Type': 'application/json' }
-//     });
-//     alert('送出成功！我們將儘快聯絡你。');
-//   } catch (err) {
-//     console.error('提交失敗:', err);
-//     alert('送出失敗，請稍後再試。');
-//   }
-// };
+
+async function goHome() {
+  await router.push({ path: '/', hash: '' }) // 清掉 hash 避免停在某錨點
+    await nextTick()
+    // 兩幀後再捲動，避免首頁還在渲染布局
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' }) // 或 'smooth'
+      })
+    })
+}
 
 function next() {
+  if (!isPage1Valid.value) {
+    return;
+  }
   step.value = 2;
   const formContainer = document.querySelector(".form-container");
   const offset =
@@ -409,6 +559,46 @@ function last() {
     behavior: "smooth",
   });
 }
+
+// 監聽「其他」輸入框 → 自動勾選
+watch(targetCountryOther, (val) => {
+  if (val && val.trim()) {
+    form.value.targetCountry = "other";
+  }
+});
+
+watch(programTypeOther, (val) => {
+  if (val && val.trim()) {
+    form.value.programType = "other";
+  }
+});
+
+watch(intendedMajorOther, (val) => {
+  if (val && val.trim() && !form.value.intendedMajor.includes("other")) {
+    form.value.intendedMajor.push("other");
+  }
+});
+
+watch(referralOther, (val) => {
+  if (val && val.trim()) {
+    form.value.referral = "其他";
+  }
+});
+
+watch(questionToResolveOther, (val) => {
+  if (val && val.trim() && !form.value.questionToResolve.includes("other")) {
+    form.value.questionToResolve.push("other");
+  }
+});
+
+onMounted(() => {
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", checkMobile);
+});
 </script>
 
 <style scoped lang="scss">
@@ -620,8 +810,8 @@ section {
           width: auto;
         }
       }
-      
-      .w-50{
+
+      .w-50 {
         @media (max-width: 768px) {
           width: calc(50% - 0.5rem);
         }
@@ -638,9 +828,9 @@ section {
         width: 100%;
       }
     }
-    .question-area{
-      .w-50{
-            width: calc(50% - 1rem);
+    .question-area {
+      .w-50 {
+        width: calc(50% - 1rem);
       }
     }
   }
@@ -666,18 +856,17 @@ section {
       background-size: cover;
       background-position: center;
       @media (max-width: 1280px) {
-       left: calc(50% - 10px);
-    }
-    @media (max-width: 1280px) {
-       left: calc(50% - 60px);
-    }
-    @media (max-width: 768px) {
-          top: -75px;
-     left: calc(50% - 70px);
-     width: 180px;
-    height: 225px;
-    }
-    
+        left: calc(50% - 10px);
+      }
+      @media (max-width: 1280px) {
+        left: calc(50% - 60px);
+      }
+      @media (max-width: 768px) {
+        top: -75px;
+        left: calc(50% - 70px);
+        width: 180px;
+        height: 225px;
+      }
     }
     button {
       position: relative;
@@ -703,6 +892,15 @@ section {
       }
     }
   }
+}
+.red {
+  color: red !important;
+}
+.disabled {
+  background-color: #afafafff !important;
+  color: #fff !important;
+  outline: 0 !important;
+  cursor: not-allowed !important;
 }
 
 /* Accordion 流暢動畫 */
@@ -820,4 +1018,92 @@ small {
     }
   }
 }
+/* 全頁遮罩 */
+.submit-overlay.global {
+  position: fixed;   /* 覆蓋整個視窗 */
+  inset: 0;          /* top/right/bottom/left 全 0 */
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;     /* 蓋過所有元素（包含 navbar/幸運物件等） */
+  pointer-events: all;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid rgba(6, 58, 94, 0.2);
+  border-top-color: #063a5e;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 12px;
+}
+
+.loading-text {
+  color: #063a5e;
+  font-weight: 600;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 成功燈箱（全頁） */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-card {
+  width: min(520px, 92vw);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.modal-card h3 {
+  margin: 0 0 8px;
+  color: #063a5e;
+}
+
+.modal-card p {
+  margin: 4px 0;
+  color: #333;
+}
+
+.modal-card .countdown {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #063a5e;
+}
+
+.modal-card .actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.modal-card .actions .primary {
+  background-color: #ffee55;
+  color: #063a5e;
+  font-weight: 700;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-card .actions .primary:hover {
+  background-color: #d8c93e;
+}
+
 </style>
