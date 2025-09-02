@@ -9,6 +9,8 @@ import LanguageSchool from "../pages/LanguageSchool.vue";
 import Blog from "../pages/Blog.vue"
 import BlogPost from '../pages/BlogPost.vue'; 
 import Document from "../pages/Document.vue";
+import News from '../pages/News.vue';
+import NewsPost from '../pages/NewsPost.vue'
 
 
 const routes = [
@@ -61,6 +63,16 @@ const routes = [
     path: "/document",
     name: "document",
     component: Document,
+  },
+  {
+    path: "/news",
+    name: "news",
+    component: News,
+  },
+  {
+    path: "/news/post",
+    name: "NewsPost",
+    component: NewsPost,
   },
   // {
   //   path: '/template',
