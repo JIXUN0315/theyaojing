@@ -22,7 +22,7 @@
         </div>
         <a href="/blog"><span class="nav__sub">學生回饋</span></a>
         <!-- <a href="#"><span class="nav__sub">學生心得</span></a> -->
-        <!-- <a href="#"><span class="nav__sub">最新消息</span></a> -->
+        <a href="/news"><span class="nav__sub">最新消息</span></a>
         <span class="nav__line">|</span>
         <button class="nav__link" @click="goToBooking">
           <span class="nav__sub">預約諮詢</span>
@@ -91,11 +91,11 @@
               >BLOG<span class="list__item--link">學生回饋</span></a
             >
           </div>
-          <!-- <div class="list__item">
-            <a href="#" class="list__item--link"
+          <div class="list__item">
+            <a href="/news" class="list__item--link"
               >NEW<span class="list__item--link">最新消息</span></a
             >
-          </div> -->
+          </div>
           <!-- <div class="list__item">
             <a href="#" class="list__item--link"
               >FEEDBACK<span class="list__item--link">學生心得</span></a

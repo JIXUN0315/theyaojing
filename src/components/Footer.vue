@@ -1,5 +1,5 @@
 <template>
-  <section class="ctaContainer" v-if="page !== 'booking' && page !== 'document'">
+  <section class="ctaContainer" v-if="!showCta">
     <div class="cta">
       <h2>夢想不該等待</h2>
       <p>馬上預約，邁出你的第一步。</p>
@@ -54,6 +54,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 
 const page = computed(() => route.name);
+const showCta = computed(() => ['booking', 'document','news'].includes(page.value));
 function sendEmail() {
   const recipient = "admin@theyaojing.com";
   const subject = encodeURIComponent("預約免費留學諮詢");
