@@ -9,13 +9,32 @@
       <div class="spinner" aria-hidden="true"></div>
       <div class="loading-text">送出中，請稍候…</div>
     </div>
-    <div class="modal-overlay" v-if="showSuccess" role="dialog" aria-modal="true" aria-label="送出成功">
+    <div
+      class="modal-overlay"
+      v-if="showSuccess"
+      role="dialog"
+      aria-modal="true"
+      aria-label="送出成功"
+    >
       <div class="modal-card">
         <h3>已成功送出！</h3>
         <p>感謝您的填寫，我們將盡快與您聯繫。</p>
         <div class="actions">
           <button class="primary" @click="goHome">返回首頁</button>
         </div>
+      </div>
+    </div>
+    <div
+      class="modal-overlay"
+      v-if="showHint"
+      role="dialog"
+      aria-modal="true"
+      aria-label="提示"
+    >
+      <div class="modal-card">
+        <div class="close" @click="close"></div>
+        <h3>請填寫以下欄位</h3>
+        <p v-for="value in needInputs">{{ value }}</p>
       </div>
     </div>
     <div class="consultation-hero"></div>
@@ -272,18 +291,12 @@
           <div class="lucky"></div>
           <div class="" v-show="step === 1"></div>
           <button @click="last" v-show="step === 2">上一頁</button>
-          <button
-            @click="next"
-            v-show="step === 1"
-            style="margin-right: 0"
-            :class="{ disabled: !isPage1Valid }"
-          >
+          <button @click="next" v-show="step === 1" style="margin-right: 0">
             下一頁
           </button>
           <button
             v-show="step === 2"
             @click="submit"
-            :class="{ disabled: !isPage2Valid }"
           >
             立即送出
           </button>
@@ -301,12 +314,14 @@ import {
   onBeforeUnmount,
   computed,
   watch,
-  nextTick 
+  nextTick,
 } from "vue";
 import { formSubmit } from "@/api/booking.js";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const showSuccess = ref(false);
+const showHint = ref(false);
+const needInputs = ref([]);
 
 const isMobile = ref(false);
 
@@ -325,20 +340,27 @@ const emailValid = computed(() => {
   return emailRegex.test(email);
 });
 
-const isPage1Valid = computed(() => {
+const page1Valid = function () {
+  needInputs.value = [];
   const f = form.value;
-  const fullOk = !!f.fullName?.trim();
-  const phoneOk = !!f.phoneOrLine?.trim();
-  const emailOk = emailRegex.test(f.email || "");
-  const countryOk =
-    !!f.targetCountry &&
-    (f.targetCountry !== "other" || !!targetCountryOther.value.trim());
-  return fullOk && phoneOk && emailOk && countryOk;
-});
+  if (!f.fullName?.trim()) {
+    needInputs.value.push("中文全名");
+  }
+  if (!f.phoneOrLine?.trim()) {
+    needInputs.value.push("電話 或 LINE ID");
+  }
+  if (!emailRegex.test(f.email || "")) {
+    needInputs.value.push("電子郵件");
+  }
+  if (!f.targetCountry?.trim()) {
+    needInputs.value.push("想去哪個國家");
+  }
+};
 
-const isPage2Valid = computed(() => {
+const page2Valid = function () {
   const f = form.value;
   // 課程類別：一般選項或「other+文字」
+  needInputs.value = [];
   const progOk =
     !!f.programType &&
     (f.programType !== "other" || !!programTypeOther.value.trim());
@@ -352,8 +374,18 @@ const isPage2Valid = computed(() => {
   let refOk = !!f.referral;
   if (f.referral === "親友介紹") refOk = refOk && !!recommendName.value.trim();
   if (f.referral === "其他") refOk = refOk && !!referralOther.value.trim();
+  if (!progOk) {
+    needInputs.value.push("想了解的課程類別");
+  }
+  if (!majorOk) {
+    needInputs.value.push("欲就讀的科系");
+  }
+  if (!refOk) {
+    needInputs.value.push("如何得知曜境");
+  }
+
   return progOk && majorOk && refOk;
-});
+};
 
 const faqs = reactive([
   {
@@ -466,7 +498,12 @@ const courseTypes = [
 const subject = ["商科", "工程類", "科學類", "藝術設計", "人文相關"];
 const howKnow = ["Google Search", "Instagram", "Facebook", "Dcard", "Threads"];
 const submit = async () => {
-  if (!isPage2Valid.value || isSubmitting.value) {
+  if (isSubmitting.value) {
+    return;
+  }
+  page2Valid();
+  if (needInputs.value.length > 0) {
+    showHint.value = true;
     return;
   }
   isSubmitting.value = true;
@@ -524,18 +561,23 @@ const submit = async () => {
 };
 
 async function goHome() {
-  await router.push({ path: '/', hash: '' }) // 清掉 hash 避免停在某錨點
-    await nextTick()
-    // 兩幀後再捲動，避免首頁還在渲染布局
+  await router.push({ path: "/", hash: "" }); // 清掉 hash 避免停在某錨點
+  await nextTick();
+  // 兩幀後再捲動，避免首頁還在渲染布局
+  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' }) // 或 'smooth'
-      })
-    })
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // 或 'smooth'
+    });
+  });
 }
 
 function next() {
-  if (!isPage1Valid.value) {
+  // if (!isPage1Valid.value) {
+  //   return;
+  // }
+  page1Valid();
+  if (needInputs.value.length > 0) {
+    showHint.value = true;
     return;
   }
   step.value = 2;
@@ -558,6 +600,9 @@ function last() {
     top: offset,
     behavior: "smooth",
   });
+}
+function close() {
+  showHint.value = false;
 }
 
 // 監聽「其他」輸入框 → 自動勾選
@@ -1020,14 +1065,14 @@ small {
 }
 /* 全頁遮罩 */
 .submit-overlay.global {
-  position: fixed;   /* 覆蓋整個視窗 */
-  inset: 0;          /* top/right/bottom/left 全 0 */
+  position: fixed; /* 覆蓋整個視窗 */
+  inset: 0; /* top/right/bottom/left 全 0 */
   background: rgba(255, 255, 255, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: 9999;     /* 蓋過所有元素（包含 navbar/幸運物件等） */
+  z-index: 9999; /* 蓋過所有元素（包含 navbar/幸運物件等） */
   pointer-events: all;
 }
 
@@ -1046,7 +1091,11 @@ small {
   font-weight: 600;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* 成功燈箱（全頁） */
 .modal-overlay {
@@ -1064,9 +1113,10 @@ small {
   width: min(520px, 92vw);
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   padding: 24px 20px;
   text-align: center;
+  position: relative;
 }
 
 .modal-card h3 {
@@ -1105,5 +1155,14 @@ small {
 .modal-card .actions .primary:hover {
   background-color: #d8c93e;
 }
-
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background-image: url("@/assets/images/close.svg");
+  background-position: center;
+  cursor: pointer;
+}
 </style>
