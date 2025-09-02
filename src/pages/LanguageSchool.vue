@@ -30,7 +30,7 @@
 
       <!-- 右側圖片 -->
       <div class="leaf-image">
-        <img src="@/assets/images/middleschool-banner.jpg" alt="語言學校介紹" />
+        <img src="@/assets/images/language-school.jpg" alt="語言學校介紹" />
       </div>
     </div>
   </section>
