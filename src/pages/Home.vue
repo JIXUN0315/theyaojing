@@ -22,7 +22,7 @@
     <section class="about-section">
       <div class="container">
         <!-- 標題 -->
-        <h2 class="about-title">我們是躍境 Excellent Future Education</h2>
+        <h2 class="about-title">我們是曜境 Excellent Future Education</h2>
 
         <!-- 雙欄區塊 -->
         <div class="about-content">
@@ -37,16 +37,17 @@
           <!-- 右文 -->
           <div class="about-text">
             <p>
-              誠信 ✕ 專業 ✕ 陪伴，是我們不變的承諾。<br />
-              躍境留遊學，提供真誠、安心、用心的留學諮詢服務。<br />
-              我們了解：對大多數人來說，留學代表未知、焦慮與挑戰。這就是我們存在的理由。<br />
-              讓複雜的申請流程變得清楚簡單，讓你在每一個選擇上都有專業陪伴，走得穩、走得對。<br />
-              「躍」是光，「境」是方向，我們願成為你留學路上的一盞明燈。
+              誠信 ✕ 專業 ✕ 陪伴，是我們不變的承諾<br />
+              曜境留遊學，提供真誠、安心、用心的留學諮詢服務。<br />
+              我們了解：對大多數人來說，留學代表未知、焦慮與挑戰，<br />
+              這就是我們存在的理由 ——<br />
+              讓複雜的申請流程變得清楚簡單，讓你在每個選擇上都有專業陪伴，走得穩、走得對。<br /><br />
+              「曜」是光，「境」是方向，我們願成為你留學路上的一盞明燈。
             </p>
 
             <p class="highlight">
-              凡預約實體諮詢，即享一杯飲品。<br />
-              我們誠摯邀請你，一起暢談你的夢想。
+              凡預約實體諮詢，即享一杯飲品<br />
+              我們誠摯邀請你，一起暢談你的夢想
             </p>
           </div>
         </div>
@@ -223,7 +224,7 @@
             <a class="option" href="#">大學研究所申請</a>
             <a class="option" href="#">中學申請</a>
             <a class="option" href="#">語言學校／遊學團</a>
-            <a class="option" href="#">純文件服務</a>
+            <a class="option" href="#">純文件／落點分析</a>
           </div>
         </div>
       </div>
@@ -525,7 +526,7 @@ const images = [
   &__slide {
     width: 100%;
     img {
-      width: auto;
+      width: 100%;
       max-width: 100%;
     }
   }
@@ -920,7 +921,6 @@ const images = [
   width: 100%;
   padding: 14px 18px;
   border: 2px solid #3f3a33;
-  border-radius: 8px;
   background: transparent;
   color: #2f2b26;
   font-weight: 700;
@@ -937,7 +937,6 @@ const images = [
 .floating-img {
   position: absolute;
   overflow: hidden;
-  border-radius: 6px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
   pointer-events: none; /* 不擋住按鈕點擊 */
 }
@@ -958,14 +957,14 @@ const images = [
 }
 .img-tr {
  right: 60px;
-  top: -70px;
+  top: -88px;
   width: 400px;
   height: 250px;
   max-width: 23%;
 }
 .img-bl {
   left: 40px;
-  bottom: 40px;
+  bottom: -87px;
   width: 400px;
   height: 250px;
   max-width: 23%;

@@ -1,55 +1,58 @@
 <template>
-  <section class="news-list" >
-    <ul role="list">
-      <li v-for="(item, i) in pagedNews" :key="i" class="news-item">
-        <a :href="item.link || '#'" class="news-link">
-          <div class="thumb-wrap" :aria-label="item.title">
-            <template v-if="item.imageUrl">
-              <img
-                class="thumb"
-                :src="item.imageUrl"
-                :alt="item.imageAlt || item.title"
-                loading="lazy"
-                decoding="async"
-              />
-            </template>
-            <template v-else>
-              <span class="no-image">Information</span>
-            </template>
-          </div>
-
-          <div class="meta">
-            <time class="date" :datetime="isoDate(item.date)">
-              {{ displayDate(item.date) }}
-            </time>
-            <h3 class="title">
-              {{ item.title }}
-            </h3>
-          </div>
-        </a>
-
-        <!-- 只有本頁最後一項不顯示分隔線（不改你的 CSS，直接用 v-if 控制） -->
-        <div class="divider" aria-hidden="true" v-if="i !== pagedNews.length - 1"></div>
-      </li>
-    </ul>
-
-    <!-- 分頁列：只有多於一頁才顯示；不動你的 CSS，僅新增素按鈕 -->
-    <nav v-if="totalPages > 1" class="pagination" aria-label="pagination">
-      <button type="button" @click="prevPage" :disabled="currentPage === 1">← Prev</button>
-
-      <button
-        v-for="chip in pagesToShow"
-        :key="chip.key"
-        type="button"
-        :disabled="chip.type === 'ellipsis'"
-        :aria-current="chip.page === currentPage ? 'page' : undefined"
-        @click="chip.type === 'page' && setPage(chip.page!)"
-      >
-        {{ chip.label }}
-      </button>
-
-      <button type="button" @click="nextPage" :disabled="currentPage === totalPages">Next →</button>
-    </nav>
+  <h2 class="titleNews">最新消息</h2>
+  <section class="news">
+    <section class="news-list" >
+      <ul role="list">
+        <li v-for="(item, i) in pagedNews" :key="i" class="news-item">
+          <a :href="item.link || '#'" class="news-link">
+            <div class="thumb-wrap" :aria-label="item.title">
+              <template v-if="item.imageUrl">
+                <img
+                  class="thumb"
+                  :src="item.imageUrl"
+                  :alt="item.imageAlt || item.title"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </template>
+              <template v-else>
+                <span class="no-image">Information</span>
+              </template>
+            </div>
+  
+            <div class="meta">
+              <time class="date" :datetime="isoDate(item.date)">
+                {{ displayDate(item.date) }}
+              </time>
+              <h3 class="title">
+                {{ item.title }}
+              </h3>
+            </div>
+          </a>
+  
+          <!-- 只有本頁最後一項不顯示分隔線（不改你的 CSS，直接用 v-if 控制） -->
+          <div class="divider" aria-hidden="true" v-if="i !== pagedNews.length - 1"></div>
+        </li>
+      </ul>
+  
+      <!-- 分頁列：只有多於一頁才顯示；不動你的 CSS，僅新增素按鈕 -->
+      <nav v-if="totalPages > 1" class="pagination" aria-label="pagination">
+        <button type="button" @click="prevPage" :disabled="currentPage === 1">← Prev</button>
+  
+        <button
+          v-for="chip in pagesToShow"
+          :key="chip.key"
+          type="button"
+          :disabled="chip.type === 'ellipsis'"
+          :aria-current="chip.page === currentPage ? 'page' : undefined"
+          @click="chip.type === 'page' && setPage(chip.page!)"
+        >
+          {{ chip.label }}
+        </button>
+  
+        <button type="button" @click="nextPage" :disabled="currentPage === totalPages">Next →</button>
+      </nav>
+    </section>
   </section>
 </template>
 
@@ -189,11 +192,22 @@ const displayDate = (d: string | Date) => {
 </script>
 
 <style scoped lang="scss">
+main{
+  background-color: #eeece9;
+}
+.titleNews{
+  margin: 60px auto 60px ;
+  max-width: 1200px;
+  font-size: 30px;
+}
 .news-list {
+  margin: auto;
+  max-width: 1200px;
   padding: clamp(12px, 3vw, 24px);
   min-height: 60vh; 
   display: flex;
   flex-direction: column;
+  border: #d9d3cc 1px solid;
 }
 .news-list > .pagination {
   margin-top: auto;                
@@ -210,11 +224,14 @@ ul {
   overflow: hidden;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
 }
-
+.news{
+  background-color: #eeece9;
+  padding-bottom: 20px;
+}
 .news-item {
   .news-link {
     display: grid;
-    grid-template-columns: 168px 1fr; /* 左圖右文 */
+    grid-template-columns: 240px 1fr; /* 左圖右文 */
     gap: clamp(12px, 2.2vw, 24px);
     align-items: center;
     padding: clamp(12px, 2.4vw, 20px) clamp(12px, 2.8vw, 28px);
