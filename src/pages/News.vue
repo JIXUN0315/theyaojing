@@ -4,12 +4,12 @@
     <section class="news-list" >
       <ul role="list">
         <li v-for="(item, i) in pagedNews" :key="i" class="news-item">
-          <a :href="item.link || '#'" class="news-link">
+          <a :href="`/news/${item.link || '#'}`" class="news-link">
             <div class="thumb-wrap" :aria-label="item.title">
               <template v-if="item.imageUrl">
                 <img
                   class="thumb"
-                  :src="item.imageUrl"
+                  :src="getImageUrl(item.imageUrl)"
                   :alt="item.imageAlt || item.title"
                   loading="lazy"
                   decoding="async"
@@ -70,34 +70,22 @@ type NewsItem = {
 // 直接在這個頁面放資料，不外部呼叫
 const news: NewsItem[] = [
   {
-    date: "2025-07-24",
-    title: "「エクストラ ハンドクリーム」再販のお知らせ",
-    imageUrl: "https://picsum.photos/seed/handcream/640/400",
-    link: "/news/post",
+    date: "2025-09-02",
+    title: "托福將於 2026 年 1 月起正式改版",
+    imageUrl: "news3.png",
+    link: "toefl-2026-revamp",
   },
   {
-    date: "2025-07-09",
-    title: "「longleage meets ART」広尾店 エントランス、アート展示のご案内",
-    imageUrl: "https://picsum.photos/seed/art/640/400",
-    link: "/news/post",
+    date: "2025-09-02",
+    title: "加拿大留學審核趨嚴，申請人該如何因應？",
+    imageUrl: "news2.jpg",
+    link: "canada-study-permit-2025",
   },
   {
     date: "2025-05-31",
-    title: "料金改定のお知らせ",
-    imageUrl: "", // 故意留空 → 顯示 Information 方塊
-    link: "/news/post",
-  },
-  {
-    date: "2025-04-30",
-    title: "POP UP at 伊勢丹新宿店 – “自分を慈しむ”ネイルケアの體驗を、売場から",
-    imageUrl: "https://picsum.photos/seed/popup/640/400",
-    link: "/news/post",
-  },
-  {
-    date: "2025-03-04",
-    title: "公式ブランドサイトをリニューアル",
-    imageUrl: "https://picsum.photos/seed/renewal/640/400",
-    link: "/news/post",
+    title: "慶祝曜境官網全新升級上線",
+    imageUrl: "news1.png", // 故意留空 → 顯示 Information 方塊
+    link: "site-launch",
   },
 ];
 
@@ -123,6 +111,10 @@ function nextPage() {
 }
 function prevPage() {
   setPage(currentPage.value - 1);
+}
+
+function getImageUrl(file: string) {
+  return new URL(`../assets/images/${file}`, import.meta.url).href;
 }
 
 // 產生頁碼 + 省略號（最多 5 顆按鈕）

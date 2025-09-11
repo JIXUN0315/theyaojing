@@ -70,7 +70,7 @@ const routes = [
     component: News,
   },
   {
-    path: "/news/post",
+    path: "/news/:id",
     name: "NewsPost",
     component: NewsPost,
   },
