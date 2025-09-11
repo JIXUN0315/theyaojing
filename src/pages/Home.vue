@@ -1,23 +1,10 @@
 <template>
   <div class="home">
     <section class="home__heroImage">
-      <Carousel
-        :items-to-show="1"
-        :wrap-around="images.length > 1"
-        :autoplay="500000"
-        :pause-autoplay-on-hover="true"
-        :transition="500"
-        :mouse-drag="true"
-        class="hero-carousel"
-      >
-        <Slide v-for="(img, i) in images" :key="i">
-          <img :src="img" alt="hero image" />
-        </Slide>
-
-        <template #addons>
-          <Navigation />
-        </template>
-      </Carousel>
+      <img
+            src="@/assets/images/homepage.png"
+            alt=""
+          />
     </section>
     <section class="about-section">
       <div class="container">
@@ -743,6 +730,11 @@ const images = [
 @media (max-width: 1024px) {
   .cards {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .home__heroImage{
+    img{
+      height: 50vh;
+    }
   }
 }
 @media (max-width: 680px) {

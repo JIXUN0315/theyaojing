@@ -206,7 +206,6 @@ function openUrl(url) {
 .ctaContainer {
   background-color: #eeece9;
   @media (max-width: 1024px) {
-    padding: 50px 0 0px;
     .cta {
       border-radius: 0;
     }
