@@ -85,6 +85,14 @@ const routes = [
 const router = createRouter({
   history: createWebHistory("/"),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    // 想保留瀏覽器返回/前進的滾動位置就保留這行；想每次都置頂就拿掉
+    if (savedPosition) return savedPosition;
+
+    // 目標有 hash 就捲到錨點；否則置頂
+    if (to.hash) return { el: to.hash, behavior: "smooth" };
+    return { left: 0, top: 0 };
+  },
 });
 
 export default router;

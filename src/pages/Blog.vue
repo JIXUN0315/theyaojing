@@ -40,6 +40,7 @@
           <p class="date">{{ post.date }}</p>
           <p class="tag">{{ post.category }}</p>
           <p class="title">{{ post.title }}</p>
+          <p class="info" v-if="post.info">{{ post.info }}</p>
         </div>
       </div>
     </div>
@@ -72,7 +73,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const categories = ["#總覽", "#學生見證", "#留學故事", "#實用專欄"];
+const categories = ["#總覽", "#學生見證", "#留學故事", "#實用專欄", "#服務心得", "#心得分享"];
 
 const activeCategory = ref(categories[0]);
 
@@ -82,64 +83,103 @@ import sharedImg from "@/assets/images/shareblog01.jpg";
 const posts = ref([
   {
     slug: "post-01",
-    title: "Lu同學,Purdue University",
-    date: "2025.05.31",
-    category: "#總覽",
-    image: sharedImg,
-  },
-  {
-    slug: "post-01",
-    title: "Lu同學,Purdue University",
-    date: "2025.05.31",
-    category: "#總覽",
-    image: sharedImg,
-  },
-  {
-    slug: "post-01",
-    title: "Lu同學,Purdue University",
-    date: "2025.05.31",
-    category: "#總覽",
-    image: sharedImg,
-  },
-  {
-    slug: "post-01",
-    title: "Lu同學,Purdue University",
-    date: "2025.05.31",
-    category: "#總覽",
-    image: sharedImg,
+    title: "CW. Mai, Case Western University",
+    info: "MS Biostatistics (全美國生物統計排名#28)",
+    date: "2025.7.28",
+    category: "#服務心得",
+    image: new URL("@/assets/images/stu1.jpg", import.meta.url).href,
   },
   {
     slug: "post-02",
-    title: "Lu同學, Purdue University",
-    date: "2025.05.31",
-    category: "#總覽",
-    image: sharedImg,
+    title: "Heidi Liang, The University of Manchester",
+    info: "MSc Operations, Project and Supply Chain Management",
+    date: "2025.8.3",
+    category: "#服務心得",
+    image: new URL("@/assets/images/stu2.png", import.meta.url).href,
   },
   {
     slug: "post-03",
-    title: "Lu同學,Purdue University",
-    date: "2025.05.31",
-    category: "#學生見證",
-    image: sharedImg,
+    title: "Chien, University of Nottingham",
+    info: "MSc Entrepreneurship, Innovation and Management",
+    date: "2025.8.3",
+    category: "#服務心得",
+    image: new URL("@/assets/images/stu3.jpg", import.meta.url).href,
+    extra: {
+      收穫: "來英國讀書不只是接觸新知，還能認識不同的人，拓展眼界。",
+      校園: "Jubilee Campus，離市中心20分鐘公車，校園有鴨子和極光。",
+      課程: "必修 + 論文/商業報告 + 選修，主要以 essay 評分。",
+      住宿: "市中心宿舍，交通便利，安全並能認識新朋友。",
+      工作: "有商業報告課程接觸企業，學校提供就業講座與履歷修改。",
+    },
   },
   {
     slug: "post-04",
-    title: "Lu同學,Purdue University",
-    date: "YYYY.MM.DD",
-    category: "#實用專欄",
-    image: sharedImg,
+    title: "Jessie, The University of Manchester",
+    info: "MSc Finance",
+    date: "2025.8.3",
+    category: "#服務心得",
+    image: new URL("@/assets/images/stu4.jpg", import.meta.url).href,
   },
   {
     slug: "post-05",
-    title: "Lu同學,Purdue University",
-    date: "YYYY.MM.DD",
-    category: "#實用專欄",
-    image: sharedImg,
+    title: "Ann, University of Pennsylvania",
+    info: "MSN, Adult Gerontology Acute Care Nurse Practitioner",
+    date: "2025.8.3",
+    category: "#留學故事——勇敢跳脫舒適圈：以前的我 vs 現在的我",
+    image: new URL("@/assets/images/stu5.jpg", import.meta.url).href,
+  },
+  {
+    slug: "post-06",
+    title: "Dustin, Purdue University",
+    info: "MS Chemical Engineering",
+    date: "2025.05.31",
+    category: "#留學故事——留學後的我變了",
+    image: new URL("@/assets/images/shareblog01.jpg", import.meta.url).href,
+  },
+  {
+    slug: "post-07",
+    title: "Bryant, Abbey College Cambridge",
+    info: "GCSE",
+    date: "2025.7.17",
+    category: "#留學故事——我來英國留學後才知道的事",
+    image: new URL("@/assets/images/stu7.jpg", import.meta.url).href,
+  },
+  {
+    slug: "post-08",
+    title: "Vera Kuo, The University of Leeds",
+    info: "MA Corporate Communications, Marketing and Public Relations",
+    date: "2025.6.25",
+    category: "#服務心得",
+    image: new URL("@/assets/images/stu8.jpg", import.meta.url).href,
+  },
+  {
+    slug: "post-09",
+    title: "Johnny, UCLA",
+    info: "MS Materials Science & Engineering",
+    date: "2023.6.25",
+    category: "#服務心得",
+    image: new URL("@/assets/images/stu9.jpg", import.meta.url).href,
+  },
+  {
+    slug: "post-10",
+    title: "Hank, The University of Edinburgh",
+    info: "MSc Finance",
+    date: "2023.8.17",
+    category: "#服務心得",
+    image: new URL("@/assets/images/stu10.jpg", import.meta.url).href,
+  },
+  {
+    slug: "post-11",
+    title: "匿名, King’s College London",
+    info: "MSc Digital Marketing",
+    date: "2024.4.30",
+    category: "#心得分享",
+    image: new URL("@/assets/images/stu2.png", import.meta.url).href,
   },
 ]);
 
 const filteredPosts = computed(() =>
-  posts.value.filter((p) => p.category === activeCategory.value)
+  posts.value.filter((p) => p.category.includes(activeCategory.value) || activeCategory.value === '#總覽')
 );
 
 function goToPost(slug) {
@@ -228,8 +268,10 @@ function goToPost(slug) {
 }
 
 .blog-card img {
-  width: 100%;
-  height: auto;
+      width: 100%;
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 10px;
 }
 
 .card-content {
@@ -247,7 +289,7 @@ function goToPost(slug) {
   margin: 0;
 }
 
-.title {
+.title, .info {
   font-size: 1rem;
   margin: 0;
 }
@@ -329,6 +371,9 @@ function goToPost(slug) {
 }
 
 @media (max-width: 640px) {
+  .photo{
+    height: 50vh;
+  }
   .cards-grid {
     grid-template-columns: 1fr;
   }
@@ -345,6 +390,9 @@ function goToPost(slug) {
 
   .category-tabs div:first-child {
     border-top: none;
+  }
+  .slide-media{
+    margin: 10px !important;
   }
 }
 </style>
