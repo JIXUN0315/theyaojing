@@ -1,147 +1,162 @@
 <template>
   <article class="post-detail">
-    <!-- Hero 圖片 -->
-
+    <!-- 上一頁 -->
     <div class="back-container">
-         <span class="back-btn" type="button" @click="goBack" aria-label="Go back">
-        ← 上一頁
-      </span>
+      <span class="back-btn" type="button" @click="goBack" aria-label="Go back"
+        >← 上一頁</span
+      >
     </div>
 
     <!-- 內容容器 -->
-    <div class="container">
-      
+    <div class="container" v-if="post">
+      <!-- Hero 圖片 -->
       <div>
         <img
           class="hero-img"
-          :src="heroUrl"
-          :alt="heroAlt"
+          :src="getImageUrl(post.heroUrl)"
+          :alt="post.heroAlt || post.title"
           loading="lazy"
           decoding="async"
         />
       </div>
 
       <!-- 標題與日期 -->
-      <h1 class="post-title">London loses top student city title to Seoul</h1>
-      <p class="post-date">Jul 15, 2025</p>
+      <h1 class="post-title">{{ post.title }}</h1>
+      <p class="post-date">
+        {{ post.date }}
+        <template v-if="post.source">｜來源：{{ post.source }}</template>
+      </p>
 
-      <!-- 內文 -->
-      <div class="post-content">
-        <p>
-          After holding the top spot in the QS Best Student Cities Rankings for
-          six consecutive years, London has been overtaken by South Korea’s
-          capital, Seoul.
-        </p>
-        <p>
-          QS Best Student Cities considers the rankings, student mix,
-          desirability, employer activity and affordability of university
-          cities. The 2026 iteration saw the UK capital’s affordability score
-          decline, with London slipping to third place, overtaken by the rising
-          cities of Seoul and Tokyo – a shift that underscores Asia’s growing
-          appeal as a global hub for world-class education.
-        </p>
-        <p>
-          Deputy Prime Minister and minister of education of the Republic of
-          Korea, Ju-Ho Lee, described it as an honour as Seoul was named the
-          world’s best student city.
-        </p>
-        <blockquote>
-          “This recognition reflects the growing global trust in Korea’s higher
-          education system and highlights Seoul’s unique strengths – a blend of
-          academic excellence, cultural vibrancy, innovation, and safety,” he
-          said.
-        </blockquote>
-        <p>
-          Three Seoul-based universities – Seoul National University, Yonsei
-          University, and Korea University – are ranked among the top 100 in the
-          QS World University Rankings. Over 200,000 international students are
-          currently studying in Korea, and the country’s ministry of education
-          has signalled its ongoing commitment to supporting students from
-          around the globe by “helping them study, grow, and thrive in Korea”.
-        </p>
-        <p>
-          Meanwhile, Tokyo – maintaining its second place spot – leads globally
-          in the employer activity metric.
-        </p>
-        <p>
-          As for London, despite being home to 18 top-ranked universities, its
-          affordability challenges significantly impacted its overall score. The
-          city ranked 137th in the affordability category, placing it behind
-          rivals like Seoul and Tokyo.
-        </p>
-        <p>
-          Notably, this challenge extends beyond the capital, as all 16 UK
-          cities featured in the rankings have declined in this key metric, with
-          none placing among the world’s top 100 for affordability. Scotland’s
-          Aberdeen is currently the most affordable UK city, ranking 106th in
-          this category.
-        </p>
-        <p>
-          In contrast, UK cities performed notably well in the Desirability
-          metric. All – except Leicester, which slipped just one spot – saw
-          improvements, with every city now ranked within the global top 80.
-          Edinburgh leads at 12th, followed by London at 16th.
-        </p>
-        <p>
-          Based on the Economist’s Price Index, Numbeo’s Cost of Living Index,
-          and average tuition fees, London received an affordability score of
-          12.6 – placing it lower than all but one of the top 20 cities in the
-          student city rankings. The only city to score lower was Boston, ranked
-          joint 15th overall, with a score of 7.2.
-        </p>
-        <p>
-          Commenting on the shift, Liz Hutchinson, executive of London Higher,
-          outlined the “complex” challenges the city of London is facing.
-        </p>
-        <blockquote>
-          “London offers a world-class experience for students across a whole
-          range of measures from student voice and employer activity. It
-          continues to have huge appeal for prospective students the world over,
-          through its globally recognised universities, vibrant culture and
-          diverse employment opportunities,” she said.
-        </blockquote>
-        <p>
-          However, she described a “chronic shortage” of affordable housing
-          affecting students and the wider community alike – part of the wider
-          cost of living crisis felt across the UK.
-        </p>
-        <blockquote>
-          “Our members are working with the Greater London Authority through
-          their London Plan to develop policies and practices to ease pressure
-          on the broader rental market and accelerate the provision of genuinely
-          affordable homes for all Londoners including students,” continued
-          Hutchinson.
-        </blockquote>
-        <p>
-          London also experienced a decline in the student mix indicator, which
-          considers a city’s international student population, diversity, and
-          inclusivity.
-        </p>
-        <blockquote>
-          “London’s diversity and warm welcome to students from the world over
-          has always been a big pull factor for applicants. It’s concerning to
-          see a drop in this rating,” said Hutchinson.
-        </blockquote>
-      </div>
+      <!-- 內文（以 HTML 字串渲染） -->
+      <div class="post-content" v-html="post.content"></div>
+    </div>
+
+    <div v-else class="container">
+      <p>找不到文章（id: {{ route.params.id }}）。</p>
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { computed, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
+const route = useRoute();
 const router = useRouter();
-const heroUrl =
-  "https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?q=80&w=1600&auto=format&fit=crop";
-const heroAlt = "Seoul city skyline at dusk";
 
+/** 文章資料（之後要接 API，改這裡即可） */
+const posts = [
+  {
+    id: "toefl-2026-revamp",
+    title: "托福將於 2026 年 1 月起正式改版",
+    date: "2025.09.02",
+    source: "ETS 官網",
+    heroUrl: "news3.png",
+    heroAlt: "TOEFL 改版示意",
+    content: `
+      <p>ETS 於今年 5 月 28 日宣布 TOEFL iBT 將於 2026 年 1 月起迎來全新升級，提供更貼近真實學術情境、更加公平與高效的測驗體驗。</p>
+      <h3>改版重點如下：</h3>
+      <ul>
+        <li><strong>多階段自適應測驗設計：</strong>閱讀與聽力部分將根據考生表現即時調整難度，並納入更多現代且兼顧公平性的主題內容。</li>
+        <li><strong>雙重評分系統：</strong>除 0–120 分外，新增 1–6 分級，並與全球最廣泛採用的 <strong>歐洲共同語言參考架構（CEFR）</strong>完整對應，讓成績解讀更直觀。</li>
+      </ul>
+      <h4>其他升級措施：</h4>
+      <ul>
+        <li><strong>音訊設備全面升級：</strong>全球考場耳機更換為客製化立體聲耳機。</li>
+        <li><strong>加速出分：</strong成績最快 72 小時內釋出。></li>
+        <li><strong>簡化報名流程：</strong>全新系統更易於完成報名。</li>
+      </ul>
+      <p>此次改版將為全球考生帶來更公平、精準且便利的托福測驗體驗。</p>
+    `,
+  },
+  {
+    id: "canada-study-permit-2025",
+    title: "加拿大留學審核趨嚴，申請人該如何因應？",
+    date: "2025.09.02",
+    source: "",
+    heroUrl: "news2.jpg",
+    heroAlt: "加拿大留學簽證示意",
+    content: `
+      <p>本文延伸自 The PIE News（Aug 29, 2025）對加拿大留學簽證趨勢的報導，並結合我們的專業觀點與建議，提供完整解析。</p>
+      <p>近年來，加拿大已經成為國際學生熱門留學目的地，但最新統計顯示，2025 年至今留學簽證（Study Permit）拒簽率已升至 <strong>62%</strong>，創十多年新高。印度學生受影響尤其明顯，第二季拒簽率高達 <strong>80%</strong>。
+</p>
+      <h3>拒簽主要原因</h3>
+      <ol>
+        <li><strong>移民傾向疑慮：</strong>部分審核官認為申請人畢業後不會返回原居國。</li>
+        <li><strong>財力證明不足：</strong>加拿大對留學生資金證明要求提高，申請人需充分展示學費及生活費來源。</li>
+        <li><strong>申請材料或目的不符：</strong>如停留目的與申請資訊不一致，或缺乏明確學習計畫。</li>
+      </ol>
+      <h3>💡專業觀點與建議</h3>
+      <p>雖然拒簽率提高，但透過正確準備與策略，仍可大幅提升成功率。以下針對拒簽主因一一破防：</p>
+      <ul>
+        <li><strong>移民傾向疑慮：提交 Letter of Explanation </strong>，清楚說明就學目的與返國規劃，讓移民官了解你完成學業後會返回原居國。<strong>曜境顧問將全程協助你規劃與撰寫，提高說服力。</strong></li>
+        <li><strong>財務證明不足：</strong>提早準備符合 IRCC 規定的財力證明。<em>（2025年9月1號財力證明要求上升至加幣$22,895）</em></li>
+        <li><strong>申請材料或目的不符：</strong>確保簽證申請時提供的資訊與學校申請時一致，避免資料矛盾。</li>
+      </ul>
+      <p>有經驗的 <strong>留學顧問</strong> 可以協助你：</p>
+      <ul>
+        <li>
+          規劃與撰寫 <strong>Letter of Explanation</strong>，呈現完整且清楚的就學與返國計畫。
+        </li>
+        <li>
+          檢視最終遞交文件，提醒容易忽略的細節，降低被拒風險。
+        </li>
+      </ul>
+      <p>提前準備，搭配專業協助，是順利取得加拿大留學簽證的關鍵。</p>
+    `,
+  },
+  {
+    id: "site-launch",
+    title: "慶祝曜境官網全新升級上線",
+    date: "日期：待官網正式上線日期確定後補",
+    source: "",
+    heroUrl: "news1.png",
+    heroAlt: "網站上線示意",
+    content: `
+      <p><strong>曜境官網正式上線！</strong></p>
+      <p>歷經半年多的規劃與優化，曜境官網全新改版，正式與大家見面！這不僅是我們的重要里程碑，更代表曜境在服務與內容上再提升。</p>
+
+      <p>在這裡，我們將持續分享：</p>
+      <ul>
+        <li>🌍<strong> 最新留學趨勢與政策解讀 </strong></li>
+        <li>✨<strong> 學生回饋與留學心得故事 </strong></li>
+        <li>🤝<strong> 曜境的最新活動與合作消息 </strong></li>
+      </ul>
+      <p>
+      衷心感謝一路支持曜境的學生、家長與合作夥伴們，讓這個平台能順利誕生。
+      <br>
+誠摯邀請大家一起探索我們的新網站，並持續給予我們寶貴的回饋。</p>
+      <h3>🎁 官網上線限定回饋活動</h3>
+      <p>即日起透過新官網預約並選擇與曜境合作，<br>
+      <strong>即可 免費額外加送兩所學校申請服務！
+      </strong> <br>
+      👉 名額有限，敬請把握！</p>
+    `,
+  },
+];
+
+const post = computed(() => {
+  const id = String(route.params.id || "");
+  return posts.find((p) => p.id === id);
+});
+
+/** 保留你的上一頁行為 */
 function goBack() {
-  if (window.history.length > 1) {
-    router.back();
-  } else {
-    router.push("/news");
-  }
+  if (window.history.length > 1) router.back();
+  else router.push("/news");
 }
+
+function getImageUrl(file: string) {
+  return new URL(`../assets/images/${file}`, import.meta.url).href;
+}
+/** 可選：變更頁面 title */
+watch(
+  () => post.value?.title,
+  (t) => {
+    if (t) document.title = `${t} | 曜境`;
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped lang="scss">
@@ -161,13 +176,13 @@ function goBack() {
 .container {
   max-width: 760px;
   margin: 0 auto;
-  padding: 0px 16px 48px;
-}
-.back-container{
-    max-width: 900px;
-    margin: 15px auto;
+  padding: 0 16px 48px;
 }
 
+.back-container {
+  max-width: 900px;
+  margin: 15px auto;
+}
 .back-btn {
   font-size: 14px;
   padding: 6px 12px;
@@ -183,19 +198,26 @@ function goBack() {
   font-size: clamp(22px, 4vw, 32px);
   font-weight: 650;
   line-height: 1.35;
-  margin: 0 0 8px;
+  margin: 14px 0 8px;
 }
-
 .post-date {
   font-size: 0.95rem;
   color: #7a7a7a;
   margin: 0 0 20px;
 }
 
-.post-content p {
-  margin: 0 0 1.2em;
+.post-content :is(h2, h3, h4) {
+  margin: 1.5rem 0 0.5rem;
+  font-weight: 700;
 }
-
+.post-content p {
+  margin: 0.75rem 0 1.2rem;
+}
+.post-content ul,
+.post-content ol {
+  padding-left: 1.25rem;
+  margin: 0.5rem 0 1rem;
+}
 blockquote {
   margin: 1.4em 0;
   padding-left: 1em;
