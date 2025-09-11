@@ -118,42 +118,36 @@
         <h2 class="news-title">最新消息</h2>
 
         <div class="news-grid">
-          <a class="news-card" href="#">
+          <a class="news-card" href="/news/toefl-2026-revamp">
             <div class="thumb">
-              <img src="@/assets/images/persist.jpg" alt="news cover" />
+              <img src="@/assets/images/news3.png" alt="news cover" />
             </div>
             <div class="news-content">
-              <h3>Your Article Title Goes Here</h3>
-              <p>
-                Five to six lines of body copy to support the heading. Five to
-                six lines of body copy to support the heading.
-              </p>
+              <h3>托福將於 2026 年 1 月起正式改版</h3>
+              <p> 2025.09.02</p>
+              <p>ETS 於今年 5 月 28 日宣布 TOEFL iBT 將於 2026 年 1 月起迎來全新升級，提供更貼近真實學術情境、更加公平與高效...</p>
             </div>
           </a>
 
-          <a class="news-card" href="#">
+          <a class="news-card" href="/news/canada-study-permit-2025">
             <div class="thumb">
-              <img src="@/assets/images/feedback.jpg" alt="news cover" />
+              <img src="@/assets/images/news2.jpg" alt="news cover" />
             </div>
             <div class="news-content">
-              <h3>Your Article Title Goes Here</h3>
-              <p>
-                Five to six lines of body copy to support the heading. Five to
-                six lines of body copy to support the heading.
-              </p>
+              <h3>加拿大留學審核趨嚴，申請人該如何因應？</h3>
+              <p>2025.09.02</p>
+              <p>本文延伸自 The PIE News（Aug 29, 2025）對加拿大留學簽證趨勢的報導，並結合我們的專業觀點與建議...</p>
             </div>
           </a>
 
-          <a class="news-card" href="#">
+          <a class="news-card" href="/news/site-launch">
             <div class="thumb">
-              <img src="@/assets/images/service.jpg" alt="news cover" />
+              <img src="@/assets/images/news1.png" alt="news cover" />
             </div>
             <div class="news-content">
-              <h3>Your Article Title Goes Here</h3>
-              <p>
-                Five to six lines of body copy to support the heading. Five to
-                six lines of body copy to support the heading.
-              </p>
+              <h3>慶祝曜境官網全新升級上線</h3>
+              <p>待官網正式上線日期確定後補</p>
+              <p>曜境官網正式上線！歷經半年多的規劃與優化，曜境官網全新改版，正式與大家見面！這不僅是我們的重要里程碑...</p>
             </div>
           </a>
 
@@ -208,10 +202,10 @@
           <p class="sub">PICK THE PATH THAT LEADS TO YOUR DREAMS.</p>
 
           <div class="actions">
-            <a class="option" href="#">大學研究所申請</a>
-            <a class="option" href="#">中學申請</a>
-            <a class="option" href="#">語言學校／遊學團</a>
-            <a class="option" href="#">純文件／落點分析</a>
+            <a class="option"  href="/studyAbroad">大學研究所申請</a>
+            <a class="option"  href="/highSchool">中學申請</a>
+            <a class="option"  href="/languageSchool">語言學校／遊學團</a>
+            <a class="option"  href="/document">純文件／落點分析</a>
           </div>
         </div>
       </div>
