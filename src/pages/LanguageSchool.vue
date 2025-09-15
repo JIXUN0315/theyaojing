@@ -1,163 +1,189 @@
 <template>
-  <section class="leaf-section">
-    <div class="leaf-container">
-      <!-- 左側文字 -->
-      <div class="leaf-content">
-        <div class="leaf-header">
-          <h2>在台灣學了多年英文，卻還是不敢開口說？</h2>
-          <p class="summary">
-            語言學校提供沉浸式學習環境，讓你真正用英文溝通，從生活中學習。
-            無論你是學生、上班族，還是準備出國生活／工作的你，都能找到最適合你的主題式課程。
-            語言，不只是工具，更是走向世界的橋樑。
-          </p>
-        </div>
+  <!-- ① Hero 圖 -->
+  <div class="hero-wrap">
+    <img
+      class="hero"
+      src="@/assets/images/language-hero.jpg"
+      alt="Language Programs"
+    />
+  </div>
 
-        <div class="leaf-columns">
-          <div class="col">
-            <h4>（01）主題式課程</h4>
-            <p>
-              依照學習目的（學術、商務、生活會話）彈性選擇內容與進度，量身打造你的英文學習地圖。
-            </p>
-          </div>
-          <div class="col">
-            <h4>（02）沉浸式體驗</h4>
-            <p>
-              課程結合當地文化、實境會話，讓你不再只是「學語言」，而是用語言生活、思考、交朋友。
-            </p>
-          </div>
-        </div>
-      </div>
+  <!-- ② 兩列四色交錯 -->
+  <div class="grid">
+    <!-- 左上：語言學校文字（#aba08f） -->
+    <div class="cell text bg-aba08f">
+      <h2 class="title">語言學校</h2>
+      <p class="subtitle">在台灣學了多年英文，卻還是不敢開口說？</p>
+      <hr class="divider" />
+      <ul class="content">
+        <li>語言學校提供沉浸式學習環境，讓你真正用英文溝通，從生活中學習。</li>
+        <li>
+          當你能自在地用英文表達想法，不再只停留在 "Hi, how are you?"
+          或聊聊天氣的程度，而是能深入交流、分享觀點、建立跨文化的真實連結，
+          你會發現：語言不只是工具，更是走向世界的橋樑。
+        </li>
+        <li>
+          不論你是學生、上班族，還是準備出國生活／工作的你，語言學校都是投資自己的最佳選擇。
+        </li>
+      </ul>
+    </div>
 
-      <!-- 右側圖片 -->
-      <div class="leaf-image">
-        <img src="@/assets/images/language-school.jpg" alt="語言學校介紹" />
+    <!-- 右上：圖片（#466a8b） -->
+    <div class="cell photo bg-466a8b">
+      <div class="photo-frame">
+        <img src="@/assets/images/summer-camp.jpg" alt="遊學團" />
       </div>
     </div>
-  </section>
+
+    <!-- 左下：遊學團文字（#8b949d） -->
+    <div class="cell text bg-8b949d">
+      <h2 class="title">遊學團</h2>
+      <p class="subtitle">
+        您有 12～18 歲的孩子，還不知道寒暑假該怎麼規劃嗎？現在就讓我們幫您！
+      </p>
+      <hr class="divider" />
+      <p class="paragraph">
+        歡迎聯繫我們了解最新的國際遊學團資訊，找到適合孩子的冬／夏令營，
+        讓孩子在假期中學習語言、探索世界、拓展視野、培養自信！
+      </p>
+    </div>
+
+    <!-- 右下：圖片（#ede2d7） -->
+    <div class="cell photo bg-ede2d7 dark">
+      <div class="photo-frame">
+        <img src="@/assets/images/language-school.jpg" alt="語言學校" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-const text = ref("模板");
+// Hero 圖、語言學校圖、遊學團圖
+// 請放到 src/assets/images/ 底下：language-hero.jpg, language-school.jpg, summer-camp.jpg
 </script>
 
-<style lang="scss" scoped>
-.leaf-section {
-  background: #eeece9;
-  padding: 4rem 1.5rem;
+<style scoped lang="scss">
+.hero {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
 }
 
-.leaf-container {
-  display: flex;
-  flex-wrap: wrap;
+/* Grid */
+.grid {
   max-width: 1200px;
-  margin: 0 auto;
-  border: 1px solid #ddd;
-  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: minmax(380px, auto);
 }
 
-.leaf-content {
-  flex: 1;
-  padding: 2rem;
-  min-width: 300px;
+/* Cell 通用 */
+.cell {
+  overflow: hidden;
+}
+
+/* 文字格：頂端對齊 */
+.cell.text {
+  padding: clamp(24px, 4vw, 48px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start; /* 由上往下 */
+  align-items: flex-start; /* 左對齊 */
+  text-align: left;
+  color: #fff;
 
-  background: #fff;
-  border: 1px solid #e5e5e5; // << 淺灰邊框
+  .title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    margin: 0 0 12px;
+    letter-spacing: 0.03em;
+  }
+  .subtitle {
+    font-size: clamp(16px, 2.2vw, 22px);
+    font-weight: 700;
+    margin: 6px 0 14px;
+  }
+  .divider {
+    width: 60%;
+    max-width: 460px;
+    border: 0;
+    border-top: 2px solid rgba(255, 255, 255, 0.7);
+    margin: 12px 0 18px;
+  }
+  .content {
+    margin: 0;
+    padding-left: 1.2em;
+    list-style: disc outside;
+  }
+  .content li {
+    line-height: 1.9;
+    margin: 0 0 0.6em;
+  }
+  .paragraph {
+    margin: 0;
+    line-height: 1.9;
+    color: white;
+  }
 }
 
-.leaf-header {
-  margin-bottom: 2rem;
-
-  .label {
-    font-size: 0.8rem;
-    color: #888;
-    margin-bottom: 0.5rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    color: #111;
-    margin-bottom: 1rem;
-    font-weight: bold;
-  }
-
-  .summary {
-    font-size: 1rem;
-    color: #444;
-    line-height: 1.6;
-  }
-}
-
-.leaf-columns {
+/* 圖片格：置中顯示相框 */
+.cell.photo {
+  padding: clamp(20px, 3vw, 36px);
   display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-  border-top: 1px solid #ddd;
-
-  .col {
-    flex: 1;
-    padding: 1.5rem 2rem;
-    min-width: 200px;
-
-    // 中間分隔線
-    &:not(:first-child) {
-      border-left: 1px solid #ddd;
-    }
-    h4 {
-      font-size: 1rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: #333;
-    }
-
-    p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: #666;
-    }
-  }
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 768px) {
-  .leaf-columns {
-    flex-direction: column;
-
-    .col {
-      &:first-child {
-        border-bottom: 1px solid #ddd;
-      }
-      &:not(:first-child) {
-        border-left: none;
-      }
-    }
-  }
-  .leaf-section {
-    padding: 30px 0;
-  }
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
 }
 
-.leaf-image {
-  flex: 1;
-  min-width: 300px;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+/* 顏色 */
+.bg-aba08f {
+  background: #aba08f;
+}
+.bg-466a8b {
+  background: #466a8b;
+}
+.bg-8b949d {
+  background: #8b949d;
+}
+.bg-ede2d7 {
+  background: #ede2d7;
+}
+.dark {
+  color: #2d2d2d;
 }
 
-@media (max-width: 768px) {
-  .leaf-container {
-    flex-direction: column;
-  }
+/* CTA */
+.cta {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 24px 16px 0;
+}
+.cta h3 {
+  margin: 0;
+  background: #f2c94c;
+  color: #2d2d2d;
+  text-align: center;
+  padding: 28px 16px;
+  border-radius: 4px;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
 
-  .leaf-columns {
-    flex-direction: column;
+/* RWD */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
   }
 }
 </style>
