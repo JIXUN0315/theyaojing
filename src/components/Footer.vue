@@ -1,7 +1,7 @@
 <template>
   <section class="ctaContainer" v-if="!showCta">
     <div class="cta">
-      <h2>夢想不該等待</h2>
+      <h2>{{ isLauguageSchool?  "勇敢出發，讓語言帶你環遊世界": "夢想不該等待" }}</h2>
       <p>馬上預約，邁出你的第一步。</p>
       <a href="/booking" class="cta-button">預約諮詢</a>
     </div>
@@ -50,10 +50,12 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
+import LanguageSchool from "../pages/LanguageSchool.vue";
 
 const route = useRoute();
 
 const page = computed(() => route.name);
+const isLauguageSchool = computed(()=> route.name == 'languageSchool')
 const showCta = computed(() => ['booking', 'document','news'].includes(page.value));
 function sendEmail() {
   const recipient = "admin@theyaojing.com";
