@@ -46,11 +46,11 @@
           <img src="@/assets/images/highschool-2.jpg" alt="全英文環境" />
           <p>全英文環境 x 培養語言與獨立生活力。</p>
         </div>
-        <div class="adv-item">
+        <div class="adv-item adv-cul">
           <img src="@/assets/images/highschool-3.jpg" alt="跨文化交流" />
           <p>跨文化交流，拓展人脈與全球視野。</p>
         </div>
-        <div class="adv-item">
+        <div class="adv-item adv-class">
           <img src="@/assets/images/highschool-4.jpg" alt="課程與社團" />
           <p>
             多元課程與社團活動，有助於探索興趣與發展潛能，提早找到大學與職涯方向。
@@ -269,6 +269,7 @@
         width: 100%;
         margin-bottom: 1rem;
         object-fit: cover;
+
         display: block;
         height: 220px;
       }
@@ -277,82 +278,120 @@
         line-height: 1.5;
       }
     }
+    .adv-class {
+      img {
+        width: 100%;
+        height: 220px;
+        display: block;
+        object-fit: cover;
+
+        /* 往下顯示 20px（看到更靠下的區域）*/
+        object-position: 50% calc(50% + 120px);
+      }
+    }
+    .adv-cul{
+      img {
+        width: 100%;
+        height: 220px;
+        display: block;
+        object-fit: cover;
+
+        /* 往下顯示 20px（看到更靠下的區域）*/
+        object-position: 50% calc(50% + 60px);
+      }
+    }
   }
 
   /* Services */
   .services {
-  background: #eee6df;
-  padding: 3.5rem 1.5rem;
+    background: #eee6df;
+    padding: 3.5rem 1.5rem;
 
-  .svc-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+    .svc-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-  /* 上方標題 */
-  .svc-head {
-    text-align: left;
-    max-width: 720px;
-    margin: 0 0 2rem 0;
-  }
+    /* 上方標題 */
+    .svc-head {
+      text-align: left;
+      max-width: 720px;
+      margin: 0 0 2rem 0;
+    }
 
-  /* 下方：服務卡片網格（由上到下 → 再往右） */
-  .svc-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 兩欄 */
-    grid-template-rows: repeat(3, auto);              /* 三列（因為 6 個項目） */
-    grid-auto-flow: column;                            /* 關鍵：先填滿第一欄的列，再往右欄 */
-    column-gap: 2rem;
-    row-gap: 1.25rem;
-  }
-
-  .svc-item {
-    display: grid;
-    grid-template-columns: auto 1fr; /* 左編號、右文字 */
-    align-items: start;
-    column-gap: 1rem;
-  }
-
-  .badge {
-    display: inline-grid;
-    place-items: center;
-    min-width: 46px;
-    height: 46px;
-    padding: 0 .25rem;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #fff;
-    background: #1f1f1f;
-    border-radius: 10px;
-    box-shadow: 0 0 0 2px rgba(255,255,255,.9) inset;
-  }
-
-  .text h3 { margin: 0 0 .25rem; font-size: 1.05rem; font-weight: 700; color: #1f1f1f; }
-  .text p  { margin: 0; font-size: .98rem; line-height: 1.8; color: #2b2928; }
-
-  /* RWD：平板保持兩欄（仍由上到下排） */
-  @media (max-width: 1024px) {
-    .svc-head { margin-bottom: 1.5rem; }
+    /* 下方：服務卡片網格（由上到下 → 再往右） */
     .svc-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: auto auto auto; /* 同效果，寫法等價 */
-      grid-auto-flow: column;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* 兩欄 */
+      grid-template-rows: repeat(3, auto); /* 三列（因為 6 個項目） */
+      grid-auto-flow: column; /* 關鍵：先填滿第一欄的列，再往右欄 */
+      column-gap: 2rem;
+      row-gap: 1.25rem;
+    }
+
+    .svc-item {
+      display: grid;
+      grid-template-columns: auto 1fr; /* 左編號、右文字 */
+      align-items: start;
+      column-gap: 1rem;
+    }
+
+    .badge {
+      display: inline-grid;
+      place-items: center;
+      min-width: 46px;
+      height: 46px;
+      padding: 0 0.25rem;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      background: #1f1f1f;
+      border-radius: 10px;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9) inset;
+    }
+
+    .text h3 {
+      margin: 0 0 0.25rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1f1f1f;
+    }
+    .text p {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: #2b2928;
+    }
+
+    /* RWD：平板保持兩欄（仍由上到下排） */
+    @media (max-width: 1024px) {
+      .svc-head {
+        margin-bottom: 1.5rem;
+      }
+      .svc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto auto auto; /* 同效果，寫法等價 */
+        grid-auto-flow: column;
+      }
+    }
+
+    /* 手機：單欄，順序自然由上到下 */
+    @media (max-width: 640px) {
+      .svc-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        grid-auto-flow: row; /* 單欄就改回預設即可 */
+      }
+      .badge {
+        min-width: 42px;
+        height: 42px;
+        font-size: 0.95rem;
+      }
     }
   }
-
-  /* 手機：單欄，順序自然由上到下 */
-  @media (max-width: 640px) {
-    .svc-grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: none;
-      grid-auto-flow: row; /* 單欄就改回預設即可 */
-    }
-    .badge { min-width: 42px; height: 42px; font-size: .95rem; }
-  }
-}
 }
 </style>

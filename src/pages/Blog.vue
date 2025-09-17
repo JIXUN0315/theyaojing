@@ -73,7 +73,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const categories = ["#總覽", "#學生見證", "#留學故事", "#實用專欄", "#服務心得", "#心得分享"];
+const categories = ["#總覽", "#留學故事", "#服務心得", "#實用專欄"];
 
 const activeCategory = ref(categories[0]);
 
@@ -173,7 +173,7 @@ const posts = ref([
     title: "匿名, King’s College London",
     info: "MSc Digital Marketing",
     date: "2024.4.30",
-    category: "#心得分享",
+    category: "#服務心得",
     image: new URL("@/assets/images/stu2.png", import.meta.url).href,
   },
 ]);

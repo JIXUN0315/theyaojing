@@ -13,7 +13,7 @@
         <span v-if="post.school" class="school">{{ post.school }}</span>
         <span v-if="post.info" class="school">{{ post.info }}</span>
         <router-link
-          :to="'/blog?cat=' + encodeURIComponent(post.category)"
+          
           class="category"
         >
           {{ post.category }}
@@ -307,7 +307,7 @@ const posts = ref([
     title: "學生（匿名）",
     school: "King’s College London",
     info: "MSc Digital Marketing",
-    category: "#心得分享",
+    category: "#服務心得",
     images: [
       new URL("@/assets/images/stu2.png", import.meta.url).href,
       // new URL("@/assets/images/posts/post-11-2.jpg", import.meta.url).href,
@@ -380,6 +380,7 @@ const post = computed(() => posts.value.find((p) => p.slug === slug));
   font-size: 0.9rem;
   text-decoration: underline;
   color: #555;
+  cursor: auto;
 }
 
 .post-cover {

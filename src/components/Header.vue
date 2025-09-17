@@ -13,14 +13,16 @@
           </a>
           <div class="nav__dropdown--position">
             <div class="nav__dropdown--menu">
-              <a href="/studyAbroad">留學申請（大學、研究所）</a>
+              <a href="/studyAbroad">大學研究所申請</a>
               <a href="/highSchool">中學申請</a>
-              <a href="/languageSchool">語言學校</a>
+              <a href="/languageSchool">語言學校與遊學團</a>
               <a href="/document">純文件與落點分析</a>
             </div>
           </div>
         </div>
-        <a href="/blog"><span class="nav__sub">學生回饋</span></a>
+        <a href="/blog" class="nav__blog"
+          ><span class="nav__sub">學生回饋與實用專欄</span></a
+        >
         <!-- <a href="#"><span class="nav__sub">學生心得</span></a> -->
         <a href="/news"><span class="nav__sub">最新消息</span></a>
         <span class="nav__line">|</span>
@@ -79,16 +81,16 @@
             </div>
 
             <div class="list__item--submenu" v-show="isProductOpen">
-              <a href="/studyAbroad">留學申請（大學、研究所）</a>
+              <a href="/studyAbroad">大學研究所申請</a>
               <a href="/highSchool">中學申請</a>
-              <a href="/languageSchool">語言學校</a>
+              <a href="/languageSchool">語言學校與遊學團</a>
               <a href="/document">純文件與落點分析</a>
             </div>
           </div>
 
           <div class="list__item">
             <a href="/blog" class="list__item--link"
-              >BLOG<span class="list__item--link">學生回饋</span></a
+              >BLOG<span class="list__item--link">學生回饋與實用專欄</span></a
             >
           </div>
           <div class="list__item">
@@ -390,7 +392,9 @@ header {
     }
   }
 }
-
+.nav__blog {
+  width: 200px !important;
+}
 .list {
   border-top: 1px solid #ddd;
   height: calc(100vh - 55px);
