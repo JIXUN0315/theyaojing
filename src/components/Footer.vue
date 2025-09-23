@@ -1,8 +1,10 @@
 <template>
   <section class="ctaContainer" v-if="!showCta">
     <div class="cta">
-      <h2>{{ isLauguageSchool?  "勇敢出發，讓語言帶你環遊世界": "孩子的未來不能等，立即預約諮詢，把握最佳成長契機。" }}</h2>
-      <p v-if="isLauguageSchool">馬上預約，邁出你的第一步。</p>
+      <h2 v-if="isLauguageSchool">勇敢出發，讓語言帶你環遊世界</h2>
+      <h2 v-if="isHightSchool">孩子的未來不能等，立即預約諮詢，把握最佳成長契機。</h2>
+      <h2 v-if="!isLauguageSchool && !isHightSchool">夢想不該等待</h2>
+      <p v-if="!isHightSchool">馬上預約，邁出你的第一步。</p>
       <a href="/booking" class="cta-button">預約諮詢</a>
     </div>
   </section>
@@ -48,15 +50,18 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
-import LanguageSchool from "../pages/LanguageSchool.vue";
 
 const route = useRoute();
 
-const page = computed(() => route.name);
-const isLauguageSchool = computed(()=> route.name == 'languageSchool')
-const showCta = computed(() => ['booking', 'document','news'].includes(page.value));
+// 取得目前的路由名稱（確保是字串）
+const pageName = computed(() => route.name?.toString() ?? "");
+
+// 各頁判斷（注意拼字與實際路由名稱一致）
+const isLauguageSchool = computed(() => pageName.value === "languageSchool");
+const isHightSchool    = computed(() => pageName.value === "highSchool");
+const showCta = computed(() => ['booking', 'document','news'].includes(pageName.value));
 function sendEmail() {
   const recipient = "admin@theyaojing.com";
   const subject = encodeURIComponent("預約免費留學諮詢");
