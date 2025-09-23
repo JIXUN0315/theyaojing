@@ -73,7 +73,6 @@
 
 /* Grid */
 .grid {
-  max-width: 1200px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: minmax(380px, auto);
@@ -130,7 +129,7 @@
 
 /* 圖片格：置中顯示相框 */
 .cell.photo {
-  padding: clamp(20px, 3vw, 36px);
+  padding: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,5 +184,8 @@
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
   }
+  .cell.photo {
+  padding: 30px;
+}
 }
 </style>

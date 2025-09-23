@@ -1,8 +1,8 @@
 <template>
   <section class="ctaContainer" v-if="!showCta">
     <div class="cta">
-      <h2>{{ isLauguageSchool?  "勇敢出發，讓語言帶你環遊世界": "夢想不該等待" }}</h2>
-      <p>馬上預約，邁出你的第一步。</p>
+      <h2>{{ isLauguageSchool?  "勇敢出發，讓語言帶你環遊世界": "孩子的未來不能等，立即預約諮詢，把握最佳成長契機。" }}</h2>
+      <p v-if="isLauguageSchool">馬上預約，邁出你的第一步。</p>
       <a href="/booking" class="cta-button">預約諮詢</a>
     </div>
   </section>

@@ -1,10 +1,7 @@
 <template>
   <div class="home">
     <section class="home__heroImage">
-      <img
-            src="@/assets/images/homepage.png"
-            alt=""
-          />
+      <img src="@/assets/images/homepage.png" alt="" />
     </section>
     <section class="about-section">
       <div class="container">
@@ -74,10 +71,14 @@
 
         <div class="cards">
           <!-- Card 1 -->
-          <article class="card">
+          <article class="card" @click="goToPost('post-12')">
             <div class="card-head">
-              <h3 class="name">Jacky</h3>
-              <p class="title">錄取華威商學院<br />金融碩士</p>
+              <div class="card-head-text">
+                <h3 class="name">Jacky</h3>
+                <p class="title">The University of Warwick Business School</p>
+                <div class="titleSub">MSc Finance</div>
+              </div>
+              <div class="card-head-img"><img src="@/assets/images/stu12-1.jpg" alt="" /></div>
             </div>
             <hr class="rule" />
             <p class="card-body">
@@ -87,30 +88,44 @@
           </article>
 
           <!-- Card 2 -->
-          <article class="card">
+          <article class="card" @click="goToPost('post-09')">
             <div class="card-head">
-              <h3 class="name">TY W</h3>
-              <p class="title">錄取 UCLA 材料工程<br />碩士</p>
+              <div class="card-head-text">
+                <h3 class="name">Johnny</h3>
+                <p class="title">UCLA</p>
+                <div class="titleSub">MS Materials Science & Engineering</div>
+              </div>
+              <div class="card-head-img">
+                <img src="@/assets/images/stu9.jpg" alt="" />
+              </div>
             </div>
             <hr class="rule" />
             <p class="card-body">
-              真的幫我非常多的事情，申請文件、與校方溝通與代辦討論。申請美簽時更不用說，我還遇到行政審查（希望大家不要碰到會非常難受），相關文件準備也能協助並幫忙潤稿，真的非常感謝顧問的協助。
+              在申請大學的過程中，留學顧問幫了我非常多。因為我的英文不好，像是撰寫
+              SOP、推薦信、CV
+              和選校等文件時，都需要與代辦密切討論。加上遇到疫情，我延遲了一年才入學，在台灣工作期間，代辦也持續幫我處理與學校的聯繫，省去了很多心力。
             </p>
           </article>
 
           <!-- Card 3 -->
-          <article class="card">
+          <article class="card" @click="goToPost('post-04')">
             <div class="card-head">
-              <h3 class="name">Eco-friendly</h3>
-              <p class="title">Highlight a feature</p>
+              <div class="card-head-text">
+                <h3 class="name">Jessie</h3>
+                <p class="title">The University of Manchester</p>
+                <div class="titleSub">MSc Finance</div>
+              </div>
+              <div class="card-head-img">
+                <img src="@/assets/images/stu4.jpg" alt="" />
+              </div>
             </div>
             <hr class="rule" />
             <p class="card-body">
-              Highlight a specific feature of your product or service. Convince
-              your audience why they need to check out your brand.
+              整個申請過程中都有給予很多有用的建議，也會耐心聽我們的顧慮。做事效率高、資訊來源豐富，還幫助我找到讀同系的同學，去讀書的時候不會那麼焦慮；後續學費問題也協助解決，整體感受很好！
             </p>
           </article>
         </div>
+        <div class="moreStory" @click="goto('/blog')">➢查看更多成功故事</div>
       </div>
     </section>
     <section class="news">
@@ -118,14 +133,43 @@
         <h2 class="news-title">最新消息</h2>
 
         <div class="news-grid">
+          
+          <a class="news-card" href="/news/site-launch">
+            <div class="thumb">
+              <img src="@/assets/images/news1.png" alt="news cover" />
+            </div>
+            <div class="news-content">
+              <h3>慶祝曜境官網全新升級上線</h3>
+              <p>2025.10.1</p>
+              <p>
+                曜境官網正式上線！歷經半年多的規劃與優化，曜境官網全新改版，正式與大家見面！這不僅是我們的重要里程碑...
+              </p>
+            </div>
+          </a>
+          
+          <a class="news-card" href="/news/QS-Ranking">
+            <div class="thumb">
+              <img src="@/assets/images/news4.png" alt="news cover" />
+            </div>
+            <div class="news-content">
+              <h3>最新QS Global MBA Rankings 2026出爐</h3>
+              <p>2025.09.17</p>
+              <p>賓夕法尼亞大學（沃頓商學院 / Wharton）榮登全球最佳全日制 MBA！
+                緊隨其後的前三名分別為：哈佛商學院...
+              </p>
+            </div>
+          </a>
           <a class="news-card" href="/news/toefl-2026-revamp">
             <div class="thumb">
               <img src="@/assets/images/news3.png" alt="news cover" />
             </div>
             <div class="news-content">
               <h3>托福將於 2026 年 1 月起正式改版</h3>
-              <p> 2025.09.02</p>
-              <p>ETS 於今年 5 月 28 日宣布 TOEFL iBT 將於 2026 年 1 月起迎來全新升級，提供更貼近真實學術情境、更加公平與高效...</p>
+              <p>2025.09.02</p>
+              <p>
+                ETS 於今年 5 月 28 日宣布 TOEFL iBT 將於 2026 年 1
+                月起迎來全新升級，提供更貼近真實學術情境、更加公平與高效...
+              </p>
             </div>
           </a>
 
@@ -136,34 +180,14 @@
             <div class="news-content">
               <h3>加拿大留學審核趨嚴，申請人該如何因應？</h3>
               <p>2025.09.02</p>
-              <p>本文延伸自 The PIE News（Aug 29, 2025）對加拿大留學簽證趨勢的報導，並結合我們的專業觀點與建議...</p>
-            </div>
-          </a>
-
-          <a class="news-card" href="/news/site-launch">
-            <div class="thumb">
-              <img src="@/assets/images/news1.png" alt="news cover" />
-            </div>
-            <div class="news-content">
-              <h3>慶祝曜境官網全新升級上線</h3>
-              <p>待官網正式上線日期確定後補</p>
-              <p>曜境官網正式上線！歷經半年多的規劃與優化，曜境官網全新改版，正式與大家見面！這不僅是我們的重要里程碑...</p>
-            </div>
-          </a>
-
-          <a class="news-card" href="#">
-            <div class="thumb">
-              <img src="@/assets/images/introduce.jpg" alt="news cover" />
-            </div>
-            <div class="news-content">
-              <h3>Your Article Title Goes Here</h3>
               <p>
-                Five to six lines of body copy to support the heading. Five to
-                six lines of body copy to support the heading.
+                本文延伸自 The PIE News（Aug 29,
+                2025）對加拿大留學簽證趨勢的報導，並結合我們的專業觀點與建議...
               </p>
             </div>
           </a>
         </div>
+        <div class="moreNews" @click="goto('/News')">➢點我看更多最新消息</div>
       </div>
     </section>
 
@@ -171,28 +195,16 @@
       <div class="path-stage">
         <!-- 浮動裝飾圖（可換成你的圖片） -->
         <div class="floating-img img-tl">
-          <img
-            src="@/assets/images/kaplan2.jpg"
-            alt=""
-          />
+          <img src="@/assets/images/kaplan2.jpg" alt="" />
         </div>
         <div class="floating-img img-tr">
-          <img
-            src="@/assets/images/kaplan1.jpg"
-            alt=""
-          />
+          <img src="@/assets/images/kaplan1.jpg" alt="" />
         </div>
         <div class="floating-img img-bl">
-          <img
-            src="@/assets/images/sydney.jpg"
-            alt=""
-          />
+          <img src="@/assets/images/sydney.jpg" alt="" />
         </div>
         <div class="floating-img img-mr">
-          <img
-            src="@/assets/images/perth.jpg"
-            alt=""
-          />
+          <img src="@/assets/images/perth.jpg" alt="" />
         </div>
 
         <!-- 中央內容 -->
@@ -202,10 +214,10 @@
           <p class="sub">PICK THE PATH THAT LEADS TO YOUR DREAMS.</p>
 
           <div class="actions">
-            <a class="option"  href="/studyAbroad">大學研究所申請</a>
-            <a class="option"  href="/highSchool">中學申請</a>
-            <a class="option"  href="/languageSchool">語言學校／遊學團</a>
-            <a class="option"  href="/document">純文件／落點分析</a>
+            <a class="option" href="/studyAbroad">大學研究所申請</a>
+            <a class="option" href="/highSchool">中學申請</a>
+            <a class="option" href="/languageSchool">語言學校／遊學團</a>
+            <a class="option" href="/document">純文件／落點分析</a>
           </div>
         </div>
       </div>
@@ -218,7 +230,9 @@ import { ref, onMounted, nextTick } from "vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const images = [
   new URL("@/assets/images/homepage.png", import.meta.url).href,
   new URL("@/assets/images/homepage.png", import.meta.url).href,
@@ -227,6 +241,13 @@ const images = [
   // new URL("@/assets/images/student.jpg", import.meta.url).href,
   // new URL("@/assets/images/qa.jpg", import.meta.url).href,
 ];
+
+function goToPost(slug) {
+  router.push(`/blog/posts/${slug}`);
+}
+function goto(path) {
+  router.push(path);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -669,6 +690,22 @@ const images = [
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+}
+.moreStory {
+  position: absolute;
+  bottom: -50px;
+  right: 0;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+.moreNews{
+  position: absolute;
+  bottom: -50px;
+  right: 0;
+  font-size: 16px;
+  cursor: pointer;
 }
 .section-title {
   color: #fff;
@@ -698,7 +735,28 @@ const images = [
   transform: translateY(-4px);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
 }
-
+.card-head {
+  height: 125px;
+  position: relative;
+}
+.card-head-text {
+  width: calc(100% - 60px);
+}
+.card-head-img {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-head-img img {
+  width: 100%;
+}
 .card-head .name {
   margin: 0 0 8px;
   font-size: 28px;
@@ -707,9 +765,16 @@ const images = [
 }
 .card-head .title {
   margin: 0;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.4;
 }
+.card-head .titleSub {
+  margin: 0;
+  margin-top: 5px;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
 .rule {
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
@@ -725,8 +790,8 @@ const images = [
   .cards {
     grid-template-columns: repeat(2, 1fr);
   }
-  .home__heroImage{
-    img{
+  .home__heroImage {
+    img {
       height: 50vh;
     }
   }
@@ -942,7 +1007,7 @@ const images = [
   max-width: 23%;
 }
 .img-tr {
- right: 60px;
+  right: 60px;
   top: -88px;
   width: 400px;
   height: 250px;
@@ -1000,7 +1065,7 @@ const images = [
   .badge {
     font-size: 13px;
   }
-  .option{
+  .option {
     width: auto;
   }
 }

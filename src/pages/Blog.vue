@@ -15,12 +15,12 @@
     </div>
   </div>
   <!-- 分類區塊 -->
-  <nav class="category-tabs">
+  <nav class="category-tabs" ref="blogPage">
     <div
       v-for="cat in categories"
       :key="cat"
       :class="{ active: activeCategory === cat }"
-      @click="activeCategory = cat"
+      @click="setCategory(cat)"
     >
       {{ cat }}
     </div>
@@ -30,7 +30,7 @@
     <!-- 卡片區塊 -->
     <div class="cards-grid">
       <div
-        v-for="post in filteredPosts"
+        v-for="post in paginatedPosts"
         :key="post.slug"
         class="blog-card"
         @click="goToPost(post.slug)"
@@ -46,23 +46,39 @@
     </div>
   </div>
 
-  <div class="pagination">
+  <div class="pagination" v-if="totalPages > 1">
     <nav class="pager" aria-label="Pagination">
-      <a class="pager__nav pager__prev" href="#" aria-label="上一頁">上一頁</a>
+      <button
+        class="pager__nav pager__prev"
+        :disabled="currentPage === 1"
+        @click="prevPage"
+      >
+        上一頁
+      </button>
 
       <ul class="pager__pages" role="list">
-        <li><a class="pager__page" href="#">1</a></li>
-        <li class="pager__ellipsis" aria-hidden="true">…</li>
-        <li><a class="pager__page" href="#">2</a></li>
-        <li>
-          <a class="pager__page is-current" aria-current="page" href="#">3</a>
+        <li
+          v-for="page in totalPages"
+          :key="page"
+          @click="goToPage(page)"
+        >
+          <a
+            class="pager__page"
+            :class="{ 'is-current': currentPage === page }"
+            href="javascript:void(0);"
+          >
+            {{ page }}
+          </a>
         </li>
-        <li><a class="pager__page" href="#">4</a></li>
-        <li class="pager__ellipsis" aria-hidden="true">…</li>
-        <li><a class="pager__page" href="#">10</a></li>
       </ul>
 
-      <a class="pager__nav pager__next" href="#" aria-label="下一頁">下一頁</a>
+      <button
+        class="pager__nav pager__next"
+        :disabled="currentPage === totalPages"
+        @click="nextPage"
+      >
+        下一頁
+      </button>
     </nav>
   </div>
 </template>
@@ -125,7 +141,7 @@ const posts = ref([
     title: "Ann, University of Pennsylvania",
     info: "MSN, Adult Gerontology Acute Care Nurse Practitioner",
     date: "2025.8.3",
-    category: "#留學故事——勇敢跳脫舒適圈：以前的我 vs 現在的我",
+    category: "#留學故事⸺勇敢跳脫舒適圈：以前的我 vs 現在的我",
     image: new URL("@/assets/images/stu5.jpg", import.meta.url).href,
   },
   {
@@ -133,7 +149,7 @@ const posts = ref([
     title: "Dustin, Purdue University",
     info: "MS Chemical Engineering",
     date: "2025.05.31",
-    category: "#留學故事——留學後的我變了",
+    category: "#留學故事⸺留學後的我變了",
     image: new URL("@/assets/images/shareblog01.jpg", import.meta.url).href,
   },
   {
@@ -141,7 +157,7 @@ const posts = ref([
     title: "Bryant, Abbey College Cambridge",
     info: "GCSE",
     date: "2025.7.17",
-    category: "#留學故事——我來英國留學後才知道的事",
+    category: "#留學故事⸺我來英國留學後才知道的事",
     image: new URL("@/assets/images/stu7.jpg", import.meta.url).href,
   },
   {
@@ -176,6 +192,14 @@ const posts = ref([
     category: "#服務心得",
     image: new URL("@/assets/images/stu2.png", import.meta.url).href,
   },
+   {
+    slug: "post-12",
+    title: "Jacky, The University of Warwick Business School",
+    info: "MSc Finance",
+    date: "2023.5.20",
+    category: "#服務心得",
+    image: new URL("@/assets/images/stu12-1.jpg", import.meta.url).href,
+  },
 ]);
 
 const filteredPosts = computed(() =>
@@ -184,6 +208,46 @@ const filteredPosts = computed(() =>
 
 function goToPost(slug) {
   router.push(`/blog/posts/${slug}`);
+}
+const pageSize = 10;
+const currentPage = ref(1);
+const totalPages = computed(() =>
+  Math.ceil(filteredPosts.value.length / pageSize)
+);
+const paginatedPosts = computed(() => {
+  const start = (currentPage.value - 1) * pageSize;
+  return filteredPosts.value.slice(start, start + pageSize);
+});
+// 切換分類時要回到第一頁
+function setCategory(cat) {
+  activeCategory.value = cat;
+  currentPage.value = 1;
+}
+const blogPage = ref(null);
+
+// 跳到指定頁
+function goToPage(page) {
+  currentPage.value = page;
+  scrollToTop();
+}
+
+// 上一頁
+function prevPage() {
+  if (currentPage.value > 1) currentPage.value--;
+  scrollToTop();
+}
+
+// 下一頁
+function nextPage() {
+  if (currentPage.value < totalPages.value) currentPage.value++;
+  scrollToTop();
+}
+
+// ⭐ 捲動到最上方
+function scrollToTop() {
+  if (blogPage.value) {
+    blogPage.value.scrollIntoView({ behavior: "smooth" });
+  }
 }
 </script>
 

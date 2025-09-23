@@ -1,7 +1,7 @@
 <template>
   <h2 class="titleNews">最新消息</h2>
   <section class="news">
-    <section class="news-list" >
+    <section class="news-list">
       <ul role="list">
         <li v-for="(item, i) in pagedNews" :key="i" class="news-item">
           <a :href="`/news/${item.link || '#'}`" class="news-link">
@@ -19,7 +19,7 @@
                 <span class="no-image">Information</span>
               </template>
             </div>
-  
+
             <div class="meta">
               <time class="date" :datetime="isoDate(item.date)">
                 {{ displayDate(item.date) }}
@@ -29,16 +29,22 @@
               </h3>
             </div>
           </a>
-  
+
           <!-- 只有本頁最後一項不顯示分隔線（不改你的 CSS，直接用 v-if 控制） -->
-          <div class="divider" aria-hidden="true" v-if="i !== pagedNews.length - 1"></div>
+          <div
+            class="divider"
+            aria-hidden="true"
+            v-if="i !== pagedNews.length - 1"
+          ></div>
         </li>
       </ul>
-  
+
       <!-- 分頁列：只有多於一頁才顯示；不動你的 CSS，僅新增素按鈕 -->
       <nav v-if="totalPages > 1" class="pagination" aria-label="pagination">
-        <button type="button" @click="prevPage" :disabled="currentPage === 1">← Prev</button>
-  
+        <button type="button" @click="prevPage" :disabled="currentPage === 1">
+          ← Prev
+        </button>
+
         <button
           v-for="chip in pagesToShow"
           :key="chip.key"
@@ -49,15 +55,21 @@
         >
           {{ chip.label }}
         </button>
-  
-        <button type="button" @click="nextPage" :disabled="currentPage === totalPages">Next →</button>
+
+        <button
+          type="button"
+          @click="nextPage"
+          :disabled="currentPage === totalPages"
+        >
+          Next →
+        </button>
       </nav>
     </section>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch } from "vue";
 
 type NewsItem = {
   date: string | Date;
@@ -70,6 +82,18 @@ type NewsItem = {
 // 直接在這個頁面放資料，不外部呼叫
 const news: NewsItem[] = [
   {
+    date: "2025-10-1",
+    title: "慶祝曜境官網全新升級上線",
+    imageUrl: "news1.png", // 故意留空 → 顯示 Information 方塊
+    link: "site-launch",
+  },
+  {
+    date: "2025-09-17",
+    title: "最新QS Global MBA Rankings 2026出爐",
+    imageUrl: "news4.png", // 故意留空 → 顯示 Information 方塊
+    link: "QS-Ranking",
+  },
+  {
     date: "2025-09-02",
     title: "托福將於 2026 年 1 月起正式改版",
     imageUrl: "news3.png",
@@ -81,17 +105,11 @@ const news: NewsItem[] = [
     imageUrl: "news2.jpg",
     link: "canada-study-permit-2025",
   },
-  {
-    date: "2025-05-31",
-    title: "慶祝曜境官網全新升級上線",
-    imageUrl: "news1.png", // 故意留空 → 顯示 Information 方塊
-    link: "site-launch",
-  },
 ];
 
 // ====== 分頁核心 ======
-const pageSize = ref(4);         // 每頁幾筆，想改就改這裡
-const currentPage = ref(1);      // 目前頁碼（1-based）
+const pageSize = ref(4); // 每頁幾筆，想改就改這裡
+const currentPage = ref(1); // 目前頁碼（1-based）
 
 const totalPages = computed(() =>
   Math.max(1, Math.ceil(news.length / pageSize.value))
@@ -119,8 +137,8 @@ function getImageUrl(file: string) {
 
 // 產生頁碼 + 省略號（最多 5 顆按鈕）
 type PageChip =
-  | { type: 'page'; page: number; label: string | number; key: string }
-  | { type: 'ellipsis'; label: string; key: string; page?: undefined };
+  | { type: "page"; page: number; label: string | number; key: string }
+  | { type: "ellipsis"; label: string; key: string; page?: undefined };
 
 const pagesToShow = computed<PageChip[]>(() => {
   const total = totalPages.value;
@@ -129,7 +147,7 @@ const pagesToShow = computed<PageChip[]>(() => {
 
   if (total <= maxButtons) {
     return Array.from({ length: total }, (_, i) => ({
-      type: 'page',
+      type: "page",
       page: i + 1,
       label: i + 1,
       key: `p-${i + 1}`,
@@ -137,8 +155,10 @@ const pagesToShow = computed<PageChip[]>(() => {
   }
 
   const chips: PageChip[] = [];
-  const addPage = (p: number) => chips.push({ type: 'page', page: p, label: p, key: `p-${p}` });
-  const addEllipsis = (k: string) => chips.push({ type: 'ellipsis', label: '…', key: k });
+  const addPage = (p: number) =>
+    chips.push({ type: "page", page: p, label: p, key: `p-${p}` });
+  const addEllipsis = (k: string) =>
+    chips.push({ type: "ellipsis", label: "…", key: k });
 
   addPage(1);
 
@@ -152,9 +172,9 @@ const pagesToShow = computed<PageChip[]>(() => {
     else break;
   }
 
-  if (start > 2) addEllipsis('e-left');
+  if (start > 2) addEllipsis("e-left");
   for (let p = start; p <= end; p++) addPage(p);
-  if (end < total - 1) addEllipsis('e-right');
+  if (end < total - 1) addEllipsis("e-right");
 
   addPage(total);
   return chips;
@@ -184,11 +204,11 @@ const displayDate = (d: string | Date) => {
 </script>
 
 <style scoped lang="scss">
-main{
+main {
   background-color: #eeece9;
 }
-.titleNews{
-  margin: 60px auto 60px ;
+.titleNews {
+  margin: 60px auto 60px;
   max-width: 1200px;
   font-size: 30px;
 }
@@ -196,13 +216,13 @@ main{
   margin: auto;
   max-width: 1200px;
   padding: clamp(12px, 3vw, 24px);
-  min-height: 60vh; 
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   border: #d9d3cc 1px solid;
 }
 .news-list > .pagination {
-  margin-top: auto;                
+  margin-top: auto;
   display: flex;
   gap: 8px;
   justify-content: center;
@@ -216,7 +236,7 @@ ul {
   overflow: hidden;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
 }
-.news{
+.news {
   background-color: #eeece9;
   padding-bottom: 20px;
 }
@@ -302,7 +322,7 @@ ul {
 
   .divider {
     height: 1px;
-    background:  #d9d3cc;
+    background: #d9d3cc;
     margin-left: clamp(12px, 2.8vw, 28px);
   }
 

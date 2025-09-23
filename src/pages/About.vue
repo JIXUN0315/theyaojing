@@ -5,12 +5,18 @@
   </section>
 
   <!-- 品牌理念 -->
-  <section class="content">
-    <p class="paragraph">
-      曜境留遊學致力於為每一位懷抱留遊學夢想的學生，提供真誠、安心、用心的留學諮詢服務。
-      我們了解：對大多數人來說，留學代表未知、焦慮與挑戰。這就是我們存在的理由——
-      讓複雜的申請流程變得清楚簡單，讓你在每一個選擇上都有專業陪伴，走得穩、走得對。
-    </p>
+  <section class="content aboutHeader">
+    <div class="paragraph">
+      <div>
+        曜境留遊學致力於為每一位懷抱留遊學夢想的學生，提供真誠、安心、用心的留學諮詢服務。
+      </div>
+      <div>
+        我們了解：對大多數人來說，留學代表未知、焦慮與挑戰。這就是我們存在的理由——
+      </div>
+      <div>
+        讓複雜的申請流程變得清楚簡單，讓你在每一個選擇上都有專業陪伴，走得穩、走得對。
+      </div>
+    </div>
   </section>
 
   <!-- <img
@@ -39,33 +45,31 @@
           />
           <div class="caption-block">
             <p class="caption-title">品牌名稱與Logo</p>
-            <p class="paragraph">
-              「曜是光，境是方向，我們願成為你留學路上的一盞明燈，照亮你的前程。」
-              Logo設計結合學士帽及提供指引的箭頭。(那個老鼠純粹是老闆喜歡)
-            </p>
+            <p class="paragraph">「曜是光，境是方向，我們願成為您留學路上的一盞明燈，照亮前程。」</p>
+            <p>Logo 設計結合了象徵學業的學士帽與指引方向的箭頭，展現我們的專業與使命。而其中的小老鼠，則來自創辦人的巧思，讓品牌識別在專業之外，也保有記憶點。它提醒我們，在追求未來的同時，也要保有純粹的喜歡。留學不只是一條規劃好的路，更需要一些意外的驚喜與童心，因為夢想之路，從來都需要一點趣味。</p>
           </div>
         </div>
         <div class="grid-row">
           <img src="@/assets/images/myworry.jpg" alt="worry" />
           <div class="caption-block">
             <p class="caption-title">
-              你有以下煩惱嗎 <br />——我們來幫你搞定一切。
+              你是不是也有這些煩惱? <br />別擔心 —— 我們幫你搞定！
             </p>
             <ul>
-              <li>我不知道我能申請到什麼學校</li>
-              <li>什麼時候該準備? 到底要準備什麼?</li>
-              <li>成績太差、英文也不好，我能出國留學嗎</li>
-              <li>我不知道怎麼寫(懶得寫)讀書計畫，幫QQ</li>
-              <li>備審資料我都寫好了，但感覺只有87分</li>
+              <li>我能申請到哪些學校？</li>
+              <li>什麼時間點該開始準備？需要準備哪些文件？</li>
+              <li>成績不夠理想、英文不好，我還能出國留學嗎？</li>
+              <li>讀書計畫不知道如何下筆（甚至完全提不起勁）？</li>
+              <li>備審資料完成了，但還想再更完美？</li>
             </ul>
           </div>
         </div>
         <div class="grid-row">
           <img src="@/assets/images/mything.jpg" alt="mything" />
           <div class="caption-block">
-            <p class="caption-title">認真對待你對我們的信任</p>
+            <p class="caption-title">我們用心對待每一份信任</p>
             <p class="paragraph">
-              與我們合作的學生，正是因為信任我們的專業與服務。我們始終秉持「你的事，就是我的事」的態度，全心全意地陪伴每一位學生，細心處理他們的留學大小事
+              選擇與我們合作的學生和家長，是因為相信我們的專業與用心。我們始終秉持「你的事，就是我的事」的理念，全心陪伴每一位學生，細心處理留學路上的每個細節。
             </p>
           </div>
         </div>
@@ -78,7 +82,7 @@
 
 <style>
 .hero {
-      height: 12rem;
+  height: 10rem;
   display: flex;
   padding: 0;
   align-items: center;
@@ -87,15 +91,20 @@
   background-size: cover;
   background-position: center;
 }
-
+.aboutHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
 .hero-title {
   font-size: 2.25rem;
   font-weight: 700;
   padding: 1rem 5rem;
   letter-spacing: 1rem;
   border-radius: 0.5rem;
-      color: #38342e;
-
+  color: #38342e;
 }
 
 .content {

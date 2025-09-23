@@ -286,7 +286,7 @@
         object-fit: cover;
 
         /* 往下顯示 20px（看到更靠下的區域）*/
-        object-position: 50% calc(50% + 120px);
+            object-position: 50% 0;
       }
     }
     .adv-cul{

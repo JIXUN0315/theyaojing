@@ -108,7 +108,7 @@ const posts = [
   {
     id: "site-launch",
     title: "慶祝曜境官網全新升級上線",
-    date: "日期：待官網正式上線日期確定後補",
+    date: "日期：2025.10.1",
     source: "",
     heroUrl: "news1.png",
     heroAlt: "網站上線示意",
@@ -132,6 +132,82 @@ const posts = [
       </strong> <br>
       👉 名額有限，敬請把握！</p>
     `,
+  },
+  {
+    id: "QS-Ranking",
+    title: "最新QS Global MBA Rankings 2026出爐",
+    date: "日期：2025.09.17",
+    source: "QS Ranking",
+    heroUrl: "news4.png",
+    heroAlt: "網站上線示意",
+    content: `
+<div>
+  <p><b>賓夕法尼亞大學（沃頓商學院 / Wharton）</b> 榮登全球最佳全日制 MBA！</p>
+  <p>
+    緊隨其後的前三名分別為：
+    <b>哈佛商學院（Harvard Business School）</b>、
+    <b>麻省理工學院（史隆 / MIT Sloan）</b> 及
+    <b>史丹佛大學研究生商學院（Stanford GSB）</b>，
+    全面展現美國商學院的全球領先地位。
+  </p>
+
+  <p><b>歐洲最佳：</b> 巴黎高等商學院（HEC Paris），位列第 5；</p>
+  <p><b>亞洲最佳：</b> 新加坡國立大學（NUS），排名第 23。</p>
+
+  <p><b>前十名完整名單：</b></p>
+  <ul style="list-style:none; padding:0; margin:0;">
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">1</span>
+      賓夕法尼亞大學（沃頓商學院 / Wharton）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">2</span>
+      哈佛商學院（Harvard Business School）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">3</span>
+      麻省理工學院史隆管理學院（MIT Sloan）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">4</span>
+      史丹佛大學研究生商學院（Stanford GSB）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">5</span>
+      巴黎高等商學院（HEC Paris）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">6</span>
+      倫敦商學院（London Business School）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">7</span>
+      劍橋大學商學院（Cambridge Judge）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">8</span>
+      歐洲工商管理學院（INSEAD）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">9</span>
+      西北大學凱洛格管理學院（Northwestern Kellogg）
+    </li>
+    <li style="display:flex; align-items:center; margin:6px 0;">
+      <span style="background:#007bff; color:#fff; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:10px; font-size:14px;">10</span>
+      哥倫比亞商學院（Columbia Business School）
+    </li>
+  </ul>
+
+  <p style="margin-top:20px; font-size:16px;">
+    「Wharton、哈佛、MIT... 你最想念哪所 MBA？<br>
+    快到我們的 
+    <a href="https://www.facebook.com/profile.php?id=61551849541200" target="_blank" style="color:#007bff; font-weight:bold; text-decoration:none;">Facebook</a> /
+    <a href="https://www.instagram.com/excellent_future_education/" target="_blank" style="color:#007bff; font-weight:bold; text-decoration:none;">Instagram</a>
+    留言告訴我們吧！」
+  </p>
+</div>
+
+`,
   },
 ];
 
