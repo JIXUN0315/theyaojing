@@ -235,5 +235,8 @@ function openUrl(url) {
     font-weight: bold;
     transition: background 0.3s;
   }
+   @media (max-width: 1024px) {
+       padding: 3rem 2rem;
+  }
 }
 </style>

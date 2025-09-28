@@ -177,6 +177,7 @@
 @media (max-width: 768px) {
   .grid-row {
     flex-direction: column;
+        gap: 1rem;
   }
 
   .grid-row img,
@@ -187,5 +188,14 @@
   .caption-block {
     text-align: center;
   }
+  .grid-section {
+  padding: 1.5rem;
+}
+.paragraph {
+  padding: 0 1.5rem;
+}
+.grid-vertical{
+      gap: 4rem;
+}
 }
 </style>

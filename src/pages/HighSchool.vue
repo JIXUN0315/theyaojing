@@ -211,7 +211,7 @@
       line-height: 1.6;
       color: #fff;
       background: #1b0a02; /* 深咖啡（截圖中的暗色塊） */
-      padding: 0.8rem 1rem;
+      padding: 0.8rem 1.5rem;
       box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08) inset;
       width: 70%;
     }
@@ -243,7 +243,7 @@
         row-gap: 0.75rem;
       }
       .intro-badge {
-        width: 90%;
+        width: calc(100% - 50px);
       }
     }
   }
@@ -299,6 +299,10 @@
         /* 往下顯示 20px（看到更靠下的區域）*/
         object-position: 50% calc(50% + 60px);
       }
+    }
+     @media (max-width: 1024px) {
+      padding:1.5rem
+      
     }
   }
 
@@ -394,4 +398,10 @@
     }
   }
 }
+ @media (max-width: 1024px) {
+      .hero{
+        height: 50vh !important;
+      }
+      
+    }
 </style>

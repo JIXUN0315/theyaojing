@@ -74,7 +74,7 @@
               class="list__item--link list__item--dropdown"
               @click="toggleProductDropdown"
             >
-              <div class="list__item--text">PRODUCTS<span>服務項目</span></div>
+              <div class="list__item--text">SERVICES<span>服務項目</span></div>
               <span class="dropdown-arrow" :class="{ open: isProductOpen }"
                 >▼</span
               >
@@ -90,12 +90,12 @@
 
           <div class="list__item">
             <a href="/blog" class="list__item--link"
-              >BLOG<span class="list__item--link">學生回饋與實用專欄</span></a
+              >TESTMONIALS<span class="list__item--link">學生回饋與實用專欄</span></a
             >
           </div>
           <div class="list__item">
             <a href="/news" class="list__item--link"
-              >NEW<span class="list__item--link">最新消息</span></a
+              >NEWS<span class="list__item--link">最新消息</span></a
             >
           </div>
           <!-- <div class="list__item">

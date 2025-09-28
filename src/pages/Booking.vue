@@ -656,6 +656,7 @@ onBeforeUnmount(() => {
   background-position: 0 -50px;
   @media (max-width: 768px) {
     height: 30vh;
+    background-position: center;
   }
 }
 .consultation-wrapper {

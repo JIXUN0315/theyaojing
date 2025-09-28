@@ -60,6 +60,12 @@
   margin: 0 auto;
   font-family: "Noto Sans TC", sans-serif;
   color: #000;
+   @media (max-width: 1024px) {
+      padding: 0 1.5rem;
+      .service-analysis{
+        padding: 0;
+      }
+    }
 }
 
 .highlight-list {
@@ -69,6 +75,11 @@
   list-style: disc;
   padding-left: 1.2rem;
   padding-top: 6rem;
+  @media (max-width: 1024px) {
+    max-width: calc(100% - 30px);
+      padding-left:30px;
+      padding-top: 2rem;
+    }
 }
 
 .box {
@@ -128,6 +139,10 @@ ul {
   list-style: disc;
   padding-left: 1.2rem;
   line-height: 1.8;
+   @media (max-width: 1024px) {
+    max-width: calc(100% - 30px);
+      padding-left:30px;
+    }
 }
 
 .cta {
@@ -188,8 +203,12 @@ ul {
     width: 100%;
   }
   .ask-button {
-    width: 90%;
-    justify-content: flex-end;
+    width: 100%;
+    justify-content: center;
+  }
+  .cta-content{
+    padding: 0 30px;
+    width: calc(100% - 30px);
   }
 }
 </style>

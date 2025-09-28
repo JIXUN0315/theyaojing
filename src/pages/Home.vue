@@ -75,7 +75,7 @@
             <div class="card-head">
               <div class="card-head-text">
                 <h3 class="name">Jacky</h3>
-                <p class="title">The University of Warwick Business School</p>
+                <p class="title">Warwick Business School</p>
                 <div class="titleSub">MSc Finance</div>
               </div>
               <div class="card-head-img"><img src="@/assets/images/stu12-1.jpg" alt="" /></div>
@@ -698,6 +698,7 @@ function goto(path) {
   right: 0;
   font-size: 16px;
   color: white;
+  font-weight: bold;
   cursor: pointer;
 }
 .moreNews{
@@ -706,6 +707,8 @@ function goto(path) {
   right: 0;
   font-size: 16px;
   cursor: pointer;
+  font-weight: bold;
+  color: #6b4d2e;
 }
 .section-title {
   color: #fff;
@@ -740,7 +743,7 @@ function goto(path) {
   position: relative;
 }
 .card-head-text {
-  width: calc(100% - 60px);
+  width: calc(100% - 65px);
 }
 .card-head-img {
   position: absolute;
