@@ -135,7 +135,7 @@
         <h2 class="news-title">最新消息</h2>
 
         <div class="news-grid">
-          <a class="news-card" href="/news/canada-study-permit-2025">
+          <a class="news-card" href="/news/why-Annenberg">
             <div class="thumb">
               <img src="@/assets/images/news5.png" alt="news cover" />
             </div>

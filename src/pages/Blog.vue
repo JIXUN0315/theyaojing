@@ -36,12 +36,12 @@
         @click="goToPost(post.slug)"
       >
         <img :src="post.image" alt="cover" />
-        <div class="card-content">
+        <!-- <div class="card-content">
           <p class="date">{{ post.date }}</p>
           <p class="tag">{{ post.category }}</p>
           <p class="title">{{ post.title }}</p>
           <p class="info" v-if="post.info">{{ post.info }}</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -351,6 +351,8 @@ watch(
   grid-template-columns: repeat(3, 1fr);
   padding: 0;
   gap: 1rem;
+  max-width: 1300px;
+  margin: auto;
 }
 
 .blog-card {
@@ -361,8 +363,8 @@ watch(
 }
 
 .blog-card img {
-      width: 100%;
-    height: 300px;
+    width: 100%;
+    height: auto;
     object-fit: contain;
     margin-bottom: 10px;
 }
