@@ -2,9 +2,10 @@
   <section class="ctaContainer" v-if="!showCta">
     <div class="cta">
       <h2 v-if="isLauguageSchool">勇敢出發，讓語言帶你環遊世界</h2>
-      <h2 v-if="isHightSchool">孩子的未來不能等，立即預約諮詢，把握最佳成長契機。</h2>
+      <h2 v-if="isHightSchool">孩子的未來不能等</h2>
       <h2 v-if="!isLauguageSchool && !isHightSchool">夢想不該等待</h2>
       <p v-if="!isHightSchool">馬上預約，邁出你的第一步。</p>
+      <p v-if="isHightSchool">立即預約諮詢，把握最佳成長契機。</p>
       <a href="/booking" class="cta-button">預約諮詢</a>
     </div>
   </section>
@@ -50,13 +51,18 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 
 // 取得目前的路由名稱（確保是字串）
 const pageName = computed(() => route.name?.toString() ?? "");
+const isMobile = ref(false);
+
+function checkMobile() {
+  isMobile.value = window.innerWidth <= 768; // 768px 以下視為手機
+}
 
 // 各頁判斷（注意拼字與實際路由名稱一致）
 const isLauguageSchool = computed(() => pageName.value === "languageSchool");
@@ -75,6 +81,11 @@ function sendEmail() {
 function openUrl(url) {
   window.open(url, "_blank");
 }
+
+onMounted(() => {
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+});
 </script>
 
 <style lang="scss" scoped>

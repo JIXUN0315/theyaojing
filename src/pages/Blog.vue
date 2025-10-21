@@ -2,13 +2,13 @@
   <div class="hero-section">
     <div class="photo"></div>
     <div class="content">
-      <p class="paragraph">每段留學路都是一場獨特的旅程</p>
+      <p class="paragraph">每段留學路 <br> 都是一場獨特的旅程</p>
       <p class="description">
-        這裡,我們集結了學生們的真實回饋、親身經歷,
+        這裡，我們集結了學生們的真實回饋、親身經歷，
         <br />
         以及顧問團隊撰寫的實用文章。
         <br />
-        也許你會在某一段故事中,看見此刻的自己。
+        也許你會在某一段故事中，看見此刻的自己。
         <br />
         感受到「你不是一個人」的陪伴力量。
       </p>
@@ -84,11 +84,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import { useRouter } from "vue-router";
+import { ref, computed, watch, onMounted, nextTick } from "vue";
+import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter();
-
+const route = useRoute()
 const categories = ["#總覽", "#留學故事", "#服務心得", "#實用專欄"];
 
 const activeCategory = ref(categories[0]);
@@ -103,7 +103,7 @@ const posts = ref([
     info: "MS Biostatistics (全美國生物統計排名#28)",
     date: "2025.7.28",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu1.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/CW Mai.png", import.meta.url).href,
   },
   {
     slug: "post-02",
@@ -111,7 +111,7 @@ const posts = ref([
     info: "MSc Operations, Project and Supply Chain Management",
     date: "2025.8.3",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu2.png", import.meta.url).href,
+    image: new URL("@/assets/images/Heidi Liang.png", import.meta.url).href,
   },
   {
     slug: "post-03",
@@ -119,7 +119,7 @@ const posts = ref([
     info: "MSc Entrepreneurship, Innovation and Management",
     date: "2025.8.3",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu3.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Chien.png", import.meta.url).href,
     extra: {
       收穫: "來英國讀書不只是接觸新知，還能認識不同的人，拓展眼界。",
       校園: "Jubilee Campus，離市中心20分鐘公車，校園有鴨子和極光。",
@@ -134,7 +134,7 @@ const posts = ref([
     info: "MSc Finance",
     date: "2025.8.3",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu4.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Jessie.png", import.meta.url).href,
   },
   {
     slug: "post-05",
@@ -142,7 +142,7 @@ const posts = ref([
     info: "MSN, Adult Gerontology Acute Care Nurse Practitioner",
     date: "2025.8.3",
     category: "#留學故事⸺勇敢跳脫舒適圈：以前的我 vs 現在的我",
-    image: new URL("@/assets/images/stu5.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Ann.png", import.meta.url).href,
   },
   {
     slug: "post-06",
@@ -150,7 +150,7 @@ const posts = ref([
     info: "MS Chemical Engineering",
     date: "2025.05.31",
     category: "#留學故事⸺留學後的我變了",
-    image: new URL("@/assets/images/shareblog01.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Dustin.png", import.meta.url).href,
   },
   {
     slug: "post-07",
@@ -158,7 +158,7 @@ const posts = ref([
     info: "GCSE",
     date: "2025.7.17",
     category: "#留學故事⸺我來英國留學後才知道的事",
-    image: new URL("@/assets/images/stu7.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Bryant.png", import.meta.url).href,
   },
   {
     slug: "post-08",
@@ -166,7 +166,7 @@ const posts = ref([
     info: "MA Corporate Communications, Marketing and Public Relations",
     date: "2025.6.25",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu8.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Vera Kuo.png", import.meta.url).href,
   },
   {
     slug: "post-09",
@@ -174,7 +174,7 @@ const posts = ref([
     info: "MS Materials Science & Engineering",
     date: "2023.6.25",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu9.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Johnny.png", import.meta.url).href,
   },
   {
     slug: "post-10",
@@ -182,7 +182,7 @@ const posts = ref([
     info: "MSc Finance",
     date: "2023.8.17",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu10.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Hank.png", import.meta.url).href,
   },
   {
     slug: "post-11",
@@ -190,7 +190,7 @@ const posts = ref([
     info: "MSc Digital Marketing",
     date: "2024.4.30",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu2.png", import.meta.url).href,
+    image: new URL("@/assets/images/KCL.png", import.meta.url).href,
   },
    {
     slug: "post-12",
@@ -198,9 +198,11 @@ const posts = ref([
     info: "MSc Finance",
     date: "2023.5.20",
     category: "#服務心得",
-    image: new URL("@/assets/images/stu12-1.jpg", import.meta.url).href,
+    image: new URL("@/assets/images/Jacky.png", import.meta.url).href,
   },
 ]);
+
+const DEFAULT_CAT = categories[0];
 
 const filteredPosts = computed(() =>
   posts.value.filter((p) => p.category.includes(activeCategory.value) || activeCategory.value === '#總覽')
@@ -249,6 +251,33 @@ function scrollToTop() {
     blogPage.value.scrollIntoView({ behavior: "smooth" });
   }
 }
+function syncFromQuery() {
+  // cat 可以是像 %23留學故事（# 會被編碼），Vue Router 會自動解碼為 "#留學故事"
+  const catQ = route.query?.cat?.toString();
+  activeCategory.value = categories.find((p) => catQ.includes(p)) || DEFAULT_CAT
+}
+const HEADER_OFFSET = 80
+
+function scrollToTabs(smooth = true) {
+  if (!blogPage.value) return
+  const rect = blogPage.value.getBoundingClientRect()
+  const y = rect.top + window.pageYOffset - HEADER_OFFSET
+  window.scrollTo({ top: y, behavior: smooth ? 'smooth' : 'auto' })
+}
+onMounted(async () => {
+  syncFromQuery()
+  if (route.query.cat) {
+    await nextTick()
+    // 若上方有圖片或輪播需要高度計算完成，可多等一個 requestAnimationFrame
+    requestAnimationFrame(() => scrollToTabs(true))
+  }
+})
+
+// 支援使用者按瀏覽器返回/前進：監聽 query 變化 → 同步到狀態
+watch(
+  () => route.query,
+  () => syncFromQuery()
+);
 </script>
 
 <style scoped lang="scss">

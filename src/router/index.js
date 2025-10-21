@@ -51,7 +51,7 @@ const routes = [
   },
   {
     path: "/blog",
-    name: "template",
+    name: "Blog",
     component: Blog,
   },
   {

@@ -90,7 +90,7 @@
 
           <div class="list__item">
             <a href="/blog" class="list__item--link"
-              >TESTMONIALS<span class="list__item--link">學生回饋與實用專欄</span></a
+              >TESTIMONIALS<span class="list__item--link">學生回饋與實用專欄</span></a
             >
           </div>
           <div class="list__item">
@@ -214,6 +214,12 @@ header {
 
     @media (max-width: 1024px) {
       display: block;
+      .list__item{
+        font-weight: 500;
+        .list__item--submenu a{
+          font-weight: normal;
+        }
+      }
     }
     &--nav {
       position: relative;

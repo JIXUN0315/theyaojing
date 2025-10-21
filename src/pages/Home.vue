@@ -21,7 +21,7 @@
           <!-- 右文 -->
           <div class="about-text">
             <p>
-              誠信 ✕ 專業 ✕ 陪伴，是我們不變的承諾<br />
+              誠信 · 專業 · 陪伴，是我們不變的承諾<br />
               曜境留遊學，提供真誠、安心、用心的留學諮詢服務。<br />
               我們了解：對大多數人來說，留學代表未知、焦慮與挑戰，<br />
               這就是我們存在的理由 ——<br />
@@ -78,7 +78,9 @@
                 <p class="title">Warwick Business School</p>
                 <div class="titleSub">MSc Finance</div>
               </div>
-              <div class="card-head-img"><img src="@/assets/images/stu12-1.jpg" alt="" /></div>
+              <div class="card-head-img">
+                <img src="@/assets/images/stu12-1.jpg" alt="" />
+              </div>
             </div>
             <hr class="rule" />
             <p class="card-body">
@@ -133,7 +135,19 @@
         <h2 class="news-title">最新消息</h2>
 
         <div class="news-grid">
-          
+          <a class="news-card" href="/news/canada-study-permit-2025">
+            <div class="thumb">
+              <img src="@/assets/images/news5.png" alt="news cover" />
+            </div>
+            <div class="news-content">
+              <h3>為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？</h3>
+              <p>2025.10.15</p>
+              <p>
+                為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？ ——背後是一位改變美國媒體教育的慈善富豪...
+              </p>
+            </div>
+          </a>
+
           <a class="news-card" href="/news/site-launch">
             <div class="thumb">
               <img src="@/assets/images/news1.png" alt="news cover" />
@@ -146,7 +160,7 @@
               </p>
             </div>
           </a>
-          
+
           <a class="news-card" href="/news/QS-Ranking">
             <div class="thumb">
               <img src="@/assets/images/news4.png" alt="news cover" />
@@ -154,7 +168,8 @@
             <div class="news-content">
               <h3>最新QS Global MBA Rankings 2026出爐</h3>
               <p>2025.09.17</p>
-              <p>賓夕法尼亞大學（沃頓商學院 / Wharton）榮登全球最佳全日制 MBA！
+              <p>
+                賓夕法尼亞大學（沃頓商學院 / Wharton）榮登全球最佳全日制 MBA！
                 緊隨其後的前三名分別為：哈佛商學院...
               </p>
             </div>
@@ -173,7 +188,7 @@
             </div>
           </a>
 
-          <a class="news-card" href="/news/canada-study-permit-2025">
+          <!-- <a class="news-card" href="/news/canada-study-permit-2025">
             <div class="thumb">
               <img src="@/assets/images/news2.jpg" alt="news cover" />
             </div>
@@ -185,7 +200,7 @@
                 2025）對加拿大留學簽證趨勢的報導，並結合我們的專業觀點與建議...
               </p>
             </div>
-          </a>
+          </a> -->
         </div>
         <div class="moreNews" @click="goto('/News')">➢點我看更多最新消息</div>
       </div>
@@ -701,7 +716,7 @@ function goto(path) {
   font-weight: bold;
   cursor: pointer;
 }
-.moreNews{
+.moreNews {
   position: absolute;
   bottom: -50px;
   right: 0;

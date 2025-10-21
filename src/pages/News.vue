@@ -82,6 +82,12 @@ type NewsItem = {
 // 直接在這個頁面放資料，不外部呼叫
 const news: NewsItem[] = [
   {
+     date: "2025-10-15",
+    title: "為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？",
+    imageUrl: "news5.png", // 故意留空 → 顯示 Information 方塊
+    link: "why-Annenberg",
+  },
+  {
     date: "2025-10-1",
     title: "慶祝曜境官網全新升級上線",
     imageUrl: "news1.png", // 故意留空 → 顯示 Information 方塊
@@ -269,7 +275,6 @@ ul {
     aspect-ratio: 16/10;
     background: var(--thumb-bg);
     overflow: hidden;
-    display: grid;
     place-items: center;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   }
@@ -278,6 +283,7 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
   }
 

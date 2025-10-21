@@ -13,7 +13,7 @@
         <span v-if="post.school" class="school">{{ post.school }}</span>
         <span v-if="post.info" class="school">{{ post.info }}</span>
         <router-link
-          
+          :to="{ name: 'Blog', query: { cat: post.category} }"
           class="category"
         >
           {{ post.category }}
@@ -420,7 +420,6 @@ const post = computed(() => posts.value.find((p) => p.slug === slug));
 .category {
   font-size: 14px;
   color: #555;
-  cursor: auto;
 }
 
 .post-cover {
