@@ -86,6 +86,23 @@
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: '英國留學申請｜曜境 Excellent Future Education',
+  meta: [
+    { name: 'description', content: '英國留學代辦，專業規劃與申請協助。' },
+    { name: 'keywords', content: '留學,留學代辦,英國留學,留學申請,代辦推薦' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: '英國留學申請｜曜境' },
+    { property: 'og:description', content: '英美澳加留學申請｜專業顧問一對一規劃與全程代辦。' },
+    { property: 'og:url', content: 'https://theyaojing.org/study-uk' },
+    { property: 'og:image', content: 'https://theyaojing.org/logo.jpg' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:image', content: 'https://theyaojing.org/logo.jpg' }
+  ],
+  link: [{ rel: 'canonical', href: 'https://theyaojing.org/study-uk' }]
+})
 
 const router = useRouter();
 const route = useRoute()
@@ -97,6 +114,14 @@ import sharedImg from "@/assets/images/shareblog01.jpg";
 
 // 寫死的文章資料（僅作為卡片模板）
 const posts = ref([
+  {
+    slug: "post-news",
+    title: "為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？",
+    info: "背後是一位改變美國媒體教育的慈善富豪",
+    imageUrl: "news5.png",
+    category: "#實用專欄",
+    image: new URL("@/assets/images/news5.png", import.meta.url).href,
+  },
   {
     slug: "post-01",
     title: "CW. Mai, Case Western University",
@@ -200,6 +225,7 @@ const posts = ref([
     category: "#服務心得",
     image: new URL("@/assets/images/Jacky.png", import.meta.url).href,
   },
+
 ]);
 
 const DEFAULT_CAT = categories[0];

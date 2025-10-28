@@ -246,6 +246,23 @@ import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import { useRouter } from "vue-router";
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: '英國留學申請｜曜境 Excellent Future Education',
+  meta: [
+    { name: 'description', content: '英國留學代辦，專業規劃與申請協助。' },
+    { name: 'keywords', content: '留學,留學代辦,英國留學,留學申請,代辦推薦' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: '英國留學申請｜曜境' },
+    { property: 'og:description', content: '英美澳加留學申請｜專業顧問一對一規劃與全程代辦。' },
+    { property: 'og:url', content: 'https://theyaojing.org/study-uk' },
+    { property: 'og:image', content: 'https://theyaojing.org/logo.jpg' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:image', content: 'https://theyaojing.org/logo.jpg' }
+  ],
+  link: [{ rel: 'canonical', href: 'https://theyaojing.org/study-uk' }]
+})
 
 const router = useRouter();
 const images = [

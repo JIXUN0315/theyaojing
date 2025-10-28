@@ -22,7 +22,6 @@
 
       <!-- 標題與日期 -->
       <h1 class="post-title">{{ post.title }}</h1>
-      <h2 class="post-subTitle">{{ post.subTitle }}</h2>
       <p class="post-date">
         {{ post.date }}
         <template v-if="post.source">｜來源：{{ post.source }}</template>
@@ -47,74 +46,6 @@ const router = useRouter();
 
 /** 文章資料（之後要接 API，改這裡即可） */
 const posts = [
-  {
-    id: "why-Annenberg",
-    title: "為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？",
-    subTitle:"——背後是一位改變美國媒體教育的慈善富豪",
-    date: "2025.10.15",
-    source: "Annenberg",
-    heroUrl: "news5.png",
-    heroAlt: "why-Annenberg",
-    content: `
-      <header>
-    <h2>為什麼 USC 與 UPenn 的傳播學院都叫 Annenberg？</h2>
-    <p>
-      我們在協助學生申請美國傳播、公關、媒體或行銷相關科系時，常被問到：
-      <strong>「為什麼 USC（南加大）和 UPenn（賓州大學）的傳播學院都叫 Annenberg School？這兩間是同一個體系嗎？」</strong>
-    </p>
-    <p><strong>答案是：</strong>它們沒有隸屬關係，但背後捐助者是同一位媒體鉅子：<strong>Walter Annenberg</strong>。</p>
-  </header>
-
-  <section aria-labelledby="who-is">
-    <h3 id="who-is">▎誰是 Walter Annenberg？</h3>
-    <p>
-      Walter Annenberg 是美國企業家、投資人、慈善家與外交官。出身報業家族，靠
-      <em>TV Guide</em> 雜誌與廣播事業致富，被譽為 20 世紀的「媒體教父」。
-    </p>
-    <p>
-      他曾任美國駐英國大使，將商業媒體與公共外交相結合，展現跨領域影響力。
-    </p>
-    <blockquote>
-      <p>
-        「人類的一切進步或倒退，都可以透過『溝通』來理解。言論自由的權利，同時伴隨著尊重他人尊嚴的責任——而這點必須被視為不可逆的原則。教育學生能夠有效傳達這樣的價值，並為所有人服務。」
-      </p>
-      <cite>— Walter Annenberg</cite>
-    </blockquote>
-    <p>
-      在他看來，傳播教育的目的，不只是培養會寫稿、會報導的人，
-      而是培養能負責任地使用言論自由、尊重他人尊嚴、並促進社會福祉的溝通者。
-    </p>
-  </section>
-
-  <section aria-labelledby="why-both">
-    <h3 id="why-both">▎為什麼他同時捐給 USC 和 UPenn？</h3>
-    <p>
-      原因很單純：<strong>一所是他的家鄉與母校</strong>，<strong>一所位於他認為媒體產業最蓬勃的地方</strong>。
-    </p>
-    <ul class="schools">
-      <li>
-        <strong>UPenn Annenberg（1958）</strong>：偏重傳播理論、政策、媒體研究（位於賓州）
-      </li>
-      <li>
-        <strong>USC Annenberg（1971）</strong>：偏重新聞、公關、娛樂與新媒體實務（位於洛杉磯）
-      </li>
-    </ul>
-    <p>雖然同名，但兩所 Annenberg 的培養方向各有特色。</p>
-  </section>
-
-  <section aria-labelledby="how-choose">
-    <h3 id="how-choose">▎學生要怎麼選擇？</h3>
-    <ul class="tracks">
-      <li><strong>新聞、娛樂、公關、社群行銷</strong> → <strong>USC Annenberg</strong></li>
-      <li><strong>媒體研究、政策倡議、數據與科技</strong> → <strong>UPenn Annenberg</strong></li>
-    </ul>
-    <p>
-      如果你對傳播／媒體／公關／行銷相關申請有興趣，
-      立即<a href="/booking" class="btn btn-primary" aria-label="前往預約諮詢表單">預約諮詢</a>，讓我們為你規劃最適合的專屬申請策略，打造成功之路！
-    </p>
-  </section>
-    `,
-  },
   {
     id: "toefl-2026-revamp",
     title: "托福將於 2026 年 1 月起正式改版",

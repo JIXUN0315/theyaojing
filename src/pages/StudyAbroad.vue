@@ -149,12 +149,15 @@
 </template>
 <script setup>
 import { onMounted } from "vue";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
-onMounted(() => {
+onMounted(async() => {
+    const gsap = (await import('gsap')).default
+  const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+  gsap.registerPlugin(ScrollTrigger)
   const container = document.querySelector(".why .cards");
   const cards = Array.from(document.querySelectorAll(".why .card"));
 

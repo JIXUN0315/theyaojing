@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, createMemoryHistory } from "vue-router";
 import Home from "../pages/Home.vue";
 import About from "../pages/About.vue";
 import StudyAbroad from "../pages/StudyAbroad.vue";
@@ -13,7 +13,7 @@ import News from '../pages/News.vue';
 import NewsPost from '../pages/NewsPost.vue'
 
 
-const routes = [
+export const routes = [
   {
     path: "/",
     name: "Home",
@@ -83,7 +83,9 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory("/"),
+  history: (import.meta.env.SSR
+    ? createMemoryHistory
+    : createWebHistory)("/"),
   routes,
   scrollBehavior(to, from, savedPosition) {
     // 想保留瀏覽器返回/前進的滾動位置就保留這行；想每次都置頂就拿掉
