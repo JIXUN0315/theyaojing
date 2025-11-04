@@ -1,0 +1,15 @@
+# robots.txt for theyaojing.org (Production)
+User-agent: *
+# 開放整站
+Allow: /
+
+# 不需被索引的技術或暫存路徑（沒有就留著也不影響）
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /draft/
+Disallow: /tmp/
+Disallow: /cgi-bin/
+
+# 站台地圖
+Sitemap: https://theyaojing.org/sitemap.xml
