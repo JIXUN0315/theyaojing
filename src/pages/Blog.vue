@@ -279,7 +279,7 @@ function scrollToTop() {
 }
 function syncFromQuery() {
   // cat 可以是像 %23留學故事（# 會被編碼），Vue Router 會自動解碼為 "#留學故事"
-  const catQ = route.query?.cat?.toString();
+  const catQ = route.query?.cat?.toString() || "#總覽";
   activeCategory.value = categories.find((p) => catQ.includes(p)) || DEFAULT_CAT
 }
 const HEADER_OFFSET = 80

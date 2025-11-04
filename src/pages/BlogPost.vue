@@ -1,5 +1,5 @@
 <template>
-  <div class="post-page" v-if="post">
+  <div class="post-page"  v-if="post">
     <!-- 返回 -->
     <div class="back-column">
       <router-link to="/blog" class="back-link">← 上一頁</router-link>
@@ -60,7 +60,7 @@
   </div>
 </template>
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref,onMounted} from "vue";
 import { useRoute } from "vue-router";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
@@ -437,6 +437,10 @@ const posts = ref([
   },
 ]);
 const post = computed(() => posts.value.find((p) => p.slug === slug));
+
+onMounted(() => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+});
 </script>
 
 <style scoped>

@@ -13,6 +13,7 @@ import News from '../pages/News.vue';
 import NewsPost from '../pages/NewsPost.vue'
 
 
+
 export const routes = [
   {
     path: "/",
