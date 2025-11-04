@@ -439,7 +439,7 @@ const posts = ref([
 const post = computed(() => posts.value.find((p) => p.slug === slug));
 
 onMounted(() => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+  window.scrollTo(0, 0);
 });
 </script>
 

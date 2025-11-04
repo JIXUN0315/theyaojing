@@ -1,9 +1,18 @@
 <template>
   <div class="home">
+    <!-- 隱藏但語義清楚的主標題（不佔版面、不改視覺） -->
+    <h1 class="sr-only">曜境 Excellent Future Education｜英美澳加留學代辦與申請規劃</h1>
+
     <section class="home__heroImage">
-      <img src="@/assets/images/homepage.png" alt="" />
+      <img
+        src="@/assets/images/homepage.png"
+        alt="曜境留學官網首頁主視覺"
+        fetchpriority="high"
+        decoding="async"
+      />
     </section>
-    <section class="about-section">
+
+    <section class="about-section" aria-label="品牌介紹">
       <div class="container">
         <!-- 標題 -->
         <h2 class="about-title">我們是曜境 Excellent Future Education</h2>
@@ -14,7 +23,9 @@
           <div class="about-image">
             <img
               src="@/assets/images/home-intro.jpg"
-              alt="Excellent Future Education"
+              alt="顧問諮詢與留學規劃服務介紹"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
@@ -37,7 +48,8 @@
         </div>
       </div>
     </section>
-    <section class="services-section">
+
+    <section class="services-section" aria-label="服務項目">
       <div class="container services-grid">
         <!-- 左側內容 -->
         <div class="services-copy">
@@ -65,13 +77,14 @@
         </div>
       </div>
     </section>
-    <section class="testimonials">
+
+    <section class="testimonials" aria-label="學生回饋精選">
       <div class="container">
         <h2 class="section-title">學生回饋精選</h2>
 
         <div class="cards">
           <!-- Card 1 -->
-          <article class="card" @click="goToPost('post-12')">
+          <article class="card" @click="goToPost('post-12')" aria-label="Jacky 成功案例">
             <div class="card-head">
               <div class="card-head-text">
                 <h3 class="name">Jacky</h3>
@@ -79,7 +92,7 @@
                 <div class="titleSub">MSc Finance</div>
               </div>
               <div class="card-head-img">
-                <img src="@/assets/images/stu12-1.jpg" alt="" />
+                <img src="@/assets/images/stu12-1.jpg" alt="Jacky 大頭照" loading="lazy" decoding="async" />
               </div>
             </div>
             <hr class="rule" />
@@ -90,7 +103,7 @@
           </article>
 
           <!-- Card 2 -->
-          <article class="card" @click="goToPost('post-09')">
+          <article class="card" @click="goToPost('post-09')" aria-label="Johnny 成功案例">
             <div class="card-head">
               <div class="card-head-text">
                 <h3 class="name">Johnny</h3>
@@ -98,7 +111,7 @@
                 <div class="titleSub">MS Materials Science & Engineering</div>
               </div>
               <div class="card-head-img">
-                <img src="@/assets/images/stu9.jpg" alt="" />
+                <img src="@/assets/images/stu9.jpg" alt="Johnny 大頭照" loading="lazy" decoding="async" />
               </div>
             </div>
             <hr class="rule" />
@@ -110,7 +123,7 @@
           </article>
 
           <!-- Card 3 -->
-          <article class="card" @click="goToPost('post-04')">
+          <article class="card" @click="goToPost('post-04')" aria-label="Jessie 成功案例">
             <div class="card-head">
               <div class="card-head-text">
                 <h3 class="name">Jessie</h3>
@@ -118,7 +131,7 @@
                 <div class="titleSub">MSc Finance</div>
               </div>
               <div class="card-head-img">
-                <img src="@/assets/images/stu4.jpg" alt="" />
+                <img src="@/assets/images/stu4.jpg" alt="Jessie 大頭照" loading="lazy" decoding="async" />
               </div>
             </div>
             <hr class="rule" />
@@ -127,17 +140,18 @@
             </p>
           </article>
         </div>
-        <div class="moreStory" @click="goto('/blog')">➢查看更多成功故事</div>
+        <div class="moreStory" @click="goto('/blog')" aria-label="查看更多成功故事">➢查看更多成功故事</div>
       </div>
     </section>
-    <section class="news">
+
+    <section class="news" aria-label="最新消息">
       <div class="container">
         <h2 class="news-title">最新消息</h2>
 
         <div class="news-grid">
-          <a class="news-card" href="/news/why-Annenberg">
+          <!-- <a class="news-card" href="/news/why-Annenberg" aria-label="為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？">
             <div class="thumb">
-              <img src="@/assets/images/news5.png" alt="news cover" />
+              <img src="@/assets/images/news5.png" alt="Annenberg 主題封面" loading="lazy" decoding="async" />
             </div>
             <div class="news-content">
               <h3>為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？</h3>
@@ -146,11 +160,11 @@
                 為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？ ——背後是一位改變美國媒體教育的慈善富豪...
               </p>
             </div>
-          </a>
+          </a> -->
 
-          <a class="news-card" href="/news/site-launch">
+          <a class="news-card" href="/news/site-launch" aria-label="慶祝曜境官網全新升級上線">
             <div class="thumb">
-              <img src="@/assets/images/news1.png" alt="news cover" />
+              <img src="@/assets/images/news1.png" alt="官網上線消息封面" loading="lazy" decoding="async" />
             </div>
             <div class="news-content">
               <h3>慶祝曜境官網全新升級上線</h3>
@@ -161,9 +175,9 @@
             </div>
           </a>
 
-          <a class="news-card" href="/news/QS-Ranking">
+          <a class="news-card" href="/news/QS-Ranking" aria-label="最新QS Global MBA Rankings 2026出爐">
             <div class="thumb">
-              <img src="@/assets/images/news4.png" alt="news cover" />
+              <img src="@/assets/images/news4.png" alt="QS MBA 排名新聞封面" loading="lazy" decoding="async" />
             </div>
             <div class="news-content">
               <h3>最新QS Global MBA Rankings 2026出爐</h3>
@@ -174,9 +188,10 @@
               </p>
             </div>
           </a>
-          <a class="news-card" href="/news/toefl-2026-revamp">
+
+          <a class="news-card" href="/news/toefl-2026-revamp" aria-label="托福將於 2026 年 1 月起正式改版">
             <div class="thumb">
-              <img src="@/assets/images/news3.png" alt="news cover" />
+              <img src="@/assets/images/news3.png" alt="TOEFL 改版新聞封面" loading="lazy" decoding="async" />
             </div>
             <div class="news-content">
               <h3>托福將於 2026 年 1 月起正式改版</h3>
@@ -187,8 +202,7 @@
               </p>
             </div>
           </a>
-
-          <!-- <a class="news-card" href="/news/canada-study-permit-2025">
+           <a class="news-card" href="/news/canada-study-permit-2025">
             <div class="thumb">
               <img src="@/assets/images/news2.jpg" alt="news cover" />
             </div>
@@ -200,26 +214,26 @@
                 2025）對加拿大留學簽證趨勢的報導，並結合我們的專業觀點與建議...
               </p>
             </div>
-          </a> -->
+          </a>
         </div>
-        <div class="moreNews" @click="goto('/News')">➢點我看更多最新消息</div>
+        <div class="moreNews" @click="goto('/News')" aria-label="點我看更多最新消息">➢點我看更多最新消息</div>
       </div>
     </section>
 
-    <section class="path-picker">
+    <section class="path-picker" aria-label="快速選擇申請路徑">
       <div class="path-stage">
         <!-- 浮動裝飾圖（可換成你的圖片） -->
         <div class="floating-img img-tl">
-          <img src="@/assets/images/kaplan2.jpg" alt="" />
+          <img src="@/assets/images/kaplan2.jpg" alt="Kaplan 校園風景" loading="lazy" decoding="async" />
         </div>
         <div class="floating-img img-tr">
-          <img src="@/assets/images/kaplan1.jpg" alt="" />
+          <img src="@/assets/images/kaplan1.jpg" alt="Kaplan 學習環境" loading="lazy" decoding="async" />
         </div>
         <div class="floating-img img-bl">
-          <img src="@/assets/images/sydney.jpg" alt="" />
+          <img src="@/assets/images/sydney.jpg" alt="雪梨城市景觀" loading="lazy" decoding="async" />
         </div>
         <div class="floating-img img-mr">
-          <img src="@/assets/images/perth.jpg" alt="" />
+          <img src="@/assets/images/perth.jpg" alt="伯斯海邊風景" loading="lazy" decoding="async" />
         </div>
 
         <!-- 中央內容 -->
@@ -229,10 +243,10 @@
           <p class="sub">PICK THE PATH THAT LEADS TO YOUR DREAMS.</p>
 
           <div class="actions">
-            <a class="option" href="/studyAbroad">大學研究所申請</a>
-            <a class="option" href="/highSchool">中學申請</a>
-            <a class="option" href="/languageSchool">語言學校／遊學團</a>
-            <a class="option" href="/document">純文件／落點分析</a>
+            <a class="option" href="/studyAbroad" aria-label="大學研究所申請">大學研究所申請</a>
+            <a class="option" href="/highSchool" aria-label="中學申請">中學申請</a>
+            <a class="option" href="/languageSchool" aria-label="語言學校與遊學團">語言學校／遊學團</a>
+            <a class="option" href="/document" aria-label="純文件與落點分析">純文件／落點分析</a>
           </div>
         </div>
       </div>
@@ -241,46 +255,123 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
-import "vue3-carousel/dist/carousel.css";
-import { Carousel, Slide, Navigation } from "vue3-carousel";
-import "vue3-carousel/dist/carousel.css";
 import { useRouter } from "vue-router";
 import { useHead } from '@vueuse/head'
 
+const siteUrl = 'https://theyaojing.org';
+const pageUrl = `${siteUrl}/`; // 首頁
+const logoUrl = `${siteUrl}/logo.jpg`;
+
 useHead({
-  title: '英國留學申請｜曜境 Excellent Future Education',
+  title: '留學代辦｜英美澳加申請規劃｜曜境 Excellent Future Education',
   meta: [
-    { name: 'description', content: '英國留學代辦，專業規劃與申請協助。' },
-    { name: 'keywords', content: '留學,留學代辦,英國留學,留學申請,代辦推薦' },
+    { name: 'description', content: '曜境留學代辦｜英美澳加留學申請規劃、SOP/CV/推薦信文件指導、簽證輔導、入學註冊與行前準備，全程一對一專業陪伴。' },
+    { name: 'keywords', content: '留學, 留學代辦, 英國留學, 美國留學, 加拿大留學, 澳洲留學, 留學申請, SOP, CV, 推薦信, 簽證' },
+    { name: 'robots', content: 'index,follow,max-image-preview:large' },
+
+    // Open Graph
     { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: '英國留學申請｜曜境' },
+    { property: 'og:title', content: '曜境留學｜英美澳加留學代辦與申請規劃' },
     { property: 'og:description', content: '英美澳加留學申請｜專業顧問一對一規劃與全程代辦。' },
-    { property: 'og:url', content: 'https://theyaojing.org/study-uk' },
-    { property: 'og:image', content: 'https://theyaojing.org/logo.jpg' },
+    { property: 'og:url', content: pageUrl },
+    { property: 'og:image', content: logoUrl },
+    { property: 'og:locale', content: 'zh_TW' },
+
+    // Twitter
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:image', content: 'https://theyaojing.org/logo.jpg' }
+    { name: 'twitter:title', content: '曜境留學｜英美澳加留學代辦與申請規劃' },
+    { name: 'twitter:description', content: '英美澳加留學申請｜專業顧問一對一規劃與全程代辦。' },
+    { name: 'twitter:image', content: logoUrl }
   ],
-  link: [{ rel: 'canonical', href: 'https://theyaojing.org/study-uk' }]
+  link: [
+    { rel: 'canonical', href: pageUrl },
+    { rel: 'alternate', hreflang: 'zh-Hant-TW', href: pageUrl }
+  ],
+  script: [
+    // Organization + WebSite
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "曜境 Excellent Future Education",
+        "url": siteUrl,
+        "logo": logoUrl,
+        "sameAs": [
+          // 之後有官方 FB/IG/LinkedIn 再補進來
+        ],
+        "address": { "@type": "PostalAddress", "addressCountry": "TW" },
+        "areaServed": ["TW","HK","MO"],
+        "description": "英美澳加留學代辦與申請規劃，文件指導、簽證輔導、入學註冊與行前準備。"
+      })
+    },
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "曜境 Excellent Future Education",
+        "url": siteUrl,
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": `${siteUrl}/search?q={query}`,
+          "query-input": "required name=query"
+        }
+      })
+    },
+    // 首頁導覽麵包屑（首頁只有一層就 OK）
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "首頁", "item": pageUrl }
+        ]
+      })
+    },
+    // 首頁最新消息清單（可讓搜尋引擎理解你在首頁列出文章）
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "url": `${siteUrl}/news/why-Annenberg`,
+            "name": "為什麼南加大跟賓州大學的傳播學院都叫 Annenberg？"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "url": `${siteUrl}/news/site-launch`,
+            "name": "慶祝曜境官網全新升級上線"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "url": `${siteUrl}/news/QS-Ranking`,
+            "name": "最新QS Global MBA Rankings 2026出爐"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "url": `${siteUrl}/news/toefl-2026-revamp`,
+            "name": "托福將於 2026 年 1 月起正式改版"
+          }
+        ]
+      })
+    }
+  ]
 })
 
-const router = useRouter();
-const images = [
-  new URL("@/assets/images/homepage.png", import.meta.url).href,
-  new URL("@/assets/images/homepage.png", import.meta.url).href,
-  // new URL("@/assets/images/excellent-future.jpg", import.meta.url).href,
-  // new URL("@/assets/images/service-content.jpg", import.meta.url).href,
-  // new URL("@/assets/images/student.jpg", import.meta.url).href,
-  // new URL("@/assets/images/qa.jpg", import.meta.url).href,
-];
-
-function goToPost(slug) {
-  router.push(`/blog/posts/${slug}`);
-}
-function goto(path) {
-  router.push(path);
-}
+const router = useRouter()
+function goToPost(slug) { router.push(`/blog/posts/${slug}`) }
+function goto(path) { router.push(path) }
 </script>
+
 
 <style lang="scss" scoped>
 .smallText {
@@ -1103,5 +1194,16 @@ function goto(path) {
   .option {
     width: auto;
   }
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 1px, 1px) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 </style>

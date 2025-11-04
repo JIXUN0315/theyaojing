@@ -1,11 +1,17 @@
 <template>
+  <h1 class="sr-only">最新消息｜曜境 Excellent Future Education</h1>
+
   <h2 class="titleNews">最新消息</h2>
   <section class="news">
     <section class="news-list">
       <ul role="list">
         <li v-for="(item, i) in pagedNews" :key="i" class="news-item">
-          <a :href="`/news/${item.link || '#'}`" class="news-link">
-            <div class="thumb-wrap" :aria-label="item.title">
+          <a
+            :href="`/news/${item.link || '#'}`"
+            class="news-link"
+            :aria-label="item.title"
+          >
+            <div class="thumb-wrap">
               <template v-if="item.imageUrl">
                 <img
                   class="thumb"
@@ -30,7 +36,7 @@
             </div>
           </a>
 
-          <!-- 只有本頁最後一項不顯示分隔線（不改你的 CSS，直接用 v-if 控制） -->
+          <!-- 只有本頁最後一項不顯示分隔線 -->
           <div
             class="divider"
             aria-hidden="true"
@@ -39,7 +45,7 @@
         </li>
       </ul>
 
-      <!-- 分頁列：只有多於一頁才顯示；不動你的 CSS，僅新增素按鈕 -->
+      <!-- 分頁列：只有多於一頁才顯示 -->
       <nav v-if="totalPages > 1" class="pagination" aria-label="pagination">
         <button type="button" @click="prevPage" :disabled="currentPage === 1">
           ← Prev
@@ -51,7 +57,7 @@
           type="button"
           :disabled="chip.type === 'ellipsis'"
           :aria-current="chip.page === currentPage ? 'page' : undefined"
-          @click="chip.type === 'page' && setPage(chip.page!)"
+          @click="chip.type === 'page' && setPage(chip.page)"
         >
           {{ chip.label }}
         </button>
@@ -67,143 +73,157 @@
     </section>
   </section>
 </template>
+<script setup>
+import { ref, computed, watch } from 'vue'
+import { useHead } from '@vueuse/head'
 
-<script setup lang="ts">
-import { ref, computed, watch } from "vue";
+useHead({
+  title: '最新消息｜曜境 Excellent Future Education',
+  meta: [
+    { name: 'description', content: '曜境最新公告、申請趨勢與留學資訊整理。' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: '最新消息｜曜境 Excellent Future Education' },
+    { property: 'og:description', content: '掌握留學最新趨勢與曜境公告。' }
+  ],
+  link: [{ rel: 'canonical', href: 'https://theyaojing.org/news' }]
+})
 
-type NewsItem = {
-  date: string | Date;
-  title: string;
-  imageUrl?: string;
-  imageAlt?: string;
-  link?: string;
-};
-
-// 直接在這個頁面放資料，不外部呼叫
-const news: NewsItem[] = [
+// ====== 資料（可直接在此維護） ======
+const news = [
   {
-    date: "2025-10-1",
-    title: "慶祝曜境官網全新升級上線",
-    imageUrl: "news1.png", // 故意留空 → 顯示 Information 方塊
-    link: "site-launch",
+    date: '2025-10-01',
+    title: '慶祝曜境官網全新升級上線',
+    imageUrl: 'news1.png', // 留空 → 顯示 Information 方塊
+    link: 'site-launch'
   },
   {
-    date: "2025-09-17",
-    title: "最新QS Global MBA Rankings 2026出爐",
-    imageUrl: "news4.png", // 故意留空 → 顯示 Information 方塊
-    link: "QS-Ranking",
+    date: '2025-09-17',
+    title: '最新 QS Global MBA Rankings 2026 出爐',
+    imageUrl: 'news4.png', // 留空 → 顯示 Information 方塊
+    link: 'QS-Ranking'
   },
   {
-    date: "2025-09-02",
-    title: "托福將於 2026 年 1 月起正式改版",
-    imageUrl: "news3.png",
-    link: "toefl-2026-revamp",
+    date: '2025-09-02',
+    title: '托福將於 2026 年 1 月起正式改版',
+    imageUrl: 'news3.png',
+    link: 'toefl-2026-revamp'
   },
   {
-    date: "2025-09-02",
-    title: "加拿大留學審核趨嚴，申請人該如何因應？",
-    imageUrl: "news2.jpg",
-    link: "canada-study-permit-2025",
-  },
-];
+    date: '2025-09-02',
+    title: '加拿大留學審核趨嚴，申請人該如何因應？',
+    imageUrl: 'news2.jpg',
+    link: 'canada-study-permit-2025'
+  }
+]
 
 // ====== 分頁核心 ======
-const pageSize = ref(4); // 每頁幾筆，想改就改這裡
-const currentPage = ref(1); // 目前頁碼（1-based）
+const pageSize = ref(4)
+const currentPage = ref(1)
 
 const totalPages = computed(() =>
   Math.max(1, Math.ceil(news.length / pageSize.value))
-);
+)
 
 const pagedNews = computed(() => {
-  const start = (currentPage.value - 1) * pageSize.value;
-  const end = start + pageSize.value;
-  return news.slice(start, end);
-});
+  const start = (currentPage.value - 1) * pageSize.value
+  const end = start + pageSize.value
+  return news.slice(start, end)
+})
 
-function setPage(p: number) {
-  currentPage.value = Math.min(Math.max(1, p), totalPages.value);
+function setPage(p) {
+  const page = Number(p) || 1
+  currentPage.value = Math.min(Math.max(1, page), totalPages.value)
 }
 function nextPage() {
-  setPage(currentPage.value + 1);
+  setPage(currentPage.value + 1)
 }
 function prevPage() {
-  setPage(currentPage.value - 1);
+  setPage(currentPage.value - 1)
 }
 
-function getImageUrl(file: string) {
-  return new URL(`../assets/images/${file}`, import.meta.url).href;
+// 動態解析圖片路徑（相對於此檔案）
+function getImageUrl(file) {
+  if (!file) return ''
+  // 支援外部連結或 public 目錄絕對路徑
+  if (/^https?:\/\//i.test(file) || file.startsWith('/')) return file
+  // Vite 友善：以目前檔案為基準解析到 assets/images
+  return new URL(`../assets/images/${file}`, import.meta.url).href
 }
 
-// 產生頁碼 + 省略號（最多 5 顆按鈕）
-type PageChip =
-  | { type: "page"; page: number; label: string | number; key: string }
-  | { type: "ellipsis"; label: string; key: string; page?: undefined };
-
-const pagesToShow = computed<PageChip[]>(() => {
-  const total = totalPages.value;
-  const cur = currentPage.value;
-  const maxButtons = 5;
+// 產生頁碼 + 省略號（最多 5 顆）
+const pagesToShow = computed(() => {
+  const total = totalPages.value
+  const cur = currentPage.value
+  const maxButtons = 5
 
   if (total <= maxButtons) {
     return Array.from({ length: total }, (_, i) => ({
-      type: "page",
+      type: 'page',
       page: i + 1,
       label: i + 1,
-      key: `p-${i + 1}`,
-    }));
+      key: `p-${i + 1}`
+    }))
   }
 
-  const chips: PageChip[] = [];
-  const addPage = (p: number) =>
-    chips.push({ type: "page", page: p, label: p, key: `p-${p}` });
-  const addEllipsis = (k: string) =>
-    chips.push({ type: "ellipsis", label: "…", key: k });
+  const chips = []
+  const addPage = (p) => chips.push({ type: 'page', page: p, label: p, key: `p-${p}` })
+  const addEllipsis = (k) => chips.push({ type: 'ellipsis', label: '…', key: k })
 
-  addPage(1);
+  addPage(1)
 
-  const windowSize = 3;
-  let start = Math.max(2, cur - 1);
-  let end = Math.min(total - 1, cur + 1);
+  const windowSize = 3
+  let start = Math.max(2, cur - 1)
+  let end = Math.min(total - 1, cur + 1)
 
   while (end - start + 1 < windowSize) {
-    if (start > 2) start--;
-    else if (end < total - 1) end++;
-    else break;
+    if (start > 2) start--
+    else if (end < total - 1) end++
+    else break
   }
 
-  if (start > 2) addEllipsis("e-left");
-  for (let p = start; p <= end; p++) addPage(p);
-  if (end < total - 1) addEllipsis("e-right");
+  if (start > 2) addEllipsis('e-left')
+  for (let p = start; p <= end; p++) addPage(p)
+  if (end < total - 1) addEllipsis('e-right')
 
-  addPage(total);
-  return chips;
-});
+  addPage(total)
+  return chips
+})
 
-// 保險：當資料量變少時，避免目前頁碼超出範圍
+// 資料量變動時避免頁碼越界
 watch(totalPages, (t) => {
-  if (currentPage.value > t) currentPage.value = t;
-});
+  if (currentPage.value > t) currentPage.value = t
+})
 
 // ====== 日期工具 ======
-const isoDate = (d: string | Date) => {
+const isoDate = (d) => {
   try {
-    return new Date(d).toISOString().split("T")[0];
+    return new Date(d).toISOString().split('T')[0]
   } catch {
-    return "";
+    return ''
   }
-};
-
-const displayDate = (d: string | Date) => {
-  const dt = new Date(d);
-  const y = dt.getFullYear();
-  const m = String(dt.getMonth() + 1).padStart(2, "0");
-  const day = String(dt.getDate()).padStart(2, "0");
-  return `${y}.${m}.${day}`;
-};
+}
+const displayDate = (d) => {
+  const dt = new Date(d)
+  const y = dt.getFullYear()
+  const m = String(dt.getMonth() + 1).padStart(2, '0')
+  const day = String(dt.getDate()).padStart(2, '0')
+  return `${y}.${m}.${day}`
+}
 </script>
-
 <style scoped lang="scss">
+/* 僅供 SEO/可及性：不影響視覺 */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 1px, 1px) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 main {
   background-color: #eeece9;
 }
@@ -267,10 +287,11 @@ ul {
   .thumb-wrap {
     width: 100%;
     aspect-ratio: 16/10;
-    background: var(--thumb-bg);
+    background: #fff;
     overflow: hidden;
-    place-items: center;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    display: grid;
+    place-items: center;
   }
 
   .thumb {

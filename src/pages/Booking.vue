@@ -1,4 +1,7 @@
 <template>
+  <!-- 隱藏主標（只給搜尋引擎與螢幕報讀，完全不影響版面） -->
+  <h1 class="sr-only">預約諮詢｜曜境 Excellent Future Education</h1>
+
   <div class="consultation">
     <div
       class="submit-overlay global"
@@ -9,6 +12,8 @@
       <div class="spinner" aria-hidden="true"></div>
       <div class="loading-text">送出中，請稍候…</div>
     </div>
+
+    <!-- 成功燈箱 -->
     <div
       class="modal-overlay"
       v-if="showSuccess"
@@ -20,10 +25,12 @@
         <h3>已成功送出！</h3>
         <p>感謝您的填寫，我們將盡快與您聯繫。</p>
         <div class="actions">
-          <button class="primary" @click="goHome">返回首頁</button>
+          <button class="primary" type="button" @click="goHome">返回首頁</button>
         </div>
       </div>
     </div>
+
+    <!-- 欄位提示燈箱 -->
     <div
       class="modal-overlay"
       v-if="showHint"
@@ -32,20 +39,29 @@
       aria-label="提示"
     >
       <div class="modal-card">
-        <div class="close" @click="close"></div>
+        <div class="close" @click="close" aria-label="關閉"></div>
         <h3>請填寫以下欄位</h3>
-        <p v-for="value in needInputs">{{ value }}</p>
+        <p v-for="value in needInputs" :key="value">{{ value }}</p>
       </div>
     </div>
-    <div class="consultation-hero"></div>
+
+    <div class="consultation-hero" role="img" aria-label="預約諮詢頁首"></div>
+
     <div class="consultation-wrapper">
-      <section class="faq-container">
+      <!-- FAQ -->
+      <section class="faq-container" aria-label="常見問題">
         <div class="faq">
           <h2>常見問題 FAQ</h2>
           <div class="faq-item" v-for="(item, index) in faqs" :key="index">
-            <div class="faq-question" @click="toggle(index)">
+            <div
+              class="faq-question"
+              @click="toggle(index)"
+              :aria-expanded="item.open ? 'true' : 'false'"
+              role="button"
+              tabindex="0"
+            >
               {{ item.question }}
-              <span class="arrow" :class="{ open: item.open }">▶</span>
+              <span class="arrow" :class="{ open: item.open }" aria-hidden="true">▶</span>
             </div>
             <transition name="accordion">
               <div class="faq-answer" v-show="item.open">
@@ -55,14 +71,19 @@
           </div>
         </div>
       </section>
-      <section class="form-container">
+
+      <!-- 表單 -->
+      <section class="form-container" aria-label="預約諮詢表單">
         <h2>預約諮詢表單</h2>
-        <div class="stepper">
+
+        <div class="stepper" aria-label="步驟條">
           <div :class="['step', { active: step >= 1 }]"><span>1</span></div>
           <div :class="['stepper-line', { active: step >= 2 }]"></div>
           <div :class="['step', { active: step >= 2 }]"><span>2</span></div>
         </div>
+
         <div class="form">
+          <!-- 第一步 -->
           <div class="form-page" v-show="step === 1">
             <label>中文全名 *</label>
             <input
@@ -70,31 +91,45 @@
               placeholder="您的姓名"
               required
               v-model="form.fullName"
+              autocomplete="name"
             />
+
             <label>電話 或 LINE ID *</label>
             <input
               type="text"
               placeholder="電話或 LINE ID"
               required
               v-model="form.phoneOrLine"
+              autocomplete="tel"
             />
-            <small class="note">若留LINE ID 請確認可接收陌生訊息</small>
+            <small class="note">若留 LINE ID 請確認可接收陌生訊息</small>
+
             <label>電子郵件 *</label>
             <input
               type="email"
               placeholder="請輸入有效信箱"
               required
               v-model="form.email"
+              autocomplete="email"
             />
-            <small class="note red" v-show="!emailValid">email格式錯誤</small>
+            <small class="note red" v-show="!emailValid">email 格式錯誤</small>
+
             <label>畢業(就讀)學校</label>
-            <input type="text" placeholder="學校名稱" v-model="form.school" />
+            <input
+              type="text"
+              placeholder="學校名稱"
+              v-model="form.school"
+              autocomplete="organization"
+            />
+
             <label>畢業(就讀)科系</label>
             <input
               type="text"
               placeholder="科系名稱"
               v-model="form.department"
+              autocomplete="department"
             />
+
             <label>想去哪個國家 *</label>
             <div class="country-options">
               <label
@@ -108,14 +143,19 @@
                   v-model="form.targetCountry"
                   name="targetCountryOther"
                 />
-                <img :src="country.img" :alt="country.value" />
+                <img
+                  :src="country.img"
+                  :alt="country.value"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <span>{{ country.value }}</span>
               </label>
+
               <label for="other" class="otherOption">
                 <input
                   type="radio"
                   name="targetCountryOther"
-                  placeholder="其他"
                   v-model="form.targetCountry"
                   value="other"
                 />
@@ -123,10 +163,13 @@
                   id="other"
                   placeholder="其他"
                   v-model="targetCountryOther"
+                  autocomplete="country-name"
                 />
               </label>
             </div>
           </div>
+
+          <!-- 第二步 -->
           <div class="form-page" v-show="step === 2">
             <div class="radio-area">
               <label>想了解的課程類別 *</label>
@@ -145,7 +188,6 @@
                   <input
                     type="radio"
                     name="courseType"
-                    placeholder="其他"
                     v-model="form.programType"
                     value="other"
                   />
@@ -200,6 +242,7 @@
                   />
                   {{ type }}
                 </label>
+
                 <label
                   for="othRel"
                   :class="{ relatives: form.referral == '親友介紹' }"
@@ -218,6 +261,7 @@
                     class="otherInput"
                     style="width: 140px"
                     v-model="recommendName"
+                    autocomplete="name"
                   />
                 </label>
 
@@ -287,14 +331,16 @@
             ></textarea>
           </div>
         </div>
+
         <div class="btn-area">
-          <div class="lucky"></div>
+          <div class="lucky" aria-hidden="true"></div>
           <div class="" v-show="step === 1"></div>
-          <button @click="last" v-show="step === 2">上一頁</button>
-          <button @click="next" v-show="step === 1" style="margin-right: 0">
+          <button type="button" @click="last" v-show="step === 2">上一頁</button>
+          <button type="button" @click="next" v-show="step === 1" style="margin-right: 0">
             下一頁
           </button>
           <button
+            type="button"
             v-show="step === 2"
             @click="submit"
           >
@@ -305,7 +351,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import {
   reactive,
@@ -318,146 +363,27 @@ import {
 } from "vue";
 import { formSubmit } from "@/api/booking.js";
 import { useRouter } from "vue-router";
-import { useHead } from '@vueuse/head'
+import { useHead } from "@vueuse/head";
 
-useHead({
-  title: '英國留學申請｜曜境 Excellent Future Education',
-  meta: [
-    { name: 'description', content: '英國留學代辦，專業規劃與申請協助。' },
-    { name: 'keywords', content: '留學,留學代辦,英國留學,留學申請,代辦推薦' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: '英國留學申請｜曜境' },
-    { property: 'og:description', content: '英美澳加留學申請｜專業顧問一對一規劃與全程代辦。' },
-    { property: 'og:url', content: 'https://theyaojing.org/study-uk' },
-    { property: 'og:image', content: 'https://theyaojing.org/logo.jpg' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:image', content: 'https://theyaojing.org/logo.jpg' }
-  ],
-  link: [{ rel: 'canonical', href: 'https://theyaojing.org/study-uk' }]
-})
+// ===== 基本站點/本頁 URL（依你的實際路由調整）=====
+const siteUrl = "https://theyaojing.org";
+const pageUrl = `${siteUrl}/consultation`;
+
+// ===== Router =====
 const router = useRouter();
+
+// ===== 畫面狀態 =====
 const showSuccess = ref(false);
 const showHint = ref(false);
 const needInputs = ref([]);
-
+const isSubmitting = ref(false);
 const isMobile = ref(false);
-
 function checkMobile() {
-  isMobile.value = window.innerWidth <= 768; // 768px 以下視為手機
+  isMobile.value = window.innerWidth <= 768;
 }
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const emailValid = computed(() => {
-  const email = form.value.email || "";
-  if (!email.trim()) {
-    // 空白時直接視為「尚未驗證」 => 不顯示提示
-    return true; // 或 return null，視你 template 判斷方式
-  }
-  return emailRegex.test(email);
-});
-
-const page1Valid = function () {
-  needInputs.value = [];
-  const f = form.value;
-  if (!f.fullName?.trim()) {
-    needInputs.value.push("中文全名");
-  }
-  if (!f.phoneOrLine?.trim()) {
-    needInputs.value.push("電話 或 LINE ID");
-  }
-  if (!emailRegex.test(f.email || "")) {
-    needInputs.value.push("電子郵件");
-  }
-  if (!f.targetCountry?.trim()) {
-    needInputs.value.push("想去哪個國家");
-  }
-};
-
-const page2Valid = function () {
-  const f = form.value;
-  // 課程類別：一般選項或「other+文字」
-  needInputs.value = [];
-  const progOk =
-    !!f.programType &&
-    (f.programType !== "other" || !!programTypeOther.value.trim());
-  // 欲就讀科系：至少一個，若勾「other」則需填文字；或僅填「其他」文字也可
-  const hasMajor =
-    (f.intendedMajor?.length || 0) > 0 || !!intendedMajorOther.value.trim();
-  const majorOk =
-    hasMajor &&
-    (!f.intendedMajor.includes("other") || !!intendedMajorOther.value.trim());
-  // 如何得知：一般選項即可；若選「親友介紹」需推薦人；若選「其他」需填文字
-  let refOk = !!f.referral;
-  if (f.referral === "親友介紹") refOk = refOk && !!recommendName.value.trim();
-  if (f.referral === "其他") refOk = refOk && !!referralOther.value.trim();
-  if (!progOk) {
-    needInputs.value.push("想了解的課程類別");
-  }
-  if (!majorOk) {
-    needInputs.value.push("欲就讀的科系");
-  }
-  if (!refOk) {
-    needInputs.value.push("如何得知曜境");
-  }
-
-  return progOk && majorOk && refOk;
-};
-
-const faqs = reactive([
-  {
-    question: "是否只服務特定國家的申請？",
-    answer:
-      "我們主要服務英、美、澳、加的留學申請，如有其他國家需求，也歡迎直接與我們聯繫討論。",
-    open: false,
-  },
-  {
-    question: "第一次諮詢需要付費嗎？",
-    answer:
-      "不需要！我們提供一次免費諮詢，讓你能先認識我們的服務方式與流程，再決定是否進一步合作。",
-    open: false,
-  },
-  {
-    question: "請問諮詢大概會需要多長時間？",
-    answer: "諮詢時間大約30-40分鐘。",
-    open: false,
-  },
-  {
-    question: "請問諮詢需要準備什麼？",
-    answer:
-      "如果方便的話，可以準備好成績單或相關資料，讓我們更了解你的背景。不過最重要的，是帶著一顆輕鬆愉快的心來聊聊您的夢想與想法，其他的交給我們就好！",
-    open: false,
-  },
-  {
-    question: "請問你們有實體辦公室嗎？辦公室在哪裡呢？",
-    answer:
-      "我們目前沒有固定的辦公室，採取比較彈性的方式來安排諮詢。想要面對面聊的話，我們主要會在台北或新北的咖啡廳見面，環境輕鬆，我們也會請您喝杯飲料，讓討論更沒有壓力。當然，也有很多學生會選擇線上諮詢，不受地點限制，方便又高效。無論您在哪裡，我們都能協助您安排最適合的留學規劃。",
-    open: false,
-  },
-  {
-    question: "你們有單純協助文件或落點分析的服務嗎？",
-    answer: "有的，歡迎直接預約諮詢討論細節。",
-    open: false,
-  },
-]);
-
-const step = ref(1);
-
+// ===== 表單資料（放在使用的計算屬性之前，避免引用順序錯誤）=====
 const year = ref(new Date().getFullYear());
-
-const toggle = (index) => {
-  faqs[index].open = !faqs[index].open;
-};
-
-const targetCountryOther = ref("");
-const questionToResolveOther = ref("");
-const intendedMajorOther = ref("");
-const programTypeOther = ref("");
-const referralOther = ref("");
-const recommendName = ref("");
-
-const isSubmitting = ref(false);
-
 const form = ref({
   fullName: "",
   email: "",
@@ -473,6 +399,100 @@ const form = ref({
   referral: "",
   askType: "實體諮詢",
 });
+
+// ===== 驗證 =====
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const emailValid = computed(() => {
+  const email = form.value.email || "";
+  if (!email.trim()) return true;
+  return emailRegex.test(email);
+});
+
+const page1Valid = function () {
+  needInputs.value = [];
+  const f = form.value;
+  if (!f.fullName?.trim()) needInputs.value.push("中文全名");
+  if (!f.phoneOrLine?.trim()) needInputs.value.push("電話 或 LINE ID");
+  if (!emailRegex.test(f.email || "")) needInputs.value.push("電子郵件");
+  if (!f.targetCountry?.trim()) needInputs.value.push("想去哪個國家");
+};
+
+const page2Valid = function () {
+  const f = form.value;
+  needInputs.value = [];
+
+  const progOk =
+    !!f.programType &&
+    (f.programType !== "other" || !!programTypeOther.value.trim());
+
+  const hasMajor =
+    (f.intendedMajor?.length || 0) > 0 || !!intendedMajorOther.value.trim();
+  const majorOk =
+    hasMajor &&
+    (!f.intendedMajor.includes("other") || !!intendedMajorOther.value.trim());
+
+  let refOk = !!f.referral;
+  if (f.referral === "親友介紹") refOk = refOk && !!recommendName.value.trim();
+  if (f.referral === "其他") refOk = refOk && !!referralOther.value.trim();
+
+  if (!progOk) needInputs.value.push("想了解的課程類別");
+  if (!majorOk) needInputs.value.push("欲就讀的科系");
+  if (!refOk) needInputs.value.push("如何得知曜境");
+
+  return progOk && majorOk && refOk;
+};
+
+// ===== FAQ =====
+const faqs = reactive([
+  {
+    question: "是否只服務特定國家的申請？",
+    answer:
+      "我們主要服務英、美、澳、加的留學申請，如有其他國家需求，也歡迎直接與我們聯繫討論。",
+    open: false,
+  },
+  {
+    question: "第一次諮詢需要付費嗎？",
+    answer:
+      "不需要！我們提供一次免費諮詢，讓你能先認識我們的服務方式與流程，再決定是否進一步合作。",
+    open: false,
+  },
+  {
+    question: "請問諮詢大概會需要多長時間？",
+    answer: "諮詢時間大約 30–40 分鐘。",
+    open: false,
+  },
+  {
+    question: "請問諮詢需要準備什麼？",
+    answer:
+      "如果方便的話，可以準備好成績單或相關資料，讓我們更了解你的背景。不過最重要的，是帶著一顆輕鬆的心來聊聊夢想與想法，其他的交給我們就好！",
+    open: false,
+  },
+  {
+    question: "請問你們有實體辦公室嗎？辦公室在哪裡呢？",
+    answer:
+      "我們目前沒有固定辦公室，主要在台北/新北咖啡廳見面或安排線上諮詢。無論你在哪裡，我們都能協助安排最適合的留學規劃。",
+    open: false,
+  },
+  {
+    question: "你們有單純協助文件或落點分析的服務嗎？",
+    answer: "有的，歡迎直接預約諮詢討論細節。",
+    open: false,
+  },
+]);
+
+const step = ref(1);
+
+const toggle = (index) => {
+  faqs[index].open = !faqs[index].open;
+};
+
+// ===== 選項 =====
+const targetCountryOther = ref("");
+const questionToResolveOther = ref("");
+const intendedMajorOther = ref("");
+const programTypeOther = ref("");
+const referralOther = ref("");
+const recommendName = ref("");
 
 const countryOptions = [
   {
@@ -495,7 +515,7 @@ const countryOptions = [
 
 const questionOptions = [
   "學校/科系選擇",
-  "文件準備（CV/SOP/推薦信等",
+  "文件準備（CV/SOP/推薦信等）",
   "申請流程 / 時間規劃",
   "語言考試準備",
   "我太忙／太懶，不知道從哪開始",
@@ -512,44 +532,40 @@ const courseTypes = [
   "遊學團",
   "證照課程",
 ];
+
 const subject = ["商科", "工程類", "科學類", "藝術設計", "人文相關"];
 const howKnow = ["Google Search", "Instagram", "Facebook", "Dcard", "Threads"];
+
+// ===== 送出 =====
 const submit = async () => {
-  if (isSubmitting.value) {
-    return;
-  }
+  if (isSubmitting.value) return;
+
   page2Valid();
   if (needInputs.value.length > 0) {
     showHint.value = true;
     return;
   }
+
   isSubmitting.value = true;
-  // 複製一份，避免直接改 reactive form 對象
   const data = { ...form.value };
 
-  // 年份轉字串
   data.departYear = String(data.departYear);
 
-  // 👉 targetCountry
   if (data.targetCountry === "other") {
     data.targetCountry = targetCountryOther.value.trim();
   }
 
-  // 👉 programType
   if (data.programType === "other") {
     data.programType = programTypeOther.value.trim();
   }
 
-  // 👉 intendedMajor (checkbox 可多選)
   const majorIndex = data.intendedMajor.findIndex((x) => x === "other");
   if (majorIndex !== -1) {
     data.intendedMajor[majorIndex] = intendedMajorOther.value.trim();
   } else if (!data.intendedMajor.length && intendedMajorOther.value.trim()) {
-    // 如果完全沒勾選，但有填文字 → 直接補進陣列
     data.intendedMajor.push(intendedMajorOther.value.trim());
   }
 
-  // 👉 questionToResolve (checkbox 可多選)
   const queIndex = data.questionToResolve.findIndex((x) => x === "other");
   if (queIndex !== -1) {
     data.questionToResolve[queIndex] = questionToResolveOther.value.trim();
@@ -560,12 +576,12 @@ const submit = async () => {
     data.questionToResolve.push(questionToResolveOther.value.trim());
   }
 
-  // 👉 referral
   if (data.referral === "親友介紹") {
     data.referral = `親友介紹:${recommendName.value.trim()}`;
   } else if (data.referral === "其他") {
     data.referral = referralOther.value.trim();
   }
+
   try {
     await formSubmit.send(null, data);
     isSubmitting.value = false;
@@ -578,20 +594,16 @@ const submit = async () => {
 };
 
 async function goHome() {
-  await router.push({ path: "/", hash: "" }); // 清掉 hash 避免停在某錨點
+  await router.push({ path: "/", hash: "" });
   await nextTick();
-  // 兩幀後再捲動，避免首頁還在渲染布局
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // 或 'smooth'
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     });
   });
 }
 
 function next() {
-  // if (!isPage1Valid.value) {
-  //   return;
-  // }
   page1Valid();
   if (needInputs.value.length > 0) {
     showHint.value = true;
@@ -601,56 +613,94 @@ function next() {
   const formContainer = document.querySelector(".form-container");
   const offset =
     formContainer.getBoundingClientRect().top + window.scrollY - 60;
-
-  window.scrollTo({
-    top: offset,
-    behavior: "smooth",
-  });
+  window.scrollTo({ top: offset, behavior: "smooth" });
 }
+
 function last() {
   step.value = 1;
   const formContainer = document.querySelector(".form-container");
   const offset =
     formContainer.getBoundingClientRect().top + window.scrollY - 60;
-
-  window.scrollTo({
-    top: offset,
-    behavior: "smooth",
-  });
+  window.scrollTo({ top: offset, behavior: "smooth" });
 }
+
 function close() {
   showHint.value = false;
 }
 
-// 監聽「其他」輸入框 → 自動勾選
+// 「其他」輸入框 → 自動對應選項
 watch(targetCountryOther, (val) => {
-  if (val && val.trim()) {
-    form.value.targetCountry = "other";
-  }
+  if (val && val.trim()) form.value.targetCountry = "other";
 });
-
 watch(programTypeOther, (val) => {
-  if (val && val.trim()) {
-    form.value.programType = "other";
-  }
+  if (val && val.trim()) form.value.programType = "other";
 });
-
 watch(intendedMajorOther, (val) => {
   if (val && val.trim() && !form.value.intendedMajor.includes("other")) {
     form.value.intendedMajor.push("other");
   }
 });
-
 watch(referralOther, (val) => {
-  if (val && val.trim()) {
-    form.value.referral = "其他";
-  }
+  if (val && val.trim()) form.value.referral = "其他";
 });
-
 watch(questionToResolveOther, (val) => {
   if (val && val.trim() && !form.value.questionToResolve.includes("other")) {
     form.value.questionToResolve.push("other");
   }
+});
+
+// ===== <head>：本頁 SEO =====
+useHead({
+  title: "預約諮詢｜曜境 Excellent Future Education",
+  meta: [
+    {
+      name: "description",
+      content:
+        "預約留學諮詢：英美澳加申請規劃、科系選擇、文件指導（SOP/CV/推薦信）、簽證與行前準備。一對一專業顧問，全程陪伴。",
+    },
+    { name: "robots", content: "index,follow,max-image-preview:large" },
+    { property: "og:type", content: "website" },
+    { property: "og:title", content: "預約諮詢｜曜境 Excellent Future Education" },
+    {
+      property: "og:description",
+      content:
+        "英美澳加留學一對一諮詢與全程代辦，提供專業文件指導與時間規劃，幫你走得穩、走得對。",
+    },
+    { property: "og:url", content: pageUrl },
+    { property: "og:image", content: `${siteUrl}/logo.jpg` },
+    { property: "og:locale", content: "zh_TW" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "預約諮詢｜曜境 Excellent Future Education" },
+    {
+      name: "twitter:description",
+      content:
+        "預約留學諮詢：英美澳加申請、文件指導、簽證與行前準備，一次搞定。",
+    },
+    { name: "twitter:image", content: `${siteUrl}/logo.jpg` },
+  ],
+  link: [
+    { rel: "canonical", href: pageUrl },
+    { rel: "alternate", hreflang: "zh-Hant-TW", href: pageUrl },
+  ],
+  script: [
+    // FAQPage 結構化資料（由畫面上的 faqs 生成）
+    {
+      type: "application/ld+json",
+      children: () =>
+        JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: f.answer,
+            },
+          })),
+        }),
+    },
+  ],
 });
 
 onMounted(() => {
@@ -662,8 +712,20 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", checkMobile);
 });
 </script>
-
 <style scoped lang="scss">
+/* 只給無障礙/SEO 用的隱藏文字，不影響版面 */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 1px, 1px) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 .consultation-hero {
   width: 100%;
   height: 60vh;
@@ -942,8 +1004,6 @@ section {
       border: none;
       border-radius: 6px;
       font-size: 1rem;
-      // margin-left: 20px;
-      // margin-right: 20px;
       cursor: pointer;
 
       &:hover {
@@ -966,25 +1026,24 @@ section {
   cursor: not-allowed !important;
 }
 
-/* Accordion 流暢動畫 */
+/* Accordion 動畫 */
 .accordion-enter-active,
 .accordion-leave-active {
   transition: all 0.3s ease;
   overflow: hidden;
 }
-
 .accordion-enter-from,
 .accordion-leave-to {
   max-height: 0;
   opacity: 0;
   padding-bottom: 0;
 }
-
 .accordion-enter-to,
 .accordion-leave-from {
   max-height: 200px;
   opacity: 1;
 }
+
 small {
   display: block;
 }
@@ -1000,47 +1059,42 @@ small {
   align-items: center;
   padding: 2px 30px;
 }
-
 .step {
   position: relative;
   z-index: 10;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #fffac9; // 未完成的淺藍
-  color: #ccc544; // 文字藍
+  background: #fffac9;
+  color: #ccc544;
   display: grid;
   place-items: center;
   font-weight: 700;
   transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 
   &.active {
-    background: #ffee55; // 已完成的藍色
+    background: #ffee55;
     color: #063a5e;
     box-shadow: 0 0 0 3px rgba(208, 204, 93, 0.7);
   }
 }
-
 .stepper-line {
-  flex: 1; // 自動撐滿兩點之間
+  flex: 1;
   height: 6px;
   border-radius: 999px;
-  background: #fffac9; // 未完成的線
+  background: #fffac9;
   overflow: hidden;
   position: relative;
-
-  // 用內層條做「填滿」動畫
   &:before {
     content: "";
     position: absolute;
     inset: 0;
-    width: 0%; // 初始 0%
-    background: #ffee55; // 已完成顏色
+    width: 0%;
+    background: #ffee55;
     transition: width 0.35s ease;
   }
-
   &.active:before {
-    width: 100%; // step>=2 就填滿
+    width: 100%;
   }
 }
 .next-btn {
@@ -1081,19 +1135,18 @@ small {
     }
   }
 }
-/* 全頁遮罩 */
+/* 全頁送出遮罩 */
 .submit-overlay.global {
-  position: fixed; /* 覆蓋整個視窗 */
-  inset: 0; /* top/right/bottom/left 全 0 */
+  position: fixed;
+  inset: 0;
   background: rgba(255, 255, 255, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: 9999; /* 蓋過所有元素（包含 navbar/幸運物件等） */
+  z-index: 9999;
   pointer-events: all;
 }
-
 .spinner {
   width: 44px;
   height: 44px;
@@ -1103,19 +1156,15 @@ small {
   animation: spin 0.8s linear infinite;
   margin-bottom: 12px;
 }
-
 .loading-text {
   color: #063a5e;
   font-weight: 600;
 }
-
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
-/* 成功燈箱（全頁） */
+/* 成功燈箱 */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1126,7 +1175,6 @@ small {
   justify-content: center;
   padding: 16px;
 }
-
 .modal-card {
   width: min(520px, 92vw);
   background: #fff;
@@ -1136,51 +1184,20 @@ small {
   text-align: center;
   position: relative;
 }
-
-.modal-card h3 {
-  margin: 0 0 8px;
-  color: #063a5e;
-}
-
-.modal-card p {
-  margin: 4px 0;
-  color: #333;
-}
-
-.modal-card .countdown {
-  margin-top: 10px;
-  font-weight: 600;
-  color: #063a5e;
-}
-
+.modal-card h3 { margin: 0 0 8px; color: #063a5e; }
+.modal-card p { margin: 4px 0; color: #333; }
+.modal-card .countdown { margin-top: 10px; font-weight: 600; color: #063a5e; }
 .modal-card .actions {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
+  margin-top: 16px; display: flex; justify-content: center; gap: 12px;
 }
-
 .modal-card .actions .primary {
-  background-color: #ffee55;
-  color: #063a5e;
-  font-weight: 700;
-  padding: 0.7rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  background-color: #ffee55; color: #063a5e; font-weight: 700;
+  padding: 0.7rem 1.2rem; border: none; border-radius: 8px; cursor: pointer;
 }
-
-.modal-card .actions .primary:hover {
-  background-color: #d8c93e;
-}
+.modal-card .actions .primary:hover { background-color: #d8c93e; }
 .close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 30px;
-  height: 30px;
+  position: absolute; top: 0; right: 0; width: 30px; height: 30px;
   background-image: url("@/assets/images/close.svg");
-  background-position: center;
-  cursor: pointer;
+  background-position: center; cursor: pointer;
 }
 </style>

@@ -1,12 +1,15 @@
 <template>
   <div class="study-abroad-page">
+    <!-- 僅供 SEO/可及性；不影響畫面 -->
+    <h1 class="sr-only">中學留學申請與全方位服務｜曜境 Excellent Future Education</h1>
+
     <!-- Hero 區塊 -->
-    <section class="hero">
+    <section class="hero" aria-label="中學留學 Hero 橫幅">
       <img src="@/assets/images/middleschool-banner.png" alt="Hero Students" />
     </section>
 
     <!-- 說明區塊 -->
-    <section class="intro">
+    <section class="intro" aria-label="為什麼要出國念中學">
       <div class="intro-inner">
         <!-- Left -->
         <div class="intro-left">
@@ -35,7 +38,7 @@
     </section>
 
     <!-- 四大優勢 -->
-    <section class="advantages">
+    <section class="advantages" aria-label="四大優勢">
       <h2>四大優勢</h2>
       <div class="adv-list">
         <div class="adv-item">
@@ -60,7 +63,7 @@
     </section>
 
     <!-- 服務流程 -->
-    <section class="services">
+    <section class="services" aria-label="曜境中學留學全方位服務">
       <div class="svc-inner">
         <!-- 左側標題 -->
         <div class="svc-title">
@@ -131,12 +134,60 @@
     </section>
   </div>
 </template>
-
 <script setup>
-// 這邊暫時不需要 JS 邏輯
-</script>
+import { useHead } from '@vueuse/head'
 
+const siteUrl = 'https://theyaojing.org'
+const pageUrl = `${siteUrl}/highSchool` // 依你的實際路由調整
+
+useHead({
+  title: '中學留學申請與全方位服務｜曜境 Excellent Future Education',
+  meta: [
+    {
+      name: 'description',
+      content:
+        '為什麼在中學階段就出國？英美中學提供多元課程、研究與社團體驗，提早找到方向、強化名校申請競爭力。曜境提供選校規劃、文件與面試、監護與生活、簽證與入學等全方位服務。'
+    },
+    { name: 'robots', content: 'index,follow,max-image-preview:large' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: '中學留學申請與全方位服務｜曜境 Excellent Future Education' },
+    {
+      property: 'og:description',
+      content:
+        '中學留學四大優勢與完整服務：精準選校、申請與面試、文件指導、監護生活、入學準備與追蹤、升讀大學規畫。'
+    },
+    { property: 'og:url', content: pageUrl },
+    { property: 'og:image', content: `${siteUrl}/logo.jpg` },
+    { property: 'og:locale', content: 'zh_TW' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: '中學留學申請與全方位服務｜曜境 Excellent Future Education' },
+    {
+      name: 'twitter:description',
+      content:
+        '英美中學多元課程與社團，提早探索興趣與累積亮點。曜境提供從選校到入學的全流程協助。'
+    },
+    { name: 'twitter:image', content: `${siteUrl}/logo.jpg` }
+  ],
+  link: [
+    { rel: 'canonical', href: pageUrl },
+    { rel: 'alternate', hreflang: 'zh-Hant-TW', href: pageUrl }
+  ]
+})
+</script>
 <style scoped lang="scss">
+/* 只給 SEO/無障礙用的隱藏文字，不影響畫面 */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 1px, 1px) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 .study-abroad-page {
   font-family: "Noto Sans TC", sans-serif;
   color: #333;
@@ -253,6 +304,7 @@
     padding: 2rem 4.5rem;
     color: #1b0a02;
     margin-bottom: 1rem;
+
     h2 {
       font-size: 2.5rem;
     }
@@ -263,46 +315,48 @@
       gap: 1.5rem;
       margin-top: 2rem;
     }
+
     .adv-item {
       text-align: center;
+
       img {
         width: 100%;
         margin-bottom: 1rem;
         object-fit: cover;
-
         display: block;
         height: 220px;
       }
+
       p {
         font-size: 1rem;
         line-height: 1.5;
       }
     }
+
     .adv-class {
       img {
         width: 100%;
         height: 220px;
         display: block;
         object-fit: cover;
-
-        /* 往下顯示 20px（看到更靠下的區域）*/
-            object-position: 50% 0;
+        /* 顯示圖像較上方區域 */
+        object-position: 50% 0;
       }
     }
-    .adv-cul{
+
+    .adv-cul {
       img {
         width: 100%;
         height: 220px;
         display: block;
         object-fit: cover;
-
-        /* 往下顯示 20px（看到更靠下的區域）*/
+        /* 向下偏移一點 */
         object-position: 50% calc(50% + 60px);
       }
     }
-     @media (max-width: 1024px) {
-      padding:1.5rem
-      
+
+    @media (max-width: 1024px) {
+      padding: 1.5rem;
     }
   }
 
@@ -332,7 +386,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr)); /* 兩欄 */
       grid-template-rows: repeat(3, auto); /* 三列（因為 6 個項目） */
-      grid-auto-flow: column; /* 關鍵：先填滿第一欄的列，再往右欄 */
+      grid-auto-flow: column; /* 先填滿第一欄的列，再往右欄 */
       column-gap: 2rem;
       row-gap: 1.25rem;
     }
@@ -364,6 +418,7 @@
       font-weight: 700;
       color: #1f1f1f;
     }
+
     .text p {
       margin: 0;
       font-size: 0.98rem;
@@ -398,10 +453,11 @@
     }
   }
 }
- @media (max-width: 1024px) {
-      .hero{
-        height: 50vh !important;
-      }
-      
-    }
+
+/* 單獨補：hero 在 1024px 以下高度 */
+@media (max-width: 1024px) {
+  .hero {
+    height: 50vh !important;
+  }
+}
 </style>

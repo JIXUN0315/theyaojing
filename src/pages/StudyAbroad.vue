@@ -87,6 +87,7 @@
         </div>
       </div>
     </section>
+
     <section class="assist">
       <div class="container">
         <h2>我們將協助你</h2>
@@ -148,112 +149,107 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from "vue";
-// import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onMounted } from 'vue'
 
-// gsap.registerPlugin(ScrollTrigger);
-
-onMounted(async() => {
-    const gsap = (await import('gsap')).default
+onMounted(async () => {
+  const gsap = (await import('gsap')).default
   const { ScrollTrigger } = await import('gsap/ScrollTrigger')
   gsap.registerPlugin(ScrollTrigger)
-  const container = document.querySelector(".why .cards");
-  const cards = Array.from(document.querySelectorAll(".why .card"));
 
-  // ====== Title animation (keeps your original behavior) ======
-  const titleBlock = document.querySelector(".why .title-block");
-  const titleLine = titleBlock?.querySelector(".scan-line");
-  const titleText = titleBlock?.querySelector(".animated-text");
+  const container = document.querySelector('.why .cards')
+  const cards = Array.from(document.querySelectorAll('.why .card'))
+
+  // ====== Title animation ======
+  const titleBlock = document.querySelector('.why .title-block')
+  const titleLine = titleBlock?.querySelector('.scan-line')
+  const titleText = titleBlock?.querySelector('.animated-text')
   if (titleBlock && titleLine && titleText) {
-    gsap.set(titleBlock, { autoAlpha: 0 });
-    gsap.set(titleText, { opacity: 1 });
-    gsap.set(titleLine, { x: "0%" });
+    gsap.set(titleBlock, { autoAlpha: 0 })
+    gsap.set(titleLine, { x: '0%' })
 
-    gsap.timeline({
-      scrollTrigger: { trigger: titleBlock, start: "top 90%", once: true },
-    })
-    .to(titleBlock, { autoAlpha: 1, duration: 0.15 })
-    .to(titleLine, { x: "100%", duration: 0.4, ease: "power2.out" });
+    gsap
+      .timeline({
+        scrollTrigger: { trigger: titleBlock, start: 'top 90%', once: true }
+      })
+      .to(titleBlock, { autoAlpha: 1, duration: 0.15 })
+      .to(titleLine, { x: '100%', duration: 0.4, ease: 'power2.out' })
   }
 
   // ====== Timing params ======
-  const DUR_LINE = 0.65;      // 黑色布幕掃過速度（慢一點）
-  const GAP_WITHIN = 0;    // 同一卡片內段落間距（h3 -> p）
-  const OVERLAP_RATIO = 0.2;  // 0.5 = 前一張播到一半，下一張開始（波浪感）
+  const DUR_LINE = 0.65      // 掃描速度
+  const GAP_WITHIN = 0       // 同卡片內 h3 -> p 的間隔
+  const OVERLAP_RATIO = 0.2  // 卡片交疊播放比
 
   // ====== Initial state ======
   cards.forEach((card) => {
-    const blocks = card.querySelectorAll(".animated-block");
-    const lines = card.querySelectorAll(".scan-line");
-    const texts = card.querySelectorAll(".animated-text");
+    const blocks = card.querySelectorAll('.animated-block')
+    const lines = card.querySelectorAll('.scan-line')
 
     // 卡片本身一直存在
-    gsap.set(card, { autoAlpha: 1, visibility: "visible" });
+    gsap.set(card, { autoAlpha: 1, visibility: 'visible' })
 
-    // 區塊未輪到前完全消失（文字 & 黑幕都看不到）
-    gsap.set(blocks, { visibility: "hidden" });
+    // 區塊尚未輪到時完全看不見（由 visibility 控制）
+    gsap.set(blocks, { visibility: 'hidden' })
 
-    // 文字存在但不需要漸顯（之後一出場就被黑幕覆蓋）
-    gsap.set(texts, { opacity: 1 });
+    // 黑幕起始在左側，覆蓋文字
+    gsap.set(lines, { x: '0%' })
+  })
 
-    // 黑幕準備從左到右；實際出場時才顯示（由 block visibility 控制）
-    gsap.set(lines, { x: "0%" });
-  });
-
-  // ====== Build + play master timeline with absolute scheduling ======
+  // ====== Build + play master timeline ======
   const buildAndPlay = () => {
-    if (!container) return;
+    if (!container) return
 
-    const master = gsap.timeline({ paused: true });
+    const master = gsap.timeline({ paused: true })
 
-    // 依畫面位置排序：先比 top，再比 left（上到下、左到右）
+    // 依畫面位置排序（上到下、左到右）
     const sorted = cards
       .map((el) => {
-        const r = el.getBoundingClientRect();
-        return { el, top: Math.round(r.top), left: Math.round(r.left) };
+        const r = el.getBoundingClientRect()
+        return { el, top: Math.round(r.top), left: Math.round(r.left) }
       })
-      .sort((a, b) => (a.top - b.top) || (a.left - b.left))
-      .map((x) => x.el);
+      .sort((a, b) => a.top - b.top || a.left - b.left)
+      .map((x) => x.el)
 
     sorted.forEach((card, idx) => {
-      const blocks = card.querySelectorAll(".animated-block");
-      const lines = card.querySelectorAll(".scan-line");
+      const blocks = card.querySelectorAll('.animated-block')
+      const lines = card.querySelectorAll('.scan-line')
 
-      const tlCard = gsap.timeline();
-
+      const tlCard = gsap.timeline()
       blocks.forEach((block, i) => {
-        const line = lines[i];
+        const line = lines[i]
 
-        // 同步出現：區塊整體顯示（文字+黑幕同時出現，文字被黑幕蓋住）
         tlCard
-          .set(block, { visibility: "visible" }, i === 0 ? 0 : `+=${GAP_WITHIN}`)
-          // 黑幕從左到右掃開（露出文字），不做文字漸顯
-          .fromTo(line, { x: "0%" }, { x: "100%", duration: DUR_LINE, ease: "power2.out" }, "<");
-      });
+          // 區塊顯示（文字與黑幕一起出現，黑幕蓋住文字）
+          .set(block, { visibility: 'visible' }, i === 0 ? 0 : `+=${GAP_WITHIN}`)
+          // 黑幕掃過 → 露出文字
+          .fromTo(
+            line,
+            { x: '0%' },
+            { x: '100%', duration: DUR_LINE, ease: 'power2.out' },
+            '<'
+          )
+      })
 
-      // 用「絕對時間」安排開始點：第一張播到一半，第二張開始（波浪感）
-      const startAt = idx * DUR_LINE * OVERLAP_RATIO;
-      master.add(tlCard, startAt);
-    });
+      // 絕對時間安排開始點：前卡播放到一定比例，下一卡開始
+      const startAt = idx * DUR_LINE * OVERLAP_RATIO
+      master.add(tlCard, startAt)
+    })
 
     // 進入視窗後才播放一次
     ScrollTrigger.create({
       trigger: container,
-      start: "top 75%",
+      start: 'top 75%',
       once: true,
-      onEnter: () => master.play(0),
-    });
-  };
+      onEnter: () => master.play(0)
+    })
+  }
 
-  buildAndPlay();
+  buildAndPlay()
 
   // 版面改變時刷新（若有重排）
-  window.addEventListener("resize", () => ScrollTrigger.refresh(true));
-});
-
+  window.addEventListener('resize', () => ScrollTrigger.refresh(true))
+})
 </script>
-
 <style scoped lang="scss">
 .study-abroad {
   font-family: "Noto Sans TC", sans-serif;
@@ -266,10 +262,12 @@ onMounted(async() => {
   height: calc(100vh - 130px);
   display: flex;
   padding-bottom: 3rem;
+
   .hero-inner {
     padding-bottom: 150px;
     width: 100%;
     text-align: center;
+
     h1 {
       color: white;
       font-size: 2.5rem;
@@ -282,11 +280,13 @@ onMounted(async() => {
 .intro {
   background: #f7db9e;
   padding: 2rem 1.5rem;
+
   .intro-container {
     line-height: 2;
     max-width: 860px;
     margin: 0 auto;
     text-align: left;
+
     .line {
       font-size: 1.1rem;
       margin-bottom: 1rem;
@@ -303,22 +303,27 @@ onMounted(async() => {
 .why {
   padding: 6rem 1.5rem 6rem;
   background: #f8f8f8;
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
+
     h2 {
       font-size: 36px;
       font-weight: 700;
       margin-bottom: 50px;
       margin-top: 0;
     }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
+
       .card {
         background: #ffffff;
         padding: 2rem;
+
         h3 {
           margin: 0;
           font-size: 1.1rem;
@@ -383,8 +388,8 @@ onMounted(async() => {
           margin-bottom: 0.5rem;
           color: #111;
         }
-        h4{
-           font-size: 1.125rem;
+        h4 {
+          font-size: 1.125rem;
         }
         p {
           font-size: 1.125rem;
@@ -408,6 +413,8 @@ onMounted(async() => {
     }
   }
 }
+
+/* RWD */
 @media (max-width: 768px) {
   .hero {
     height: calc(100vh - 410px);
@@ -446,7 +453,6 @@ onMounted(async() => {
             height: auto;
             margin-bottom: 0.5rem;
           }
-
           p {
             font-size: 1rem;
           }
@@ -479,7 +485,6 @@ onMounted(async() => {
         h4 {
           font-size: 1.125rem;
         }
-
         p {
           font-size: 1rem;
         }
@@ -487,56 +492,28 @@ onMounted(async() => {
     }
   }
 }
+
+/* ===== 掃描動畫的結構與初始態（配合 GSAP） ===== */
 .animated-block {
   position: relative;
   overflow: hidden;
   margin-bottom: 1rem;
   min-height: 70px;
+  visibility: hidden; /* 由 GSAP 控制顯示時機 */
 
   .animated-text {
-    opacity: 0; /* ⬅️ 未輪到前看不到 */
     position: relative;
-    z-index: 1;
+    z-index: 1; /* 文字在黑幕下方 → 掃描後露出 */
     white-space: pre-line;
   }
 
   .scan-line {
     position: absolute;
     inset: 0;
-    background: #000; /* 不透明黑遮罩 */
+    background: #000; /* 黑色不透明掃描幕 */
     z-index: 2;
-    transform: translateX(0%); /* 從左邊蓋住 */
+    transform: translateX(0%); /* 從左覆蓋整塊 */
     pointer-events: none;
-  }
-    visibility: hidden; /* 預設整個 block 不顯示 */
-  .animated-text { opacity: 1; } /* 文字一直在（但 block 隱藏時看不到） */
-  .scan-line { display: block; } /* 黑幕預設在左邊覆蓋文字 */
-}
-
-
-@keyframes scan {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes appear {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes typing {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
   }
 }
 </style>
