@@ -369,7 +369,11 @@ useHead({
 
 const router = useRouter()
 function goToPost(slug) { router.push(`/blog/posts/${slug}`) }
-function goto(path) { router.push(path) }
+function goto(path, query = {}) {
+  router.push({ path, query }).then(() => {
+    window.scrollTo(0, 0);
+  });
+}
 </script>
 
 

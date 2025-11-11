@@ -58,9 +58,9 @@
           <li><strong>不知道可以申請到什麼學校</strong></li>
         </ul>
         <div class="ask-button">
-          <router-link class="consult-btn" to="/booking" aria-label="前往預約諮詢">
+          <div class="consult-btn" @click="goto('/booking')" aria-label="前往預約諮詢">
             預約諮詢
-          </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -68,10 +68,10 @@
 </template>
 <script setup>
 import { useHead } from '@vueuse/head'
-
+import { useRouter } from "vue-router";
 const siteUrl = 'https://theyaojing.org'
 const pageUrl = `${siteUrl}/services/analysis` // 依你的實際路由調整
-
+const router = useRouter()
 useHead({
   title: '文件服務與落點分析｜曜境 Excellent Future Education',
   meta: [
@@ -105,6 +105,11 @@ useHead({
     { rel: 'alternate', hreflang: 'zh-Hant-TW', href: pageUrl }
   ]
 })
+function goto(path, query = {}) {
+  router.push({ path, query }).then(() => {
+    window.scrollTo(0, 0);
+  });
+}
 </script>
 <style scoped  lang="scss">
 /* 只給 SEO/無障礙用的隱藏文字，不影響版面 */
